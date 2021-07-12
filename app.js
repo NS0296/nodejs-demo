@@ -8,14 +8,12 @@ const app = express();
 
 //import routers
 const adminRouter = require('./routes/admin').router;
+const registerRouter = require('./routes/register-customer');
 
 //body parser
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/admin', adminRouter);
+app.use(registerRouter);
 
-app.use((req, res, next) => {
-    console.log(companyBodyObj);
-    next();
-});
 app.listen(3000);

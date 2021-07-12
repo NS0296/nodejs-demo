@@ -14,7 +14,7 @@ router.get('/add-companies', (req, res, next) => {
 });
 
 router.post('/add-companies', (req, res, next) => {
-    companyBodyObj = req.body;
+    console.log(req.body);
     res.redirect('/admin/add-companies');
 });
 
