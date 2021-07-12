@@ -1,18 +1,19 @@
 {
-  "name": "first-webpage",
-  "version": "1.0.0",
-  "description": "A demo site, connects to a database.",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "demo",
-    "MySQL"
-  ],
-  "author": "Waleyeldeen Osman",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+    "name": "first-webpage",
+    "version": "1.0.0",
+    "description": "A demo site, connects to a database.",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon app.js"
+    },
+    "keywords": [
+        "demo",
+        "MySQL"
+    ],
+    "author": "Waleyeldeen Osman",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1"
+    }
 }
