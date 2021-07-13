@@ -1,8 +1,5 @@
 const path = require('path');
 
-const companyBodyObj = require('./routes/admin').companyBodyObj;
-//const rootDir = require('./util/path');
-
 const express = require('express');
 const app = express();
 
