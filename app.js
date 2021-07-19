@@ -8,7 +8,7 @@ const rootDir = require(path.join(__dirname, 'util', 'path'));
 
 //import routers
 const adminRouter = require(path.join(rootDir, 'routes', 'admin.js'));
-const UsersRouter = require(path.join(rootDir, 'routes', 'users.js'));
+const usersRouter = require(path.join(rootDir, 'routes', 'users.js'));
 const companiesRouter = require(path.join(rootDir, 'routes', 'companies.js'));
 const homeRouter = require(path.join(rootDir, 'routes', 'home.js'));
 const status404 = require(path.join(rootDir, 'routes', '404.js'));
@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 
 //  routers
 app.use(adminRouter);
-app.use(UsersRouter);
+app.use(usersRouter);
 app.use(companiesRouter);
 app.use(homeRouter);
 app.use(status404);
