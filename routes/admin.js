@@ -22,7 +22,6 @@ router.get('/admin/users', (req, res, next) => {
             console.log(err);
             res.send(err);
         });
-    next();
 });
 
 //render list of companies fetched from database
