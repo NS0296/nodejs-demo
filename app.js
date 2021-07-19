@@ -3,12 +3,12 @@ const path = require('path');
 
 const express = require('express');
 
-const rootDir = require(path.join(__dirname, 'util', 'path'));
+//const __dirname = require(path.join(__dirname, 'util', 'path'));
 
 //import routers
-const adminRouter = require(path.join(rootDir, 'routes', 'admin.js'));
-const usersRouter = require(path.join(rootDir, 'routes', 'users.js'));
-const companiesRouter = require(path.join(rootDir, 'routes', 'companies.js'));
+const adminRouter = require(path.join(__dirname, 'routes', 'admin.js'));
+const usersRouter = require(path.join(__dirname, 'routes', 'users.js'));
+const companiesRouter = require(path.join(__dirname, 'routes', 'companies.js'));
 
 const app = express();
 
