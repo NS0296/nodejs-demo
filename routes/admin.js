@@ -1,22 +1,40 @@
-//this file is responsible for admin pagess
+//responsibe for all admin routes
 const path = require('path');
-
-const rootDir = require('../util/path');
 
 const express = require('express');
 
+const rootDir = require('../util/path');
+const db = require(path.join(rootDir, 'models', 'db.js'));
+
 const router = express.Router();
 
-let companyBodyObj = {};
-
-router.get('/add-companies', (req, res, next) => {
-    res.sendFile(path.join(rootDir, 'views', 'add-companies.html'));
+router.get('/admin', (req, res, next) => {
+    res.sendFile(path.join(rootDir, 'views', 'admin.html'));
 });
 
-router.post('/add-companies', (req, res, next) => {
-    console.log(req.body);
-    res.redirect('/admin/add-companies');
+//render list of users fetched from database
+router.get('/admin/users', (req, res, next) => {
+    db.fetchUsers()
+        .then(([rows, fields]) => {
+            res.render('admin-users.ejs', { rows: rows });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send(err);
+        });
+    next();
 });
 
-module.exports.router = router;
-module.exports.companyBodyObj = companyBodyObj;
+//render list of companies fetched from database
+router.get('/admin/companies', (req, res, next) => {
+    db.fetchCompanies()
+        .then(([rows, fields]) => {
+            res.render('admin-companies.ejs', { rows: rows });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send(err);
+        });
+});
+
+module.exports = router;

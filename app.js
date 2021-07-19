@@ -1,19 +1,35 @@
+//tune the css
 const path = require('path');
 
 const express = require('express');
-const app = express();
+const { appendFileSync } = require('fs');
+
+const rootDir = require(path.join(__dirname, 'util', 'path'));
 
 //import routers
-const adminRouter = require('./routes/admin').router;
-const registerRouter = require('./routes/register-customer');
-const homeRouter = require('./routes/home');
-const status404 = require('./routes/404');
+const adminRouter = require(path.join(rootDir, 'routes', 'admin.js'));
+const UsersRouter = require(path.join(rootDir, 'routes', 'users.js'));
+const companiesRouter = require(path.join(rootDir, 'routes', 'companies.js'));
+const homeRouter = require(path.join(rootDir, 'routes', 'home.js'));
+const status404 = require(path.join(rootDir, 'routes', '404.js'));
 
-//body parser
+const app = express();
+
+//config express
+app.set('views', 'views');
+app.set('template engine', 'ejs');
+
+//serve public folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+//the middleware
+//  body parser
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/admin', adminRouter);
-app.use(registerRouter);
+//  routers
+app.use(adminRouter);
+app.use(UsersRouter);
+app.use(companiesRouter);
 app.use(homeRouter);
 app.use(status404);
 
