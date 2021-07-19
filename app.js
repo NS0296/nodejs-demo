@@ -26,9 +26,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 
 //  routers
-app.use(adminRouter);
-app.use(usersRouter);
-app.use(companiesRouter);
+app.use('/admin', adminRouter);
+app.use('/user', usersRouter);
+app.use('/company', companiesRouter);
 app.use(homeRouter);
 
 //catch all

@@ -8,12 +8,12 @@ const db = require(path.join(rootDir, 'models', 'db.js'));
 
 const router = express.Router();
 
-router.get('/admin', (req, res, next) => {
+router.get('/', (req, res, next) => {
     res.sendFile(path.join(rootDir, 'views', 'admin.html'));
 });
 
 //render list of users fetched from database
-router.get('/admin/users', (req, res, next) => {
+router.get('/users', (req, res, next) => {
     db.fetchUsers()
         .then(([rows, fields]) => {
             res.render('admin-users.ejs', { rows: rows });
@@ -25,7 +25,7 @@ router.get('/admin/users', (req, res, next) => {
 });
 
 //render list of companies fetched from database
-router.get('/admin/companies', (req, res, next) => {
+router.get('/companies', (req, res, next) => {
     db.fetchCompanies()
         .then(([rows, fields]) => {
             res.render('admin-companies.ejs', { rows: rows });

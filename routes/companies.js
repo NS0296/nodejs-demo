@@ -8,11 +8,11 @@ const db = require(path.join(rootDir, 'models', 'db.js'));
 
 const router = express.Router();
 
-router.get('/company/register', (req, res, next) => {
+router.get('/register', (req, res, next) => {
     res.sendFile(path.join(rootDir, 'views', 'company-register.html'));
 });
 
-router.post('/company/register', (req, res, next) => {
+router.post('/register', (req, res, next) => {
     db.registerCompany(Object.values(req.body));
     res.redirect('/');
 });
