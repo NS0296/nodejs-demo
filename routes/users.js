@@ -23,4 +23,8 @@ router.get('/sign-in', (req, res, next) => {
     res.sendFile(path.join(rootDir, 'views', 'user-sign-in.html'));
 });
 
+router.post('/sign-in', (req, res, next) => {
+    res.redirect('/');
+});
+
 module.exports = router;
