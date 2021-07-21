@@ -10,7 +10,7 @@ const router = express.Router();
 
 //register
 router.get('/register', (req, res, next) => {
-    res.sendFile(path.join(rootDir, 'views', 'user-register.html'));
+    res.render('user-register.ejs');
 });
 
 router.post('/register', (req, res, next) => {
@@ -20,7 +20,7 @@ router.post('/register', (req, res, next) => {
 
 //sign-in
 router.get('/sign-in', (req, res, next) => {
-    res.sendFile(path.join(rootDir, 'views', 'user-sign-in.html'));
+    res.render('user-sign-in.ejs');
 });
 
 router.post('/sign-in', (req, res, next) => {

@@ -9,7 +9,7 @@ const db = require(path.join(rootDir, 'models', 'db.js'));
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    res.sendFile(path.join(rootDir, 'views', 'admin.html'));
+    res.render('admin.ejs');
 });
 
 //render list of users fetched from database

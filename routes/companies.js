@@ -9,7 +9,7 @@ const db = require(path.join(rootDir, 'models', 'db.js'));
 const router = express.Router();
 
 router.get('/register', (req, res, next) => {
-    res.sendFile(path.join(rootDir, 'views', 'company-register.html'));
+    res.render('company-register.ejs');
 });
 
 router.post('/register', (req, res, next) => {
