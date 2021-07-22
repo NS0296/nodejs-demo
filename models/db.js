@@ -23,8 +23,8 @@ const registerUser = (valuesArr) => {
             valuesArr[0],
             valuesArr[1],
             valuesArr[2],
-            parseInt(valuesArr[3]),
-            valuesArr[4],
+            parseInt(valuesArr[3]) || null,
+            valuesArr[4] || null,
         ]
     );
 };
