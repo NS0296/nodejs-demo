@@ -27,4 +27,11 @@ router.post('/login', (req, res, next) => {
     res.redirect('/');
 });
 
+router.get(
+    '/dashboard',
+    /*isAuth func, */ (req, res, next) => {
+        res.render('dashboard.ejs');
+    }
+);
+
 module.exports = router;
