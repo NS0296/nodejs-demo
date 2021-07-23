@@ -18,12 +18,12 @@ router.post('/register', (req, res, next) => {
     res.redirect('/');
 });
 
-//sign-in
-router.get('/sign-in', (req, res, next) => {
-    res.render('user-sign-in.ejs');
+//login
+router.get('/login', (req, res, next) => {
+    res.render('user-login.ejs');
 });
 
-router.post('/sign-in', (req, res, next) => {
+router.post('/login', (req, res, next) => {
     res.redirect('/');
 });
 
