@@ -4,7 +4,7 @@ const express = require('express');
 
 const rootDir = require('../util/path');
 
-const db = require(path.join(rootDir, 'models', 'db.js'));
+const userModel = require(path.join(rootDir, 'models', 'db.js'));
 
 const router = express.Router();
 
