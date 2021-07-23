@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const rootDir = require('../util/path');
 
 const userModel = require(path.join(rootDir, 'models', 'db.js'));
+const store = require(path.join(rootDir, 'app.js'));
 
 const router = express.Router();
 
@@ -72,6 +73,12 @@ router.post('/login', async (req, res, next) => {
         console.log(err);
     }
 
+    res.redirect('/');
+});
+
+//logout
+router.post('/logout', (req, res, next) => {
+    req.session.destroy();
     res.redirect('/');
 });
 
