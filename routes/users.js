@@ -9,6 +9,16 @@ const userModel = require(path.join(rootDir, 'models', 'db.js'));
 
 const router = express.Router();
 
+//checks if user is auth. for requests that need this permission
+const isAuth = (req, res, next) => {
+    if (req.session.isAuth) {
+        next();
+    } else {
+        console.log('Permission to enter dashboard is missing');
+        res.redirect('/');
+    }
+};
+
 //register
 router.get('/register', (req, res, next) => {
     res.render('user-register.ejs');
@@ -65,11 +75,8 @@ router.post('/login', async (req, res, next) => {
     res.redirect('/');
 });
 
-router.get(
-    '/dashboard',
-    /*isAuth func, */ (req, res, next) => {
-        res.render('dashboard.ejs');
-    }
-);
+router.get('/dashboard', isAuth, (req, res, next) => {
+    res.render('dashboard.ejs');
+});
 
 module.exports = router;
