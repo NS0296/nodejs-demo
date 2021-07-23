@@ -27,7 +27,7 @@ app.get('/', (req, res, next) => {
 
 //  external routers
 app.use('/admin', adminRouter);
-app.use('/user', usersRouter);
+app.use(usersRouter);
 
 //  catch all
 app.use('/', (req, res, next) => {
