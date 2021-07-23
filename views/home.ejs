@@ -14,12 +14,20 @@
         </header>
         <main>
             <h2>Weclome:</h2>
+            <% if (isAuth) { %>
+            <nav>
+                <ul>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                </ul>
+            </nav>
+            <% } else if (!isAuth) {%>
             <nav>
                 <ul>
                     <li><a href="/register">Register</a></li>
                     <li><a href="/login">Login</a></li>
                 </ul>
             </nav>
+            <% } %>
             <br />
         </main>
         <br />

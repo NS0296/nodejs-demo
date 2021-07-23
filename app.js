@@ -7,10 +7,6 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
-//import routers
-const adminRouter = require(path.join(__dirname, 'routes', 'admin.js'));
-const usersRouter = require(path.join(__dirname, 'routes', 'users.js'));
-
 //config express
 app.set('views', 'views');
 app.set('template engine', 'ejs');
@@ -48,14 +44,17 @@ app.use(
     })
 );
 
+//import routers
+const homeRouter = require(path.join(__dirname, 'routes', 'home.js'));
+const adminRouter = require(path.join(__dirname, 'routes', 'admin.js'));
+const usersRouter = require(path.join(__dirname, 'routes', 'users.js'));
+
 //the middleware
 app.use(express.static(path.join(__dirname, 'public'))); //serve public
 app.use(express.urlencoded({ extended: false })); //body parser
 
 //  home page
-app.get('/', (req, res, next) => {
-    res.render('home.ejs');
-});
+app.use(homeRouter);
 
 //  external routers
 app.use('/admin', adminRouter);
