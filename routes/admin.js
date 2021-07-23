@@ -24,16 +24,4 @@ router.get('/users', (req, res, next) => {
         });
 });
 
-//render list of companies fetched from database
-router.get('/companies', (req, res, next) => {
-    db.fetchCompanies()
-        .then(([rows, fields]) => {
-            res.render('admin-companies.ejs', { rows: rows });
-        })
-        .catch((err) => {
-            console.log(err);
-            res.send(err);
-        });
-});
-
 module.exports = router;

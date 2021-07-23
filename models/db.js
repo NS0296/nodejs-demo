@@ -12,8 +12,7 @@ const pool = mysql.createPool({
 
 const poolPromise = pool.promise(); //wrap pool in promise, so cb aren't needed anymore
 
-//make sure node-demo database is active
-//pool.execute('USE node-demo');
+//task: make sure node-demo database is active
 
 //register user
 const registerUser = (valuesArr) => {
@@ -29,25 +28,11 @@ const registerUser = (valuesArr) => {
     );
 };
 
-//task: adapt INSERT statements to poolPromise
-const registerCompany = (valuesArr) => {
-    pool.execute(
-        'INSERT INTO companies(name, phone, address) VALUES (?, ?, ?)',
-        [valuesArr[0], parseInt(valuesArr[1]), valuesArr[2]]
-    );
-};
-
 const fetchUsers = () => {
     return poolPromise.execute('SELECT * FROM customers');
 };
 
-const fetchCompanies = () => {
-    return poolPromise.execute('SELECT * FROM companies');
-};
-
 module.exports = {
     registerUser: registerUser,
-    registerCompany: registerCompany,
     fetchUsers: fetchUsers,
-    fetchCompanies: fetchCompanies,
 };

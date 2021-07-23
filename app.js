@@ -3,12 +3,9 @@ const path = require('path');
 
 const express = require('express');
 
-//const __dirname = require(path.join(__dirname, 'util', 'path'));
-
 //import routers
 const adminRouter = require(path.join(__dirname, 'routes', 'admin.js'));
 const usersRouter = require(path.join(__dirname, 'routes', 'users.js'));
-const companiesRouter = require(path.join(__dirname, 'routes', 'companies.js'));
 
 const app = express();
 
@@ -31,7 +28,6 @@ app.get('/', (req, res, next) => {
 //  external routers
 app.use('/admin', adminRouter);
 app.use('/user', usersRouter);
-app.use('/company', companiesRouter);
 
 //  catch all
 app.use('/', (req, res, next) => {
