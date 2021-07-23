@@ -46,7 +46,22 @@ router.get('/login', (req, res, next) => {
     res.render('user-login.ejs');
 });
 
-router.post('/login', (req, res, next) => {
+router.post('/login', async (req, res, next) => {
+    const { email, password } = req.body;
+    try {
+        const user = await userModel.findOne({ email: email });
+        if (user === null) {
+            throw new Error('User does not exist');
+        }
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if (!isPasswordMatch) {
+            throw new Error('Wrong Password');
+        }
+        req.session.isAuth = true;
+    } catch (err) {
+        console.log(err);
+    }
+
     res.redirect('/');
 });
 
