@@ -21,27 +21,47 @@
         <main>
             <form action="/register" method="POST">
                 <label for="username">Username:</label>
-                <input type="text" name="username" id="username" required />
+                <input
+                    class="required"
+                    id="username"
+                    type="text"
+                    name="username"
+                    placeholder="*required"
+                    required
+                />
 
                 <label for="email">Email:</label>
-                <input type="email" name="email" id="email" required />
+                <input
+                    class="required"
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="*required"
+                    required
+                />
 
                 <label for="pwd">Password:</label>
                 <input
+                    class="required"
+                    id="pwd"
                     type="password"
                     name="password"
-                    id="pwd"
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    placeholder="*required"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,45}"
                     title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                 />
-                <br />
 
                 <label for="phone">Phone:</label>
-                <input type="number" name="phone" id="phone" size="11" />
+                <input
+                    id="phone"
+                    type="tel"
+                    name="phone"
+                    pattern="[0-9]{11}"
+                    title="Must be a valid phone number"
+                />
 
                 <label for="address">Address:</label>
-                <input type="text" name="address" id="address" />
-                <br />
+                <input id="address" type="text" name="address" />
 
                 <button type="submit">Register</button>
             </form>
