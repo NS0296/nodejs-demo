@@ -1,6 +1,25 @@
+/* Style all input fields */
 input {
     display: block;
-    margin: 0.5rem;
-    margin-left: 0.5rem;
-    width: 11rem;
+    width: 40%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+}
+
+/* Style the submit button */
+button {
+    width: 7rem;
+    height: 2.5rem;
+    background-color: #04aa6d;
+    color: white;
+}
+
+/* Style the container for inputs */
+.form-container {
+    background-color: #f1f1f1;
+    padding: 20px;
 }
