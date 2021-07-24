@@ -20,18 +20,23 @@
         </header>
         <main>
             <form action="/register" method="POST">
-                Username:
-                <input type="text" name="username" required />
-                Email:
-                <input type="email" name="email" required />
-                Password:
-                <input type="password" name="password" minlength="8" />
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" required />
+
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required />
+
+                <label for="pwd">Password:</label>
+                <input type="password" name="password" id="pwd" minlength="8" />
                 <br />
-                Phone
-                <input type="number" name="phone" size="11" />
-                Address
-                <input type="text" name="address" />
+
+                <label for="phone">Phone:</label>
+                <input type="number" name="phone" id="phone" size="11" />
+
+                <label for="address">Address:</label>
+                <input type="text" name="address" id="address" />
                 <br />
+
                 <button type="submit">Register</button>
             </form>
         </main>
