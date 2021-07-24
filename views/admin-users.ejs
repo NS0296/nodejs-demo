@@ -5,12 +5,26 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Admin-Users</title>
+        <link rel="stylesheet" href="/css/tables.css">
     </head>
     <body>
-        <% for (let i=0; i<rows.length; i++) { %>
-        <ul>
-            <li type="text"><%= Object.values(rows[i]) %></li>
-        </ul>
-        <% }; %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Usersname</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <% for (let i=0; i<rows.length; i++) { %>
+            <tr>
+                <td><%= rows[i][0] %></td>
+                <td><%= rows[i][1] %></td>
+                <td><%= rows[i][2] %></td>
+                <td><%= rows[i][3] %></td>
+            </tr>
+            <% } %>
+        </table>
     </body>
 </html>

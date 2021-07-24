@@ -1,0 +1,15 @@
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+thead {
+    font-size: 2rem;
+    background-color: gray;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
