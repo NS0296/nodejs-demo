@@ -15,7 +15,11 @@ const mongoUri =
     'mongodb+srv://main-server:8ryPNpKs1keznyid@nodejs-demo.v9yvf.mongodb.net/authentication?retryWrites=true&w=majority';
 
 mongoose
-    .connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(mongoUri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+    })
     .then(() => {
         app.listen(3000, console.log('Server is listening'));
     })
