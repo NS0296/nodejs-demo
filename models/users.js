@@ -1,7 +1,7 @@
 //this file is responsible for the connection to the database
 //and inserting values into each table
 const { Sequelize } = require("sequelize");
-const sequelize = require("../util/database").sequelize; //import the connection object
+const sequelize = require("../util/database"); //import the connection object
 
 sequelize.define("User", {
     id: {
@@ -35,4 +35,4 @@ sequelize.define("User", {
     },
 });
 
-module.exports = sequelize.User;
+module.exports = sequelize.models.User;
