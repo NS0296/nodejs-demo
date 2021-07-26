@@ -1,12 +1,12 @@
-const path = require('path');
+const path = require("path");
 
-const express = require('express');
-const bcrypt = require('bcryptjs');
+const express = require("express");
+const bcrypt = require("bcryptjs");
 
-const rootDir = require('../util/path');
+const rootDir = require("../util/path");
 
-const userModel = require(path.join(rootDir, 'models', 'db.js'));
-const store = require(path.join(rootDir, 'app.js'));
+const userModel = require(path.join(rootDir, "models", "users.js"));
+const store = require(path.join(rootDir, "app.js"));
 
 const router = express.Router();
 
@@ -15,19 +15,19 @@ const isAuth = (req, res, next) => {
     if (req.session.isAuth) {
         next();
     } else {
-        console.log('Permission to enter dashboard is missing');
-        res.redirect('/');
+        console.log("Permission to enter dashboard is missing");
+        res.redirect("/");
     }
 };
 
 //register
-router.get('/register', (req, res, next) => {
-    res.render('user-register.ejs');
+router.get("/register", (req, res, next) => {
+    res.render("user-register.ejs");
 });
 
-router.post('/register', async (req, res, next) => {
+router.post("/register", async (req, res, next) => {
     const { username, email, password, phone, address } = req.body;
-    res.redirect('/');
+    res.redirect("/");
 
     const hashPassword = await bcrypt.hash(password, 4);
 
@@ -43,7 +43,7 @@ router.post('/register', async (req, res, next) => {
     try {
         const isUserExist = await userModel.exists({ email: email });
         if (isUserExist) {
-            throw new Error('Email already exists for another user');
+            throw new Error("Email already exists for another user");
         }
 
         await newUser.save(); //insert the model inctance(aka document) into the db
@@ -53,37 +53,37 @@ router.post('/register', async (req, res, next) => {
 });
 
 //login
-router.get('/login', (req, res, next) => {
-    res.render('user-login.ejs');
+router.get("/login", (req, res, next) => {
+    res.render("user-login.ejs");
 });
 
-router.post('/login', async (req, res, next) => {
+router.post("/login", async (req, res, next) => {
     const { email, password } = req.body;
     try {
         const user = await userModel.findOne({ email: email });
         if (user === null) {
-            throw new Error('User does not exist');
+            throw new Error("User does not exist");
         }
         const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (!isPasswordMatch) {
-            throw new Error('Wrong Password');
+            throw new Error("Wrong Password");
         }
         req.session.isAuth = true;
     } catch (err) {
         console.log(err);
     }
 
-    res.redirect('/');
+    res.redirect("/");
 });
 
 //logout
-router.post('/logout', (req, res, next) => {
+router.post("/logout", (req, res, next) => {
     req.session.destroy();
-    res.redirect('/');
+    res.redirect("/");
 });
 
-router.get('/dashboard', isAuth, (req, res, next) => {
-    res.render('dashboard.ejs');
+router.get("/dashboard", isAuth, (req, res, next) => {
+    res.render("dashboard.ejs");
 });
 
 module.exports = router;
