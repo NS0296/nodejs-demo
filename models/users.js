@@ -19,8 +19,8 @@ sequelize.define("User", {
         type: Sequelize.STRING(100),
         isNull: false,
     },
-    passwrod: {
-        type: Sequelize.STRING(50),
+    password: {
+        type: Sequelize.STRING,
         isNull: false,
     },
     phone: {

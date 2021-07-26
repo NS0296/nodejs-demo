@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 
 const rootDir = require("../util/path");
 
-const userModel = require(path.join(rootDir, "models", "users.js"));
+const User = require(path.join(rootDir, "models", "users.js"));
 // const store = require(path.join(rootDir, "app.js"));
 
 const router = express.Router();
@@ -27,10 +27,18 @@ router.get("/register", (req, res, next) => {
 
 router.post("/register", async (req, res, next) => {
     const { username, email, password, phone, address } = req.body;
-    res.redirect("/");
 
-    // const hashPassword = await bcrypt.hash(password, 4);
+    const hashPassword = await bcrypt.hash(password, 4);
 
+    User.create({
+        username: username,
+        email: email,
+        password: hashPassword,
+        phone: phone || null,
+        address: address || null,
+    })
+        .then(result => console.log(result))
+        .catch(err => console.log(err));
     // //create new userModel
     // const newUser = new userModel({
     //     username: username,
@@ -50,6 +58,7 @@ router.post("/register", async (req, res, next) => {
     // } catch (err) {
     //     console.log(err);
     // }
+    res.redirect("/");
 });
 
 //login
