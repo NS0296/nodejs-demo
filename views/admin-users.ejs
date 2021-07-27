@@ -29,7 +29,10 @@
                 <td>
                     <div class="actions">
                         <form action="/admin/users/delete" method="POST">
-                        <button class="actions" type="submit">delete</button></form>
+                            <input type="text" name="id" value=<%= rows[i][0] %>>
+                            <button class="actions" type="submit">delete</button>
+                        </form>
+
                         <form action="/admin/users/edit" method="POST">
                         <button class="actions" type="submit">edit</button></form>
                     </div>

@@ -34,4 +34,10 @@ router.get("/users", async (req, res, next) => {
     }
 });
 
+router.post("/users/delete", async (req, res, next) => {
+    const rowId = req.body.id;
+    const deleteRow = await User.destroy({ where: { id: parseInt(rowId) } });
+    res.redirect("/admin/users");
+});
+
 module.exports = router;
