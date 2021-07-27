@@ -5,4 +5,5 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 //store
 module.exports = new SequelizeStore({
     db: sequelize,
+    tableName: "sessions",
 });
