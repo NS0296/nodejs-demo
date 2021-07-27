@@ -36,9 +36,9 @@ router.post("/register", async (req, res, next) => {
         User.create({
             username: username,
             email: email,
-            password: hashPassword,
+            password: hashPassword || null,
             phone: phone || null,
-            address: address || null,
+            address: address,
         });
     } catch (err) {
         console.log(err);
@@ -53,19 +53,19 @@ router.get("/login", (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
     const { email, password } = req.body;
-    // try {
-    //     const user = await userModel.findOne({ email: email });
-    //     if (user === null) {
-    //         throw new Error("User does not exist");
-    //     }
-    //     const isPasswordMatch = await bcrypt.compare(password, user.password);
-    //     if (!isPasswordMatch) {
-    //         throw new Error("Wrong Password");
-    //     }
-    //     req.session.isAuth = true;
-    // } catch (err) {
-    //     console.log(err);
-    // }
+    try {
+        const user = await User.findOne({ where: { email: email } });
+        if (user === null) {
+            throw new Error("User does not exist");
+        }
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if (!isPasswordMatch) {
+            throw new Error("Wrong Password");
+        }
+        req.session.isAuth = true;
+    } catch (err) {
+        console.log(err);
+    }
 
     res.redirect("/");
 });
