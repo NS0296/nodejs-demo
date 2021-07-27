@@ -27,37 +27,22 @@ router.get("/register", (req, res, next) => {
 
 router.post("/register", async (req, res, next) => {
     const { username, email, password, phone, address } = req.body;
-
-    const hashPassword = await bcrypt.hash(password, 4);
-
-    User.create({
-        username: username,
-        email: email,
-        password: hashPassword,
-        phone: phone || null,
-        address: address || null,
-    })
-        .then(result => console.log(result))
-        .catch(err => console.log(err));
-    // //create new userModel
-    // const newUser = new userModel({
-    //     username: username,
-    //     email: email,
-    //     password: hashPassword,
-    //     phone: parseInt(phone) || null,
-    //     address: address || null,
-    // });
-
-    // try {
-    //     const isUserExist = await userModel.exists({ email: email });
-    //     if (isUserExist) {
-    //         throw new Error("Email already exists for another user");
-    //     }
-
-    //     await newUser.save(); //insert the model inctance(aka document) into the db
-    // } catch (err) {
-    //     console.log(err);
-    // }
+    try {
+        const isUserExist = await User.findOne({ where: { email: email } });
+        if (isUserExist !== null) {
+            throw new Error("User already exists");
+        }
+        const hashPassword = await bcrypt.hash(password, 4);
+        User.create({
+            username: username,
+            email: email,
+            password: hashPassword,
+            phone: phone || null,
+            address: address || null,
+        });
+    } catch (err) {
+        console.log(err);
+    }
     res.redirect("/");
 });
 
