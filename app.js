@@ -5,12 +5,22 @@ const express = require("express");
 const app = express();
 const sequelize = require("./util/database");
 const session = require("express-session");
+const store = require("./util/session");
 
 //config express
 app.set("views", "views");
 app.set("template engine", "ejs");
 
-const start = async () => {
+app.use(
+    session({
+        secret: "shhhh",
+        resave: false,
+        saveUninitialized: false,
+        store: store,
+    })
+);
+
+(async () => {
     try {
         await sequelize.authenticate();
         await sequelize.sync();
@@ -19,17 +29,7 @@ const start = async () => {
     } catch (err) {
         console.log(err);
     }
-};
-
-start();
-
-app.use(
-    session({
-        secret: "shhhh",
-        resave: false,
-        saveUninitialized: false,
-    })
-);
+})();
 
 //import routers
 const homeRouter = require(path.join(__dirname, "routes", "home.js"));
