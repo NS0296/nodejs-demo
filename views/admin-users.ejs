@@ -11,6 +11,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Usersname</th>
                     <th>Email</th>
                     <th>Phone</th>
@@ -24,6 +25,7 @@
                 <td><%= rows[i][1] %></td>
                 <td><%= rows[i][2] %></td>
                 <td><%= rows[i][3] %></td>
+                <td><%= rows[i][4] %></td>
                 <td>
                     <div class="actions">
                         <form action="/admin/users/delete" method="POST">
