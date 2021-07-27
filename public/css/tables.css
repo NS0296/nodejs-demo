@@ -13,3 +13,7 @@ table {
     width: 100%;
     border-collapse: collapse;
 }
+
+.actions {
+    display: flex;
+}

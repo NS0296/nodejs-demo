@@ -15,6 +15,7 @@
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Address</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <% for (let i=0; i<rows.length; i++) { %>
@@ -23,6 +24,14 @@
                 <td><%= rows[i][1] %></td>
                 <td><%= rows[i][2] %></td>
                 <td><%= rows[i][3] %></td>
+                <td>
+                    <div class="actions">
+                        <form action="/admin/users/delete" method="POST">
+                        <button class="actions" type="submit">delete</button></form>
+                        <form action="/admin/users/edit" method="POST">
+                        <button class="actions" type="submit">edit</button></form>
+                    </div>
+                </td>
             </tr>
             <% } %>
         </table>
