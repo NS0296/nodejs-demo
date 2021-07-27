@@ -53,6 +53,7 @@ router.post("/login", async (req, res, next) => {
             throw new Error("Wrong Password");
         }
         req.session.isAuth = true;
+        req.session.userId = user.get("id");
     } catch (err) {
         console.log(err);
     }
