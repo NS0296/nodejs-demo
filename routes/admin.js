@@ -4,6 +4,7 @@ const path = require("path");
 const express = require("express");
 
 const rootDir = require("../util/path");
+const { type } = require("os");
 const User = require(path.join(rootDir, "models", "users.js"));
 
 const router = express.Router();
@@ -38,6 +39,17 @@ router.post("/users/delete", async (req, res, next) => {
     const rowId = req.body.id;
     const deleteRow = await User.destroy({ where: { id: parseInt(rowId) } });
     res.redirect("/admin/users");
+});
+
+router.post("/users/update", async (req, res, next) => {
+    const rowId = req.body.id;
+    const updateRow = await User.findByPk(parseInt(rowId));
+    res.render("update-row.ejs", {
+        username: updateRow.username,
+        email: updateRow.email,
+        phone: updateRow.phone,
+        address: updateRow.address,
+    });
 });
 
 module.exports = router;
