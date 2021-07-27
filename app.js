@@ -32,24 +32,29 @@ app.use(
 })();
 
 //import routers
-const homeRouter = require(path.join(__dirname, "routes", "home.js"));
 const adminRouter = require(path.join(__dirname, "routes", "admin.js"));
 const usersRouter = require(path.join(__dirname, "routes", "users.js"));
+const dashboardRouter = require(path.join(__dirname, "routes", "dashboard.js"));
 
 //the middleware
 app.use(express.static(path.join(__dirname, "public"))); //serve public
 app.use(express.urlencoded({ extended: false })); //body parser
 
 //  home page
-app.use(homeRouter);
+app.get("/", (req, res, next) => {
+    if ("isAuth" in req.session) {
+        res.render("home.ejs", { isAuth: req.session.isAuth });
+    } else {
+        res.render("home.ejs", { isAuth: false });
+    }
+});
 
 //  external routers
 app.use("/admin", adminRouter);
 app.use(usersRouter);
+app.use("/dashboard", dashboardRouter);
 
 //  catch all
-app.use("/", (req, res, next) => {
+app.get("/", (req, res, next) => {
     res.status(404).render("404.ejs");
 });
-
-//module.exports = store;
