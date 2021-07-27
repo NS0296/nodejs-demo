@@ -1,6 +1,7 @@
 const express = require("express");
-
 const router = express.Router();
+
+const User = require("../models/users");
 
 //checks if user is auth. for requests that need this permission
 const isAuth = (req, res, next) => {
@@ -12,8 +13,13 @@ const isAuth = (req, res, next) => {
     }
 };
 
-router.get("/", isAuth, (req, res, next) => {
-    res.render("dashboard.ejs");
+router.get("/", isAuth, async (req, res, next) => {
+    try {
+        const { username, email } = await User.findByPk(req.session.userId);
+        res.render("dashboard.ejs", { username: username, email: email });
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 module.exports = router;

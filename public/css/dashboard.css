@@ -1,0 +1,24 @@
+dl {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 1.5rem;
+}
+
+dt:hover,
+dd:hover {
+    color: indigo;
+}
+
+button {
+    width: 7rem;
+    height: 2.5rem;
+    background-color: #04aa6d;
+    color: white;
+}
+
+button:hover {
+    border-style: ridge;
+}

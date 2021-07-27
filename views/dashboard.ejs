@@ -6,14 +6,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Dashboard</title>
         <link rel="stylesheet" href="css\main.css" />
+        <link rel="stylesheet" href="css\dashboard.css" />
     </head>
     <body>
         <head>
-            <h1>This is the user dashboard</h1>
-            <h3>Restricted data is represented here</h3>
+            <nav><a href="/">Home</a></nav>
+            <h1>Dashboard</h1>
         </head>
-        <br />
         <main>
+            <div class="profile">
+                <h2>Profile:</h2>
+                <dl>
+                    <dt>Username:</dt>
+                    <dd><%= username %></dd>
+                    <dt>Email:</dt>
+                    <dd><%= email %></dd>
+                </dl>
+            </div>
             <form action="/logout" method="POST">
                 <button type="submit">Logout</button>
             </form>
