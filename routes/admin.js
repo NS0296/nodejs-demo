@@ -35,17 +35,18 @@ router.get("/users", async (req, res, next) => {
     }
 });
 
-router.post("/users/delete", async (req, res, next) => {
-    const rowId = req.body.id;
-    const deleteRow = await User.destroy({ where: { id: parseInt(rowId) } });
+router.post("/users/delete/:userId", async (req, res, next) => {
+    const userId = parseInt(req.params.userId);
+    console.log(typeof userId, userId);
+    const deleteRow = await User.destroy({ where: { id: userId } });
     res.redirect("/admin/users");
 });
 
-router.post("/users/edit/:rowId", async (req, res, next) => {
-    const rowId = parseInt(req.params.rowId); //sourced from users table view
-    const { username, email, phone, address } = await User.findByPk(parseInt(rowId));
+router.post("/users/edit/:userId", async (req, res, next) => {
+    const userId = parseInt(req.params.userId); //sourced from users table view dynamic route
+    const { username, email, phone, address } = await User.findByPk(userId);
     res.render("update-row.ejs", {
-        id: rowId,
+        userId: userId,
         username: username,
         email: email,
         phone: phone,
@@ -53,8 +54,8 @@ router.post("/users/edit/:rowId", async (req, res, next) => {
     });
 });
 
-router.post("/users/edit/confirm/:rowId", async (req, res, next) => {
-    const rowId = parseInt(req.params.rowId); //sourced from edit form
+router.post("/users/edit/confirm/:userId", async (req, res, next) => {
+    const userId = parseInt(req.params.userId); //sourced from edit form
     const { username, email, phone, address } = req.body;
     const updateRow = await User.update(
         {
@@ -64,7 +65,7 @@ router.post("/users/edit/confirm/:rowId", async (req, res, next) => {
             address: address,
         },
         {
-            where: { id: rowId },
+            where: { id: userId },
         }
     );
     res.redirect("/admin/users");

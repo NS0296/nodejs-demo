@@ -28,8 +28,7 @@
                 <td><%= rows[i][4] %></td>
                 <td>
                     <div class="actions">
-                        <form action="/admin/users/delete" method="POST">
-                            <input type="text" name="id" value=<%= rows[i][0] %>>
+                        <form action="/admin/users/delete/<%= rows[i][0] %>" method="POST">
                             <button class="actions" type="submit">delete</button>
                         </form>
 
