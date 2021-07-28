@@ -41,14 +41,14 @@ router.post("/users/delete", async (req, res, next) => {
     res.redirect("/admin/users");
 });
 
-router.post("/users/update", async (req, res, next) => {
+router.post("/users/edit", async (req, res, next) => {
     const rowId = req.body.id;
-    const updateRow = await User.findByPk(parseInt(rowId));
+    const { username, email, phone, address } = await User.findByPk(parseInt(rowId));
     res.render("update-row.ejs", {
-        username: updateRow.username,
-        email: updateRow.email,
-        phone: updateRow.phone,
-        address: updateRow.address,
+        username: username,
+        email: email,
+        phone: phone,
+        address: address,
     });
 });
 
