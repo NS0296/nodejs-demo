@@ -26,9 +26,9 @@ router.post("/register", async (req, res, next) => {
         User.create({
             username: username,
             email: email,
-            password: hashPassword || null,
+            password: hashPassword,
             phone: phone || null,
-            address: address,
+            address: address || null,
         });
     } catch (err) {
         console.log(err);

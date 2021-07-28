@@ -24,7 +24,7 @@ sequelize.define("User", {
         isNull: false,
     },
     phone: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING(11),
         isNull: true,
         defaultValue: null,
     },

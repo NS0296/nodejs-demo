@@ -11,10 +11,40 @@
     <body>
         <main>
             <form action="/admin/users/edit/confirm/<%= id %>" method="POST">
-                <input type="text" name="username" value= <%= username %>>
-                <input type="text" name="email" value= <%= email %>>
-                <input type="text" name="phone" value= <%= phone %>>
-                <input type="text" name="address" value= <%= address %>>
+                <label for="username">Username:</label>
+                <input
+                    class="required"
+                    id="username"
+                    type="text"
+                    name="username"
+                    placeholder="*required"
+                    value= <%= username %>>
+
+                <label for="email">Email:</label>
+                <input
+                    class="required"
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="*required"
+                    value= <%= email %>>
+
+                <label for="phone">Phone:</label>
+                <input
+                    id="phone"
+                    type="tel"
+                    name="phone"
+                    pattern="[0-9]{11}"
+                    title="Must be a valid phone number"
+                    value= <%= phone %>>
+
+                <label for="address">Address:</label>
+                <input
+                    id="address"
+                    type="text"
+                    name="address"
+                    value= <%= address %>>
+
                 <button type="submit">Update</button>
             </form>
         </main>
