@@ -10,7 +10,7 @@
     </head>
     <body>
         <main>
-            <form action="/admin/users/update" method="POST">
+            <form action="/admin/users/edit/confirm/<%= id %>" method="POST">
                 <input type="text" name="username" value= <%= username %>>
                 <input type="text" name="email" value= <%= email %>>
                 <input type="text" name="phone" value= <%= phone %>>

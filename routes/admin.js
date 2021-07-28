@@ -41,15 +41,33 @@ router.post("/users/delete", async (req, res, next) => {
     res.redirect("/admin/users");
 });
 
-router.post("/users/edit", async (req, res, next) => {
-    const rowId = req.body.id;
+router.post("/users/edit/:rowId", async (req, res, next) => {
+    const rowId = parseInt(req.params.rowId); //sourced from users table view
     const { username, email, phone, address } = await User.findByPk(parseInt(rowId));
     res.render("update-row.ejs", {
+        id: rowId,
         username: username,
         email: email,
         phone: phone,
         address: address,
     });
+});
+
+router.post("/users/edit/confirm/:rowId", async (req, res, next) => {
+    const rowId = parseInt(req.params.rowId); //sourced from edit form
+    const { username, email, phone, address } = req.body;
+    const updateRow = await User.update(
+        {
+            username: username,
+            email: email,
+            phone: phone,
+            address: address,
+        },
+        {
+            where: { id: rowId },
+        }
+    );
+    res.redirect("/admin/users");
 });
 
 module.exports = router;

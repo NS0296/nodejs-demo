@@ -33,8 +33,7 @@
                             <button class="actions" type="submit">delete</button>
                         </form>
 
-                        <form action="/admin/users/edit" method="POST">
-                            <input type="text" name="id" value=<%= rows[i][0] %>>
+                        <form action="/admin/users/edit/<%= rows[i][0] %>" method="POST">
                             <button class="actions" type="submit">edit</button>
                         </form>
                     </div>
