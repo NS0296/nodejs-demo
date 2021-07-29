@@ -1,4 +1,4 @@
-const User = require("../models/users.js");
+const User = require("../models/user.js");
 const bcrypt = require("bcryptjs");
 
 exports.getHome = (req, res, next) => {

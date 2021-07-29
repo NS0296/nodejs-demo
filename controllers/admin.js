@@ -1,4 +1,4 @@
-const User = require("../models/users.js");
+const User = require("../models/user.js");
 
 exports.getAdmin = (req, res, next) => {
     res.render("admin.ejs");
