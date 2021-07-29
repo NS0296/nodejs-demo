@@ -31,6 +31,8 @@ app.use(
     }
 })();
 
+const errorController = require("./controllers/error.js");
+
 //import routers
 const adminRouter = require(path.join(__dirname, "routes", "admin.js"));
 const usersRouter = require(path.join(__dirname, "routes", "users.js"));
@@ -51,8 +53,4 @@ app.get("/", (req, res, next) => {
 //  external routers
 app.use("/admin", adminRouter);
 app.use(usersRouter);
-
-//  catch all
-app.get("/", (req, res, next) => {
-    res.status(404).render("404.ejs");
-});
+app.use(errorController);
