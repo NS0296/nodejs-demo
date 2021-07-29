@@ -4,27 +4,18 @@ const express = require("express");
 const router = express.Router();
 
 const usersController = require("../controllers/users.js");
+const middleware = require("../middleware/is-auth");
 
-router.get("/register", usersController.getRegister);
+router.get("/register", middleware.isNotAuth, usersController.getRegister);
 
-router.post("/register", usersController.postRegister);
+router.post("/register", middleware.isNotAuth, usersController.postRegister);
 
-router.get("/login", usersController.getLogin);
+router.get("/login", middleware.isNotAuth, usersController.getLogin);
 
-router.post("/login", usersController.postLogin);
+router.post("/login", middleware.isNotAuth, usersController.postLogin);
 
-router.get("/logout", usersController.getLogout);
+router.get("/logout", middleware.isAuth, usersController.getLogout); //NB:authentication means beign logged in
 
-const isAuth = (req, res, next) => {
-    //checks if user is auth. for requests that need this permission
-    if (req.session.isAuth) {
-        next();
-    } else {
-        console.log("Permission to enter dashboard is missing");
-        res.redirect("/");
-    }
-};
-
-router.get("/dashboard", isAuth, usersController.getUserDashboard);
+router.get("/dashboard", middleware.isAuth, usersController.getUserDashboard);
 
 module.exports = router;
