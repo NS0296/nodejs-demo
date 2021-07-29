@@ -50,7 +50,7 @@ exports.postLogin = async (req, res, next) => {
     res.redirect("/");
 };
 
-exports.postLogout = (req, res, next) => {
+exports.getLogout = (req, res, next) => {
     req.session.destroy();
     res.redirect("/");
 };
