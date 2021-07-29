@@ -1,6 +1,14 @@
 const User = require("../models/users.js");
 const bcrypt = require("bcryptjs");
 
+exports.getHome = (req, res, next) => {
+    if ("isAuth" in req.session) {
+        res.render("home.ejs", { isAuth: req.session.isAuth });
+    } else {
+        res.render("home.ejs", { isAuth: false });
+    }
+};
+
 exports.getRegister = (req, res, next) => {
     res.render("user-register.ejs");
 };

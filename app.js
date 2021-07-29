@@ -41,16 +41,7 @@ const usersRouter = require(path.join(__dirname, "routes", "users.js"));
 app.use(express.static(path.join(__dirname, "public"))); //serve public
 app.use(express.urlencoded({ extended: false })); //body parser
 
-//  home page
-app.get("/", (req, res, next) => {
-    if ("isAuth" in req.session) {
-        res.render("home.ejs", { isAuth: req.session.isAuth });
-    } else {
-        res.render("home.ejs", { isAuth: false });
-    }
-});
-
-//  external routers
-app.use("/admin", adminRouter);
+//  use routers
 app.use(usersRouter);
+app.use("/admin", adminRouter);
 app.use(errorController);

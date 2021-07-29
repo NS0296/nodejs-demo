@@ -6,6 +6,8 @@ const router = express.Router();
 const usersController = require("../controllers/users.js");
 const middleware = require("../middleware/is-auth");
 
+router.get("/", usersController.getHome);
+
 router.get("/register", middleware.isNotAuth, usersController.getRegister);
 
 router.post("/register", middleware.isNotAuth, usersController.postRegister);
