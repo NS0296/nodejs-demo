@@ -15,4 +15,16 @@ router.post("/login", usersController.postLogin);
 
 router.get("/logout", usersController.getLogout);
 
+const isAuth = (req, res, next) => {
+    //checks if user is auth. for requests that need this permission
+    if (req.session.isAuth) {
+        next();
+    } else {
+        console.log("Permission to enter dashboard is missing");
+        res.redirect("/");
+    }
+};
+
+router.get("/dashboard", isAuth, usersController.getUserDashboard);
+
 module.exports = router;

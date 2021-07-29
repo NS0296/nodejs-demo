@@ -50,6 +50,15 @@ exports.postLogin = async (req, res, next) => {
     res.redirect("/");
 };
 
+exports.getUserDashboard = async (req, res, next) => {
+    try {
+        const { username, email } = await User.findByPk(req.session.userId);
+        res.render("dashboard.ejs", { username: username, email: email });
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 exports.getLogout = (req, res, next) => {
     req.session.destroy();
     res.redirect("/");

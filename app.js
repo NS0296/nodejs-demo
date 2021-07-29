@@ -34,7 +34,6 @@ app.use(
 //import routers
 const adminRouter = require(path.join(__dirname, "routes", "admin.js"));
 const usersRouter = require(path.join(__dirname, "routes", "users.js"));
-const dashboardRouter = require(path.join(__dirname, "routes", "dashboard.js"));
 
 //the middleware
 app.use(express.static(path.join(__dirname, "public"))); //serve public
@@ -52,7 +51,6 @@ app.get("/", (req, res, next) => {
 //  external routers
 app.use("/admin", adminRouter);
 app.use(usersRouter);
-app.use("/dashboard", dashboardRouter);
 
 //  catch all
 app.get("/", (req, res, next) => {
