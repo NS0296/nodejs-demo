@@ -1,7 +1,7 @@
 const User = require("../models/user.js");
 
 exports.getAdmin = (req, res, next) => {
-    res.render("admin.ejs");
+    res.render("admin.ejs", { pageTitle: "Admin" });
 };
 
 exports.getUsersTable = async (req, res, next) => {
@@ -19,7 +19,7 @@ exports.getUsersTable = async (req, res, next) => {
             row.push(currentDoc.address || "null");
             rows.push(row);
         }
-        res.render("admin-users.ejs", { rows: rows });
+        res.render("admin-users.ejs", { rows: rows, pageTitle: "Users Table" });
     } catch (err) {
         console.log(err);
     }
@@ -41,6 +41,7 @@ exports.postEditUser = async (req, res, next) => {
         email: email,
         phone: phone,
         address: address,
+        pageTitle: "Edit User",
     });
 };
 

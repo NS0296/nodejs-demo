@@ -3,14 +3,14 @@ const bcrypt = require("bcryptjs");
 
 exports.getHome = (req, res, next) => {
     if ("isAuth" in req.session) {
-        res.render("home.ejs", { isAuth: req.session.isAuth });
+        res.render("home.ejs", { isAuth: req.session.isAuth, pageTitle: "Home" });
     } else {
-        res.render("home.ejs", { isAuth: false });
+        res.render("home.ejs", { isAuth: false, pageTitle: "Home" });
     }
 };
 
 exports.getRegister = (req, res, next) => {
-    res.render("user-register.ejs");
+    res.render("user-register.ejs", { pageTitle: "Register" });
 };
 
 exports.postRegister = async (req, res, next) => {
@@ -35,7 +35,7 @@ exports.postRegister = async (req, res, next) => {
 };
 
 exports.getLogin = (req, res, next) => {
-    res.render("user-login.ejs");
+    res.render("user-login.ejs", { pageTitle: "Login" });
 };
 
 exports.postLogin = async (req, res, next) => {
@@ -61,7 +61,11 @@ exports.postLogin = async (req, res, next) => {
 exports.getUserDashboard = async (req, res, next) => {
     try {
         const { username, email } = await User.findByPk(req.session.userId);
-        res.render("dashboard.ejs", { username: username, email: email });
+        res.render("dashboard.ejs", {
+            username: username,
+            email: email,
+            pageTitle: "Dashboard",
+        });
     } catch (err) {
         console.log(err);
     }
