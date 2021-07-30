@@ -1,9 +1,5 @@
 const User = require("../models/user.js");
 
-exports.getAdmin = (req, res, next) => {
-    res.render("admin.ejs", { pageTitle: "Admin" });
-};
-
 exports.getUsersTable = async (req, res, next) => {
     let rows = [];
     try {

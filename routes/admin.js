@@ -4,14 +4,12 @@ const router = express.Router();
 
 const adminController = require("../controllers/admin.js");
 
-router.get("/", adminController.getAdmin);
+router.get("/", adminController.getUsersTable);
 
-router.get("/users", adminController.getUsersTable);
+router.post("/delete/:userId", adminController.postDeleteUser);
 
-router.post("/users/delete/:userId", adminController.postDeleteUser);
+router.post("/edit/:userId", adminController.postEditUser);
 
-router.post("/users/edit/:userId", adminController.postEditUser);
-
-router.post("/users/edit/confirm/:userId", adminController.postEditUserConfirm);
+router.post("/edit/confirm/:userId", adminController.postEditUserConfirm);
 
 module.exports = router;
