@@ -2,29 +2,9 @@
     </head>
     <body>
         <header>
-            <h1>NodeJS Demo Site</h1>
-            <br />
+            <%- include("inc/nav.ejs") %>
         </header>
         <main>
-            <h2>Weclome:</h2>
-            <% if (isAuth) { %>
-            <nav>
-                <ul>
-                    <li><a href="/dashboard">Dashboard</a></li>
-                </ul>
-            </nav>
-            <% } else if (!isAuth) {%>
-            <nav>
-                <ul>
-                    <li><a href="/register">Register</a></li>
-                    <li><a href="/login">Login</a></li>
-                </ul>
-            </nav>
-            <% } %>
-            <br />
+            <h1>NodeJS Demo Site</h1>
         </main>
-        <br />
-        <footer>
-            <a href="/admin">Admin</a>
-        </footer>
 <%- include("inc/end.ejs") %>

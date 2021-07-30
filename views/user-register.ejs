@@ -2,15 +2,10 @@
     </head>
     <body>
         <header>
-            <nav>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/login">Already have account?</a></li>
-                </ul>
-            </nav>
-            <h1>Register User</h1>
+            <%- include("inc/nav.ejs") %>
         </header>
         <main>
+            <h1>Register User</h1>
             <form action="/register" method="POST">
                 <label for="username">Username:</label>
                 <input

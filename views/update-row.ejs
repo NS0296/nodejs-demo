@@ -1,6 +1,9 @@
 <%- include("inc/head.ejs") %>
     </head>
     <body>
+        <header>
+            <%- include("inc/nav.ejs") %>
+        </header>
         <main>
             <form action="/admin/users/edit/confirm/<%= userId %>" method="POST">
                 <label for="username">Username:</label>

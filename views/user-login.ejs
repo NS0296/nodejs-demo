@@ -2,15 +2,10 @@
     </head>
     <body>
         <header>
-            <nav>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/register">Don't have account</a></li>
-                </ul>
-            </nav>
-            <h2>Please enter your credentials:</h2>
+            <%- include("inc/nav.ejs") %>
         </header>
         <main>
+            <h1>Please enter your credentials:</h1>
             <form action="/login" method="POST">
                 <label for="email">Email:</label>
                 <input id="email" type="email" name="email" required />
