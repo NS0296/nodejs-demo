@@ -1,7 +1,7 @@
 //this file is responsible for the connection to the database
 //and inserting values into each table
-const { Sequelize } = require("sequelize");
-const sequelize = require("../util/database"); //import the connection object
+const { Sequelize } = require("sequelize"); //import sequlize for datatypes
+const sequelize = require("../util/database"); //import connection object
 
 sequelize.define("User", {
     id: {

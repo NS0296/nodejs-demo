@@ -2,15 +2,11 @@ const User = require("../models/user.js");
 const bcrypt = require("bcryptjs");
 
 exports.getHome = (req, res, next) => {
-    if ("isAuth" in req.session) {
-        res.render("home.ejs", {
-            isAuth: req.session.isAuth,
-            pageTitle: "Home",
-            path: "/",
-        });
-    } else {
-        res.render("home.ejs", { isAuth: false, pageTitle: "Home", path: "/" });
-    }
+    res.render("home.ejs", {
+        isAuth: req.session.isAuth,
+        pageTitle: "Home",
+        path: "/",
+    });
 };
 
 exports.getRegister = (req, res, next) => {
@@ -66,7 +62,6 @@ exports.postLogin = async (req, res, next) => {
     } catch (err) {
         console.log(err);
     }
-
     res.redirect("/");
 };
 
@@ -91,5 +86,5 @@ exports.getUserDashboard = async (req, res, next) => {
 
 exports.getLogout = (req, res, next) => {
     req.session.destroy();
-    res.status(301).redirect("/");
+    res.redirect("/");
 };

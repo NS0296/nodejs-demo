@@ -1,4 +1,3 @@
-//tune the css
 const path = require("path");
 
 const express = require("express");
@@ -24,8 +23,7 @@ app.use(
     try {
         await sequelize.authenticate();
         await sequelize.sync();
-        console.log("success, hooraay");
-        app.listen(3000, console.log("app is listening"));
+        app.listen(3000, console.log("app is listening on http://localhost:3000/"));
     } catch (err) {
         console.log(err);
     }

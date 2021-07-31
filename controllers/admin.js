@@ -28,7 +28,6 @@ exports.getUsersTable = async (req, res, next) => {
 
 exports.postDeleteUser = async (req, res, next) => {
     const userId = parseInt(req.params.userId);
-    console.log(typeof userId, userId);
     const deleteRow = await User.destroy({ where: { id: userId } });
     res.redirect("/admin");
 };

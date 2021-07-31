@@ -1,7 +1,4 @@
-const path = require("path");
-
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
 
 const usersController = require("../controllers/users.js");
 const middleware = require("../middleware/is-auth");

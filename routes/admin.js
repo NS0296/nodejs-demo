@@ -1,6 +1,5 @@
 //responsibe for all admin routes
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
 
 const adminController = require("../controllers/admin.js");
 
