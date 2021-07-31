@@ -29,7 +29,7 @@ exports.postDeleteUser = async (req, res, next) => {
     const userId = parseInt(req.params.userId);
     console.log(typeof userId, userId);
     const deleteRow = await User.destroy({ where: { id: userId } });
-    res.redirect("/admin/users");
+    res.redirect("/admin");
 };
 
 exports.postEditUser = async (req, res, next) => {
@@ -60,5 +60,5 @@ exports.postEditUserConfirm = async (req, res, next) => {
             where: { id: userId },
         }
     );
-    res.redirect("/admin/users");
+    res.redirect("/admin");
 };
