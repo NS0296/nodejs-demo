@@ -2,7 +2,7 @@
     </head>
     <body>
         <header>
-            <nav><ul><li><a href="/admin">Admin</a></li></ul></nav>
+            <%- include("inc/nav.ejs") %>
         </header>
         <main>
             <form action="/admin/edit/confirm/<%= userId %>" method="POST">
@@ -43,5 +43,4 @@
                 <button type="submit">Update</button>
             </form>
         </main>
-    </body>
-</html>
+<%- include("inc/end.ejs") %>

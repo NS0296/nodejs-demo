@@ -44,6 +44,7 @@ exports.postEditUser = async (req, res, next) => {
         address: address,
         pageTitle: "Edit User",
         isAuth: req.session.isAuth,
+        path: "",
     });
 };
 
