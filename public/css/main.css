@@ -1,7 +1,32 @@
 body {
-    padding: 0;
-    margin: 0.5rem;
-    font-family: 'Open Sans', sans-serif;
-    background: #f06d07;
-    color: white;
+    margin: 50px;
+    padding-top: 20px;
+    font-family: "Open Sans", sans-serif;
+    background: #f88126;
+    color: rgb(53, 53, 53);
+}
+
+header {
+    position: fixed;
+    background: rgb(5, 146, 5);
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 10px 0 black;
+}
+
+header * {
+    display: inline;
+}
+
+header li {
+    margin: 15px;
+}
+
+header li a {
+    color: whitesmoke;
+    text-decoration: none;
 }
