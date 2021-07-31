@@ -15,7 +15,11 @@ exports.getUsersTable = async (req, res, next) => {
             row.push(currentDoc.address || "null");
             rows.push(row);
         }
-        res.render("admin-users.ejs", { rows: rows, pageTitle: "Users Table" });
+        res.render("admin-users.ejs", {
+            rows: rows,
+            pageTitle: "Users Table",
+            isAuth: req.session.isAuth,
+        });
     } catch (err) {
         console.log(err);
     }
@@ -38,6 +42,7 @@ exports.postEditUser = async (req, res, next) => {
         phone: phone,
         address: address,
         pageTitle: "Edit User",
+        isAuth: req.session.isAuth,
     });
 };
 

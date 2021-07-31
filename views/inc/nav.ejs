@@ -1,8 +1,12 @@
 <nav>
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/register">Register</a></li>
-        <li><a href="/admin">Admin</a></li>
+        <% if (isAuth) { %>
+            <li><a href="/dashboard">Dashboard</a></li>
+        <% } else if (!isAuth) { %>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+        <% } %>
+        <li id="admin"><a href="/admin">Admin</a></li>
     </ul>
 </nav>
