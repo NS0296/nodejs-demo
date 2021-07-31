@@ -5,7 +5,7 @@ exports.getHome = (req, res, next) => {
     if ("isAuth" in req.session) {
         res.render("home.ejs", { isAuth: req.session.isAuth, pageTitle: "Home" });
     } else {
-        res.render("home.ejs", { isAuth: false, pageTitle: "Home" });
+        res.render("home.ejs", { isAuth: false, pageTitle: "Home", path: "/" });
     }
 };
 
@@ -13,6 +13,7 @@ exports.getRegister = (req, res, next) => {
     res.render("user-register.ejs", {
         pageTitle: "Register",
         isAuth: req.session.isAuth,
+        path: "/register",
     });
 };
 
@@ -38,7 +39,11 @@ exports.postRegister = async (req, res, next) => {
 };
 
 exports.getLogin = (req, res, next) => {
-    res.render("user-login.ejs", { pageTitle: "Login", isAuth: req.session.isAuth });
+    res.render("user-login.ejs", {
+        pageTitle: "Login",
+        isAuth: req.session.isAuth,
+        path: "/login",
+    });
 };
 
 exports.postLogin = async (req, res, next) => {
@@ -69,6 +74,7 @@ exports.getUserDashboard = async (req, res, next) => {
             email: email,
             pageTitle: "Dashboard",
             isAuth: req.session.isAuth,
+            path: "/dashboard",
         });
     } catch (err) {
         console.log(err);

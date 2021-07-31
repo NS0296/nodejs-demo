@@ -19,6 +19,7 @@ exports.getUsersTable = async (req, res, next) => {
             rows: rows,
             pageTitle: "Users Table",
             isAuth: req.session.isAuth,
+            path: "/admin",
         });
     } catch (err) {
         console.log(err);
