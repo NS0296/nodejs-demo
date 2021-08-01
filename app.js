@@ -29,17 +29,18 @@ app.use(
     }
 })();
 
+const homeController = require("./controllers/home.js");
 const errorController = require("./controllers/error.js");
 
-//import routers
-const adminRouter = require(path.join(__dirname, "routes", "admin.js"));
-const usersRouter = require(path.join(__dirname, "routes", "users.js"));
+const admin = require(path.join(__dirname, "routes", "admin.js"));
+const auth = require(path.join(__dirname, "routes", "auth.js"));
 
 //the middleware
 app.use(express.static(path.join(__dirname, "public"))); //serve public
 app.use(express.urlencoded({ extended: false })); //body parser
 
 //  use routers
-app.use(usersRouter);
-app.use("/admin", adminRouter);
+app.use(auth);
+app.use("/admin", admin);
+app.use(homeController);
 app.use(errorController);

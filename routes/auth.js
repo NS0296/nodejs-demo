@@ -1,9 +1,7 @@
 const router = require("express").Router();
 
-const usersController = require("../controllers/users.js");
+const usersController = require("../controllers/auth.js");
 const middleware = require("../middleware/is-auth");
-
-router.get("/", usersController.getHome);
 
 router.get("/register", middleware.isNotAuth, usersController.getRegister);
 

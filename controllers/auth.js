@@ -12,14 +12,6 @@ const transporter = nodemailer.createTransport(
     })
 );
 
-exports.getHome = (req, res, next) => {
-    res.render("home.ejs", {
-        isAuth: req.session.isAuth,
-        pageTitle: "Home",
-        path: "/",
-    });
-};
-
 exports.getRegister = (req, res, next) => {
     res.render("auth/user-register.ejs", {
         pageTitle: "Register",
