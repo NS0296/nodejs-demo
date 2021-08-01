@@ -74,6 +74,14 @@ exports.postLogin = async (req, res, next) => {
     res.redirect("/");
 };
 
+exports.getReset = (req, res, next) => {
+    res.render("auth/reset.ejs", {
+        pageTitle: "Reset Password",
+        path: "/reset",
+        isAuth: req.session.isAuth,
+    });
+};
+
 exports.getUserDashboard = async (req, res, next) => {
     try {
         const { username, email, phone, address } = await User.findByPk(

@@ -1,18 +1,20 @@
 const router = require("express").Router();
 
-const usersController = require("../controllers/auth.js");
+const authController = require("../controllers/auth.js");
 const middleware = require("../middleware/is-auth");
 
-router.get("/register", middleware.isNotAuth, usersController.getRegister);
+router.get("/register", middleware.isNotAuth, authController.getRegister);
 
-router.post("/register", middleware.isNotAuth, usersController.postRegister);
+router.post("/register", middleware.isNotAuth, authController.postRegister);
 
-router.get("/login", middleware.isNotAuth, usersController.getLogin);
+router.get("/login", middleware.isNotAuth, authController.getLogin);
 
-router.post("/login", middleware.isNotAuth, usersController.postLogin);
+router.post("/login", middleware.isNotAuth, authController.postLogin);
 
-router.get("/logout", middleware.isAuth, usersController.getLogout); //NB:authentication means beign logged in
+router.get("/reset", middleware.isNotAuth, authController.getReset);
 
-router.get("/dashboard", middleware.isAuth, usersController.getUserDashboard);
+router.get("/logout", middleware.isAuth, authController.getLogout); //NB:authentication means beign logged in
+
+router.get("/dashboard", middleware.isAuth, authController.getUserDashboard);
 
 module.exports = router;

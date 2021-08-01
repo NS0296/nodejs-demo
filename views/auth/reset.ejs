@@ -1,0 +1,19 @@
+<%- include("../inc/head.ejs") %>
+    </head>
+    <body>
+        <header>
+            <%- include("../inc/nav.ejs") %>
+        </header>
+        <main>
+            <h1>Please enter your Email:</h1>
+            <div container="container">
+                <form action="/login" method="POST">
+                    <p>
+                        <label for="email">Email:</label>
+                        <input id="email" type="email" name="email" required />
+                    </p>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </main>
+<%- include("../inc/end.ejs") %>
