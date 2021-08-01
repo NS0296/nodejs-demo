@@ -13,6 +13,8 @@ router.post("/login", middleware.isNotAuth, authController.postLogin);
 
 router.get("/reset", middleware.isNotAuth, authController.getReset);
 
+router.post("/reset", authController.postReset);
+
 router.get("/logout", middleware.isAuth, authController.getLogout); //NB:authentication means beign logged in
 
 router.get("/dashboard", middleware.isAuth, authController.getUserDashboard);

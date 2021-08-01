@@ -22,7 +22,7 @@ app.use(
 (async () => {
     try {
         await sequelize.authenticate();
-        await sequelize.sync();
+        await sequelize.sync({ alter: true });
         app.listen(3000, console.log("app is listening on http://localhost:3000/"));
     } catch (err) {
         console.log(err);

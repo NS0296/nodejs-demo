@@ -1,4 +1,5 @@
 const User = require("../models/user.js");
+const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
@@ -80,6 +81,34 @@ exports.getReset = (req, res, next) => {
         path: "/reset",
         isAuth: req.session.isAuth,
     });
+};
+exports.postReset = async (req, res, next) => {
+    const { email } = req.body;
+    res.redirect("/login");
+    try {
+        const token = await crypto.randomBytes(15).toString("hex");
+        const updateUser = await User.update(
+            {
+                token: token,
+            },
+            {
+                where: { email: email },
+            }
+        );
+        if (updateUser[0] === 0) {
+            throw new Error("User does not exist");
+        }
+
+        const mail = await transporter.sendMail({
+            from: "waleyeldeen18@gmail.com",
+            to: email,
+            subject: "Reset password",
+            html: `<h1>Reset your password</h1>
+            <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to reset</p>`,
+        });
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 exports.getUserDashboard = async (req, res, next) => {

@@ -33,6 +33,11 @@ sequelize.define("User", {
         isNull: true,
         defaultValue: null,
     },
+    token: {
+        type: Sequelize.STRING(30),
+        isNull: true,
+        default: null,
+    },
 });
 
 module.exports = sequelize.models.User;
