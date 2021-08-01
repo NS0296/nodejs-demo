@@ -1,5 +1,16 @@
 const User = require("../models/user.js");
 const bcrypt = require("bcryptjs");
+const nodemailer = require("nodemailer");
+const sendgridTransport = require("nodemailer-sendgrid-transport");
+
+const transporter = nodemailer.createTransport(
+    sendgridTransport({
+        auth: {
+            api_key:
+                "***REMOVED***
+        },
+    })
+);
 
 exports.getHome = (req, res, next) => {
     res.render("home.ejs", {
@@ -19,12 +30,19 @@ exports.getRegister = (req, res, next) => {
 
 exports.postRegister = async (req, res, next) => {
     const { username, email, password, phone, address } = req.body;
+    res.redirect("/login");
     try {
         const isUserExist = await User.findOne({ where: { email: email } });
         if (isUserExist !== null) {
             throw new Error("User already exists");
         }
         const hashPassword = await bcrypt.hash(password, 4);
+        await transporter.sendMail({
+            to: email,
+            from: "waleyeldeen18@gmail.com",
+            subject: "Sign up succeed0",
+            html: "<h1>hey hey hey</h1>",
+        });
         User.create({
             username: username,
             email: email,
@@ -35,7 +53,6 @@ exports.postRegister = async (req, res, next) => {
     } catch (err) {
         console.log(err);
     }
-    res.redirect("/");
 };
 
 exports.getLogin = (req, res, next) => {
