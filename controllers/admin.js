@@ -15,7 +15,7 @@ exports.getUsersTable = async (req, res, next) => {
             row.push(currentDoc.address || "null");
             rows.push(row);
         }
-        res.render("admin-users.ejs", {
+        res.render("admin/admin-users.ejs", {
             rows: rows,
             pageTitle: "Users Table",
             isAuth: req.session.isAuth,
@@ -35,7 +35,7 @@ exports.postDeleteUser = async (req, res, next) => {
 exports.postEditUser = async (req, res, next) => {
     const userId = parseInt(req.params.userId); //sourced from users table view dynamic route
     const { username, email, phone, address } = await User.findByPk(userId);
-    res.render("update-row.ejs", {
+    res.render("admin/update-row.ejs", {
         userId: userId,
         username: username,
         email: email,

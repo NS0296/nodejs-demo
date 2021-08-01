@@ -21,7 +21,7 @@ exports.getHome = (req, res, next) => {
 };
 
 exports.getRegister = (req, res, next) => {
-    res.render("user-register.ejs", {
+    res.render("auth/user-register.ejs", {
         pageTitle: "Register",
         isAuth: req.session.isAuth,
         path: "/register",
@@ -56,7 +56,7 @@ exports.postRegister = async (req, res, next) => {
 };
 
 exports.getLogin = (req, res, next) => {
-    res.render("user-login.ejs", {
+    res.render("auth/user-login.ejs", {
         pageTitle: "Login",
         isAuth: req.session.isAuth,
         path: "/login",
@@ -87,7 +87,7 @@ exports.getUserDashboard = async (req, res, next) => {
         const { username, email, phone, address } = await User.findByPk(
             req.session.userId
         );
-        res.render("dashboard.ejs", {
+        res.render("auth/dashboard.ejs", {
             username: username,
             email: email,
             phone: phone,
