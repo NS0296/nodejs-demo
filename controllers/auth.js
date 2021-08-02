@@ -3,6 +3,7 @@ const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
+const Sequelize = require("sequelize");
 
 const transporter = nodemailer.createTransport(
     sendgridTransport({
@@ -110,6 +111,29 @@ exports.postReset = async (req, res, next) => {
     } catch (error) {
         console.log(error);
     }
+};
+
+exports.getNewPassword = async (req, res, next) => {
+    const resetToken = req.params.resetToken;
+    try {
+        const user = await User.findOne({
+            where: {
+                resetToken: resetToken,
+                resetTokenExpiration: { [Sequelize.Op.gt]: Date.now() },
+            },
+        });
+        if (user === null) {
+            throw new Error("Reset Token is invalid");
+        }
+    } catch (err) {
+        console.log(err);
+    }
+    res.render("auth/new-password.ejs", {
+        userId: user.id,
+        pageTitle: "New Password",
+        path: "/new-password",
+        isAuth: req.session.isAuth,
+    });
 };
 
 exports.getUserDashboard = async (req, res, next) => {
