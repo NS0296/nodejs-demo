@@ -115,8 +115,9 @@ exports.postReset = async (req, res, next) => {
 
 exports.getNewPassword = async (req, res, next) => {
     const resetToken = req.params.resetToken;
+    let user;
     try {
-        const user = await User.findOne({
+        user = await User.findOne({
             where: {
                 resetToken: resetToken,
                 resetTokenExpiration: { [Sequelize.Op.gt]: Date.now() },
@@ -134,6 +135,21 @@ exports.getNewPassword = async (req, res, next) => {
         path: "/new-password",
         isAuth: req.session.isAuth,
     });
+};
+
+exports.postNewPassword = async (req, res, next) => {
+    const { userId, password } = req.body;
+    try {
+        const user = await User.findByPk(userId);
+        const hashNewPassword = await bcrypt.hash(password, 4);
+        user.update({
+            password: hashNewPassword,
+            token: null,
+        });
+        console.log("success horraaayyyy");
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 exports.getUserDashboard = async (req, res, next) => {
