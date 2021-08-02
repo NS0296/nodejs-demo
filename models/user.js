@@ -1,6 +1,6 @@
 //this file is responsible for the connection to the database
 //and inserting values into each table
-const { Sequelize } = require("sequelize"); //import sequlize for datatypes
+const { Sequelize, DATE } = require("sequelize"); //import sequlize for datatypes
 const sequelize = require("../util/database"); //import connection object
 
 sequelize.define("User", {
@@ -33,8 +33,13 @@ sequelize.define("User", {
         isNull: true,
         defaultValue: null,
     },
-    token: {
+    resetToken: {
         type: Sequelize.STRING(30),
+        isNull: true,
+        default: null,
+    },
+    resetTokenExpiration: {
+        type: Sequelize.DATE,
         isNull: true,
         default: null,
     },

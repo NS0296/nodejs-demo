@@ -89,7 +89,8 @@ exports.postReset = async (req, res, next) => {
         const token = await crypto.randomBytes(15).toString("hex");
         const updateUser = await User.update(
             {
-                token: token,
+                resetToken: token,
+                resetTokenExpiration: Date.now() + 36000000,
             },
             {
                 where: { email: email },
