@@ -141,6 +141,7 @@ exports.getNewPassword = async (req, res, next) => {
     }
     res.render("auth/new-password.ejs", {
         userId: user.id,
+        resetToken: resetToken,
         pageTitle: "New Password",
         path: "/new-password",
         isAuth: req.session.isAuth,
@@ -148,15 +149,22 @@ exports.getNewPassword = async (req, res, next) => {
 };
 
 exports.postNewPassword = async (req, res, next) => {
-    const { userId, password } = req.body;
+    const { userId, resetToken, password } = req.body;
     try {
-        const user = await User.findByPk(userId);
+        const user = await User.findOne({
+            where: { id: userId, resetToken: resetToken },
+        });
         const hashNewPassword = await bcrypt.hash(password, 4);
         user.update({
             password: hashNewPassword,
-            token: null,
+            resetToken: null,
+            resetTokenExpiration: null,
         });
-        console.log("success horraaayyyy");
+        res.render("auth/user-login.ejs", {
+            pageTitle: "Login",
+            isAuth: req.session.isAuth,
+            path: "/login",
+        });
     } catch (err) {
         console.log(err);
     }
