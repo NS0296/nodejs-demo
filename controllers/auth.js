@@ -152,7 +152,11 @@ exports.postNewPassword = async (req, res, next) => {
     const { userId, resetToken, password } = req.body;
     try {
         const user = await User.findOne({
-            where: { id: userId, resetToken: resetToken },
+            where: {
+                id: userId,
+                resetToken: resetToken,
+                resetTokenExpiration: { [Sequelize.Op.gt]: Date.now() },
+            },
         });
         const hashNewPassword = await bcrypt.hash(password, 4);
         user.update({
