@@ -1,6 +1,9 @@
 const User = require("../models/user.js");
+const rootDir = require("../util/path.js");
+const path = require("path");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
+const ejs = require("ejs");
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
 const Sequelize = require("sequelize");
@@ -88,6 +91,7 @@ exports.postReset = async (req, res, next) => {
     res.redirect("/login");
     try {
         const token = await crypto.randomBytes(15).toString("hex");
+        const user = await User.findOne({ where: { email: email } });
         const updateUser = await User.update(
             {
                 resetToken: token,
@@ -100,13 +104,19 @@ exports.postReset = async (req, res, next) => {
         if (updateUser[0] === 0) {
             throw new Error("User does not exist");
         }
-
+        const mailHtml = await ejs.renderFile(
+            path.join(rootDir, "views", "email", "reset-password.ejs"),
+            {
+                username: user.username,
+                email: email,
+                resetToken: token,
+            }
+        );
         const mail = await transporter.sendMail({
             from: "waleyeldeen18@gmail.com",
             to: email,
             subject: "Reset password",
-            html: `<h1>Reset your password</h1>
-            <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to reset</p>`,
+            html: mailHtml,
         });
     } catch (error) {
         console.log(error);
