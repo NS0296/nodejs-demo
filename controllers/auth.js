@@ -169,6 +169,18 @@ exports.postNewPassword = async (req, res, next) => {
             isAuth: req.session.isAuth,
             path: "/login",
         });
+        const mailHtml = await ejs.renderFile(
+            path.join(rootDir, "views", "email", "new-password-success.ejs"),
+            {
+                username: user.username,
+            }
+        );
+        const mail = await transporter.sendMail({
+            from: "waleyeldeen18@gmail.com",
+            to: user.email,
+            subject: "Reset password succesful",
+            html: mailHtml,
+        });
     } catch (err) {
         console.log(err);
     }
