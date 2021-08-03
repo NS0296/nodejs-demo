@@ -17,26 +17,23 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <% for (let i=0; i<rows.length; i++) { %>
-                <tr>
-                    <td><%= rows[i][0] %></td>
-                    <td><%= rows[i][1] %></td>
-                    <td><%= rows[i][2] %></td>
-                    <td><%= rows[i][3] %></td>
-                    <td><%= rows[i][4] %></td>
-                    <td>
-                        <div class="actions">
-                            <form action="/admin/delete/<%= rows[i][0] %>" method="POST">
-                                <button class="actions" type="submit">delete</button>
-                            </form>
-
-                            <form action="/admin/edit/<%= rows[i][0] %>" method="POST">
-                                <button class="actions" type="submit">edit</button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-                <% } %>
+                <tBody>
+                    <% for (let i=0; i<rows.length; i++) { %>
+                    <tr id="user-row">
+                        <td id="user-row-id" class="user-field"><%= rows[i][0] %></td>
+                        <td id="user-row-username" class="user-field"><%= rows[i][1] %></td>
+                        <td id="user-row-email" class="user-field"><%= rows[i][2] %></td>
+                        <td id="user-row-phone" class="user-field"><%= rows[i][3] %></td>
+                        <td id="user-row-address" class="user-field"><%= rows[i][4] %></td>
+                        <td id="user-row-actions" class="user-field">
+                            <div class="actions">
+                                    <button id="action-button-delete" class="actions-button">delete</button>
+                                    <button id="action-button-edit" class="actions-button">edit</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tBody>
             </table>
         </main>
 <%- include("../inc/end.ejs") %>
