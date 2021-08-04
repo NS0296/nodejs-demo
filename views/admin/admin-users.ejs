@@ -6,7 +6,6 @@
             <%- include("../inc/nav.ejs") %>
         </header>
         <main>
-            <button id="button">Click me!</button>
             <table id="table">
                 <thead>
                     <tr>
@@ -18,58 +17,55 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tBody id="tbody">
-                    <tr id="user-row">
-                        <td id="user-row-id" class="user-field"></td>
-                        <td id="user-row-username" class="user-field"></td>
-                        <td id="user-row-email" class="user-field"></td>
-                        <td id="user-row-phone" class="user-field"></td>
-                        <td id="user-row-address" class="user-field"></td>
-                        <td id="user-row-actions" class="user-field">
-                            <div class="actions">
-                                    <button id="action-button-delete" class="actions-button">delete</button>
-                                    <button id="action-button-edit" class="actions-button">edit</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tBody>
+                <tBody id="tbody"></tBody>
             </table>
         </main>
         <script>
             const button = document.getElementById("button");
-            // const tBody = document.getElementById("tbody");
+            //const tBody = document.getElementById("tbody");
             const fetch = () => {
                 const xhr = new XMLHttpRequest();
 
                 xhr.open("GET", "http://localhost:3000/admin/get", true);
                 xhr.onload = () => {
                     const res = JSON.parse(xhr.responseText)
-                    // creates a <table> element and a <tbody> element
+                    console.log(res)
+                    //creates a <table> element and a <tbody> element
                     let tbl = document.getElementById("table");
                     let tblBody = document.getElementById("tbody");
 
-                    // creating all cells
-                    for (let i = 0; i <= res.length; i++) {
-                        // creates a table row
+                    //creating all cells
+                    res.forEach(elem => {
+                        //creates a table row
                         let row = document.createElement("tr");
 
-                        for (let j = 0; j < 6; j++) {
-                            // Create a <td> element and a text node, make the text
-                            // node the contents of the <td>, and put the <td> at
-                            // the end of the table row
-                            let cell = document.createElement("td");
-                            let cellText = document.createTextNode(res[i].id);
-                            cell.appendChild(cellText);
-                            row.appendChild(cell);
-                        }
+                        //creates a cell per column property
+                        let cellId = document.createElement("td");
+                        let cellUsername = document.createElement("td");
+                        let cellEmail = document.createElement("td");
+                        let cellPhone = document.createElement("td");
+                        let cellAddress = document.createElement("td");
 
-                        // add the row to the end of the table body
+                        //add text to each cell
+                        cellId.innerText = elem.username;
+                        cellUsername.innerText = elem.username;
+                        cellEmail.innerText = elem.email;
+                        cellPhone.innerText = elem.phone;
+                        cellAddress.innerText = elem.address;
+
+                        row.appendChild(cellId);
+                        row.appendChild(cellUsername);
+                        row.appendChild(cellEmail);
+                        row.appendChild(cellPhone);
+                        row.appendChild(cellAddress);
+
+                        //add the row to the end of the table body
                         tblBody.appendChild(row);
-                    }
+                    });
                 }
-                xhr.send()
+                xhr.send();
             }
 
-            button.addEventListener('click', fetch)
+            document.addEventListener('DOMContentLoaded', fetch);
         </script>
 <%- include("../inc/end.ejs") %>

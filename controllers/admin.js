@@ -9,10 +9,12 @@ exports.getPage = (req, res) => {
 };
 exports.getUsersTable = async (req, res, next) => {
     try {
-        const docsList = await User.findAll();
+        const docsList = await User.findAll({
+            attributes: ["id", "username", "email", "phone", "address"],
+        });
         res.send(docsList);
     } catch (err) {
-        console.log(err);
+        res.send(err);
     }
 };
 
