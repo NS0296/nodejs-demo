@@ -21,22 +21,18 @@
             </table>
         </main>
         <script>
-            const button = document.getElementById("button");
-            //const tBody = document.getElementById("tbody");
-            const fetch = () => {
-                const xhr = new XMLHttpRequest();
+            let tbl = document.getElementById("table");
+            let tblBody = document.getElementById("tbody");
 
+            const fetchAll = () => {
+                const xhr = new XMLHttpRequest();
                 xhr.open("GET", "http://localhost:3000/admin/get", true);
+
                 xhr.onload = () => {
                     const res = JSON.parse(xhr.responseText)
 
-                    //creates a <table> element and a <tbody> element
-                    let tbl = document.getElementById("table");
-                    let tblBody = document.getElementById("tbody");
-
                     //creating all cells
                     res.forEach(elem => {
-                        //creates a table row
                         let row = document.createElement("tr");
 
                         //creates a cell per column property
@@ -77,6 +73,6 @@
                 xhr.send();
             }
 
-            document.addEventListener('DOMContentLoaded', fetch);
+            document.addEventListener('DOMContentLoaded', fetchAll);
         </script>
 <%- include("../inc/end.ejs") %>
