@@ -1,26 +1,16 @@
 const User = require("../models/user.js");
 
+exports.getPage = (req, res) => {
+    res.render("admin/admin-users.ejs", {
+        pageTitle: "Edit User",
+        isAuth: req.session.isAuth,
+        path: "",
+    });
+};
 exports.getUsersTable = async (req, res, next) => {
-    let rows = [];
     try {
         const docsList = await User.findAll();
-        //returns list rows in javascript objects
-        for (let i = 0; i < docsList.length; i++) {
-            let currentDoc = docsList[i];
-            let row = [];
-            row.push(currentDoc.id);
-            row.push(currentDoc.username);
-            row.push(currentDoc.email);
-            row.push(currentDoc.phone || "null");
-            row.push(currentDoc.address || "null");
-            rows.push(row);
-        }
-        res.render("admin/admin-users.ejs", {
-            rows: rows,
-            pageTitle: "Users Table",
-            isAuth: req.session.isAuth,
-            path: "/admin",
-        });
+        res.send(docsList);
     } catch (err) {
         console.log(err);
     }

@@ -3,7 +3,9 @@ const router = require("express").Router();
 
 const adminController = require("../controllers/admin.js");
 
-router.get("/", adminController.getUsersTable);
+router.get("/", adminController.getPage);
+
+router.get("/get", adminController.getUsersTable);
 
 router.post("/delete/:userId", adminController.postDeleteUser);
 
