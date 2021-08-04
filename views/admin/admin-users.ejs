@@ -29,7 +29,7 @@
                 xhr.open("GET", "http://localhost:3000/admin/get", true);
                 xhr.onload = () => {
                     const res = JSON.parse(xhr.responseText)
-                    console.log(res)
+
                     //creates a <table> element and a <tbody> element
                     let tbl = document.getElementById("table");
                     let tblBody = document.getElementById("tbody");
@@ -58,6 +58,17 @@
                         row.appendChild(cellEmail);
                         row.appendChild(cellPhone);
                         row.appendChild(cellAddress);
+
+                        //add actions cell
+                        let cellActions = document.createElement("td");
+                        let actionButtonDelete = document.createElement('button');
+
+                        actionButtonDelete.className = 'actionButtons';
+                        actionButtonDelete.innerText = 'Delete';
+
+                        cellActions.appendChild(actionButtonDelete);
+
+                        row.appendChild(cellActions)
 
                         //add the row to the end of the table body
                         tblBody.appendChild(row);
