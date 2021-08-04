@@ -72,7 +72,7 @@
                         actionButtonDelete.addEventListener('click', () => {
                             const xhr = new XMLHttpRequest();
                             let reqUrl = `http://localhost:3000/admin/delete/${actionButtonDelete.dataset.userId}`
-                            xhr.open("GET", reqUrl, true);
+                            xhr.open("DELETE", reqUrl, true);
 
                             xhr.onload = () => {
                                 if (xhr.status === 200) {
