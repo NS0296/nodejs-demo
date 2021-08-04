@@ -18,10 +18,14 @@ exports.getUsersTable = async (req, res, next) => {
     }
 };
 
-exports.postDeleteUser = async (req, res, next) => {
+exports.deleteUser = async (req, res, next) => {
     const userId = parseInt(req.params.userId);
-    const deleteRow = await User.destroy({ where: { id: userId } });
-    res.redirect("/admin");
+    try {
+        const deleteRow = await User.destroy({ where: { id: userId } });
+        res.send({ status: "done" });
+    } catch (err) {
+        res.send(err);
+    }
 };
 
 exports.postEditUser = async (req, res, next) => {

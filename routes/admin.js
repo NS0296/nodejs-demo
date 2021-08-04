@@ -7,7 +7,7 @@ router.get("/", adminController.getPage);
 
 router.get("/get", adminController.getUsersTable);
 
-router.post("/delete/:userId", adminController.postDeleteUser);
+router.delete("/delete/:userId", adminController.deleteUser);
 
 router.post("/edit/:userId", adminController.postEditUser);
 
