@@ -5,12 +5,12 @@ const adminController = require("../controllers/admin.js");
 
 router.get("/", adminController.getPage);
 
-router.get("/get", adminController.getUsersTable);
+router.get("/users", adminController.usersTable);
 
 router.delete("/delete/:userId", adminController.deleteUser);
 
-router.post("/edit/:userId", adminController.postEditUser);
+router.post("/edit/:userId", adminController.editUser);
 
-router.post("/edit/confirm/:userId", adminController.postEditUserConfirm);
+router.post("/edit/confirm/:userId", adminController.editUserConfirm);
 
 module.exports = router;

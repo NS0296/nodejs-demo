@@ -7,7 +7,7 @@ exports.getPage = (req, res) => {
         path: "",
     });
 };
-exports.getUsersTable = async (req, res, next) => {
+exports.usersTable = async (req, res, next) => {
     try {
         const docsList = await User.findAll({
             attributes: ["id", "username", "email", "phone", "address"],
@@ -28,7 +28,7 @@ exports.deleteUser = async (req, res, next) => {
     }
 };
 
-exports.postEditUser = async (req, res, next) => {
+exports.editUser = async (req, res, next) => {
     const userId = parseInt(req.params.userId); //sourced from users table view dynamic route
     const { username, email, phone, address } = await User.findByPk(userId);
     res.render("admin/update-row.ejs", {
@@ -43,7 +43,7 @@ exports.postEditUser = async (req, res, next) => {
     });
 };
 
-exports.postEditUserConfirm = async (req, res, next) => {
+exports.editUserConfirm = async (req, res, next) => {
     const userId = parseInt(req.params.userId); //sourced from edit form (above)
     const { username, email, phone, address } = req.body;
     const updateRow = await User.update(
