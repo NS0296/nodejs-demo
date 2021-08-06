@@ -1,12 +1,12 @@
 let tbl = document.getElementById("table");
 let tblBody = document.getElementById("tbody");
 
-const getNthParentOf = (elem, i) => {
+const getNthParentOf = (node, i) => {
     while (i > 0) {
-        elem = elem.parentElement;
+        node = node.parentElement;
         i--;
     }
-    return elem;
+    return node;
 };
 
 let getAllSiblings = e => {
@@ -46,7 +46,7 @@ const setupTable = () => {
         if (xhr.status === 200) {
             const res = JSON.parse(xhr.responseText);
             //creating all cells
-            res.forEach(elem => {
+            res.forEach(user => {
                 let row = document.createElement("tr");
 
                 //creates a cell per column property
@@ -64,11 +64,11 @@ const setupTable = () => {
                 cellAddress.className = "userData address";
 
                 //add text to each cell
-                cellId.innerText = elem.id;
-                cellUsername.innerText = elem.username;
-                cellEmail.innerText = elem.email;
-                cellPhone.innerText = elem.phone;
-                cellAddress.innerText = elem.address;
+                cellId.innerText = user.id;
+                cellUsername.innerText = user.username;
+                cellEmail.innerText = user.email;
+                cellPhone.innerText = user.phone;
+                cellAddress.innerText = user.address;
 
                 row.appendChild(cellId);
                 row.appendChild(cellUsername);
@@ -84,7 +84,7 @@ const setupTable = () => {
                 let actionButtonDelete = document.createElement("button");
                 actionButtonDelete.className = "actionButtons deleteButtons";
                 actionButtonDelete.innerText = "Delete";
-                actionButtonDelete.dataset.userId = elem.id;
+                actionButtonDelete.dataset.userId = user.id;
 
                 actionButtonDelete.addEventListener("click", () => {
                     const xhr = new XMLHttpRequest();
@@ -104,19 +104,19 @@ const setupTable = () => {
                 let actionButtonEdit = document.createElement("button");
                 actionButtonEdit.className = "actionButton editButton";
                 actionButtonEdit.innerText = "Edit";
-                actionButtonEdit.dataset.userId = elem.id;
+                actionButtonEdit.dataset.userId = user.id;
                 actionButtonEdit.addEventListener("click", () => {
                     const allCells = getAllSiblings(actionButtonEdit.parentNode);
                     allCells.shift();
                     cellActions.replaceChild(actionButtonUpdate, actionButtonEdit);
-                    allCells.forEach(elem => {
+                    allCells.forEach(cell => {
                         const input = document.createElement("input");
                         const newCell = document.createElement("td");
-                        input.value = elem.innerText;
+                        input.value = cell.innerText;
                         newCell.appendChild(input);
-                        elem.parentNode.replaceChild(
+                        cell.parentNode.replaceChild(
                             newCell,
-                            elem.parentNode.childNodes[allCells.indexOf(elem) + 1]
+                            cell.parentNode.childNodes[allCells.indexOf(cell) + 1]
                         );
                     });
                 });
@@ -125,7 +125,7 @@ const setupTable = () => {
                 let actionButtonUpdate = document.createElement("button");
                 actionButtonUpdate.className = "actionButton updateButton";
                 actionButtonUpdate.innerText = "Update";
-                actionButtonUpdate.dataset.userId = elem.id;
+                actionButtonUpdate.dataset.userId = user.id;
 
                 actionButtonUpdate.addEventListener("click", () => {
                     const rowCells = getAllSiblings(actionButtonUpdate.parentNode);
@@ -139,11 +139,10 @@ const setupTable = () => {
                     );
 
                     for (let i = 0; i < rowCells.length; i++) {
-                        const elem = rowCells[i];
-                        const textNode = document.createTextNode(elem.firstChild.value);
-                        elem.replaceChild(textNode, elem.firstChild);
+                        const cell = rowCells[i];
+                        const textNode = document.createTextNode(cell.firstChild.value); //firstchild -> input
+                        cell.replaceChild(textNode, cell.firstChild);
                     }
-                    console.log(newData);
 
                     const xhr = new XMLHttpRequest();
                     let reqUrl = `http://localhost:3000/api/update/${actionButtonUpdate.dataset.userId}`;
