@@ -9,6 +9,6 @@ router.get("/users", adminController.usersTable);
 
 router.delete("/delete/:userId", adminController.deleteUser);
 
-router.post("/edit/:userId", adminController.editUser);
+router.post("/update/:userId", adminController.updateUser);
 
 module.exports = router;

@@ -28,7 +28,7 @@ exports.deleteUser = async (req, res, next) => {
     }
 };
 
-exports.editUser = async (req, res, next) => {
+exports.updateUser = async (req, res, next) => {
     const userId = parseInt(req.params.userId);
     const { username, email, phone, address } = req.body;
     try {

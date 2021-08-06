@@ -100,13 +100,13 @@ const setupTable = () => {
                     xhr.send();
                 });
 
-                //edit action button
-                let actionButtonEdit = document.createElement("button");
-                actionButtonEdit.className = "actionButton editButton";
-                actionButtonEdit.innerText = "Edit";
-                actionButtonEdit.dataset.userId = elem.id;
+                //update action button
+                let actionButtonUpdate = document.createElement("button");
+                actionButtonUpdate.className = "actionButton updateButton";
+                actionButtonUpdate.innerText = "Update";
+                actionButtonUpdate.dataset.userId = elem.id;
 
-                actionButtonEdit.addEventListener("click", () => {
+                actionButtonUpdate.addEventListener("click", () => {
                     let allSiblings = getAllSiblings(row.firstChild);
                     const newData = new UserData(
                         allSiblings[0].innerText,
@@ -116,7 +116,7 @@ const setupTable = () => {
                     );
 
                     const xhr = new XMLHttpRequest();
-                    let reqUrl = `http://localhost:3000/admin/edit/${actionButtonEdit.dataset.userId}`;
+                    let reqUrl = `http://localhost:3000/admin/update/${actionButtonUpdate.dataset.userId}`;
                     xhr.open("POST", reqUrl, true);
 
                     xhr.onload = () => {
@@ -134,7 +134,7 @@ const setupTable = () => {
                 });
 
                 cellActions.appendChild(actionButtonDelete);
-                cellActions.appendChild(actionButtonEdit);
+                cellActions.appendChild(actionButtonUpdate);
                 row.appendChild(cellActions);
 
                 tblBody.appendChild(row);
