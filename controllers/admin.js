@@ -1,18 +1,18 @@
 const User = require("../models/user.js");
 
-exports.getPage = (req, res) => {
-    res.render("admin/admin-users.ejs", {
-        pageTitle: "Edit User",
+exports.getAdmin = (req, res) => {
+    res.render("admin/admin.ejs", {
+        pageTitle: "Admin",
         isAuth: req.session.isAuth,
-        path: "",
+        path: "/admin",
     });
 };
 exports.usersTable = async (req, res, next) => {
     try {
-        const docsList = await User.findAll({
+        const users = await User.findAll({
             attributes: ["id", "username", "email", "phone", "address"],
         });
-        res.send(docsList);
+        res.send(users);
     } catch (err) {
         res.send(err);
     }
