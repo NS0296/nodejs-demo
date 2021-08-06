@@ -100,6 +100,27 @@ const setupTable = () => {
                     xhr.send();
                 });
 
+                //edit action button
+                let actionButtonEdit = document.createElement("button");
+                actionButtonEdit.className = "actionButton editButton";
+                actionButtonEdit.innerText = "Edit";
+                actionButtonEdit.dataset.userId = elem.id;
+                actionButtonEdit.addEventListener("click", () => {
+                    const allCells = getAllSiblings(actionButtonEdit.parentNode);
+                    allCells.shift();
+                    cellActions.replaceChild(actionButtonUpdate, actionButtonEdit);
+                    allCells.forEach(elem => {
+                        const input = document.createElement("input");
+                        const newCell = document.createElement("td");
+                        input.value = elem.innerText;
+                        newCell.appendChild(input);
+                        elem.parentNode.replaceChild(
+                            newCell,
+                            elem.parentNode.childNodes[allCells.indexOf(elem) + 1]
+                        );
+                    });
+                });
+
                 //update action button
                 let actionButtonUpdate = document.createElement("button");
                 actionButtonUpdate.className = "actionButton updateButton";
@@ -134,7 +155,7 @@ const setupTable = () => {
                 });
 
                 cellActions.appendChild(actionButtonDelete);
-                cellActions.appendChild(actionButtonUpdate);
+                cellActions.appendChild(actionButtonEdit);
                 row.appendChild(cellActions);
 
                 tblBody.appendChild(row);

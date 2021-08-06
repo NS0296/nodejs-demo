@@ -17,7 +17,3 @@ table {
 .actions {
     display: flex;
 }
-
-input {
-    display: none;
-}
