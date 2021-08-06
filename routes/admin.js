@@ -3,12 +3,12 @@ const router = require("express").Router();
 
 const adminController = require("../controllers/admin.js");
 
-router.get("/", adminController.getAdmin);
+router.get("/admin", adminController.getAdmin);
 
-router.get("/users", adminController.usersTable);
+router.get("/api/users", adminController.usersTable);
 
-router.delete("/delete/:userId", adminController.deleteUser);
+router.delete("/api/delete/:userId", adminController.deleteUser);
 
-router.post("/update/:userId", adminController.updateUser);
+router.post("/api/update/:userId", adminController.updateUser);
 
 module.exports = router;

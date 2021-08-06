@@ -42,6 +42,6 @@ app.use(express.json()); //body parser for json
 
 //  use routers
 app.use(auth);
-app.use("/admin", admin);
+app.use(admin);
 app.use(homeController);
 app.use(errorController);
