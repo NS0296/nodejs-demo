@@ -61,11 +61,41 @@ const setupTable = () => {
                     xhr.send();
                 });
 
-                cellActions.appendChild(actionButtonDelete);
+                let actionButtonEdit = document.createElement("button");
+                actionButtonEdit.className = "actionButton editButton";
+                actionButtonEdit.innerText = "Edit";
+                actionButtonEdit.dataset.userId = elem.id;
 
+                actionButtonEdit.addEventListener("click", () => {
+                    let newData = {
+                        username: elem.username,
+                        email: elem.email,
+                        phone: elem.phone,
+                        address: elem.address,
+                    };
+                    console.log(newData);
+                    const xhr = new XMLHttpRequest();
+                    let reqUrl = `http://localhost:3000/admin/edit/${actionButtonEdit.dataset.userId}`;
+                    xhr.open("POST", reqUrl, true);
+
+                    xhr.onload = () => {
+                        if (xhr.status === 200) {
+                            console.log(xhr.response);
+                        }
+                    };
+
+                    xhr.setRequestHeader(
+                        "Content-Type",
+                        "application/json;charset=UTF-8"
+                    );
+                    xhr.setRequestHeader("Accept", "application/json");
+                    xhr.send(JSON.stringify(newData));
+                });
+
+                cellActions.appendChild(actionButtonDelete);
+                cellActions.appendChild(actionButtonEdit);
                 row.appendChild(cellActions);
 
-                //add the row to the end of the table body
                 tblBody.appendChild(row);
             });
         }
