@@ -29,6 +29,15 @@ let getAllSiblings = e => {
     return siblings;
 };
 
+class UserData {
+    constructor(username, email, address, phone) {
+        this.username = username;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+    }
+}
+
 const setupTable = () => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "http://localhost:3000/admin/users", true);
@@ -47,6 +56,13 @@ const setupTable = () => {
                 let cellPhone = document.createElement("td");
                 let cellAddress = document.createElement("td");
 
+                //add classes to all cells by column
+                cellId.className = "id userData";
+                cellUsername.className = "userData username";
+                cellEmail.className = "userData email";
+                cellPhone.className = "userData phone";
+                cellAddress.className = "userData address";
+
                 //add text to each cell
                 cellId.innerText = elem.id;
                 cellUsername.innerText = elem.username;
@@ -62,6 +78,9 @@ const setupTable = () => {
 
                 //add actions cell
                 let cellActions = document.createElement("td");
+                cellActions.className = "actions";
+
+                //delete action button
                 let actionButtonDelete = document.createElement("button");
                 actionButtonDelete.className = "actionButtons deleteButtons";
                 actionButtonDelete.innerText = "Delete";
@@ -81,18 +100,21 @@ const setupTable = () => {
                     xhr.send();
                 });
 
+                //edit action button
                 let actionButtonEdit = document.createElement("button");
                 actionButtonEdit.className = "actionButton editButton";
                 actionButtonEdit.innerText = "Edit";
                 actionButtonEdit.dataset.userId = elem.id;
 
                 actionButtonEdit.addEventListener("click", () => {
-                    const newData = [];
                     let allSiblings = getAllSiblings(row.firstChild);
-                    allSiblings.forEach(elem => {
-                        newData.push(elem.innerText);
-                    });
-                    console.log(newData);
+                    const newData = new UserData(
+                        allSiblings[0].innerText,
+                        allSiblings[1].innerText,
+                        allSiblings[2].innerText,
+                        allSiblings[3].innerText
+                    );
+
                     const xhr = new XMLHttpRequest();
                     let reqUrl = `http://localhost:3000/admin/edit/${actionButtonEdit.dataset.userId}`;
                     xhr.open("POST", reqUrl, true);
@@ -108,7 +130,7 @@ const setupTable = () => {
                         "application/json;charset=UTF-8"
                     );
                     xhr.setRequestHeader("Accept", "application/json");
-                    xhr.send(JSON.stringify({ hi: newData }));
+                    xhr.send(JSON.stringify(newData));
                 });
 
                 cellActions.appendChild(actionButtonDelete);
