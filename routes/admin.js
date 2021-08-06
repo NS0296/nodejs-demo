@@ -11,6 +11,4 @@ router.delete("/delete/:userId", adminController.deleteUser);
 
 router.post("/edit/:userId", adminController.editUser);
 
-router.post("/edit/confirm/:userId", adminController.editUserConfirm);
-
 module.exports = router;

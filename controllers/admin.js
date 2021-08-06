@@ -29,33 +29,25 @@ exports.deleteUser = async (req, res, next) => {
 };
 
 exports.editUser = async (req, res, next) => {
-    const userId = parseInt(req.params.userId); //sourced from users table view dynamic route
-    const { username, email, phone, address } = await User.findByPk(userId);
-    res.render("admin/update-row.ejs", {
-        userId: userId,
-        username: username,
-        email: email,
-        phone: phone,
-        address: address,
-        pageTitle: "Edit User",
-        isAuth: req.session.isAuth,
-        path: "",
-    });
-};
-
-exports.editUserConfirm = async (req, res, next) => {
-    const userId = parseInt(req.params.userId); //sourced from edit form (above)
+    const userId = parseInt(req.params.userId);
     const { username, email, phone, address } = req.body;
-    const updateRow = await User.update(
-        {
-            username: username,
-            email: email,
-            phone: phone,
-            address: address,
-        },
-        {
-            where: { id: userId },
+    try {
+        const updateUser = await User.update(
+            {
+                username: username,
+                email: email,
+                phone: phone,
+                address: address,
+            },
+            {
+                where: { id: userId },
+            }
+        );
+        if (updateUser[0] === 0) {
+            throw new Error("User does not exit");
         }
-    );
-    res.redirect("/admin");
+        res.send({ status: "done" });
+    } catch (err) {
+        res.send(err);
+    }
 };
