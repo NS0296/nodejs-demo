@@ -1,5 +1,6 @@
 const User = require("../models/user.js");
 const rootDir = require("../util/path.js");
+const secrets = require("../secrets.json");
 const path = require("path");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
@@ -11,8 +12,7 @@ const Sequelize = require("sequelize");
 const transporter = nodemailer.createTransport(
     sendgridTransport({
         auth: {
-            api_key:
-                "***REMOVED***
+            api_key: secrets.sendgridApiKey,
         },
     })
 );
@@ -36,7 +36,7 @@ exports.postRegister = async (req, res, next) => {
         const hashPassword = await bcrypt.hash(password, 4);
         await transporter.sendMail({
             to: email,
-            from: "waleyeldeen18@gmail.com",
+            from: secrets.sendgridMainSender,
             subject: "Sign up succeed0",
             html: "<h1>hey hey hey</h1>",
         });
@@ -113,7 +113,7 @@ exports.postReset = async (req, res, next) => {
             }
         );
         const mail = await transporter.sendMail({
-            from: "waleyeldeen18@gmail.com",
+            from: secrets.sendgridMainSender,
             to: email,
             subject: "Reset password",
             html: mailHtml,
@@ -176,7 +176,7 @@ exports.postNewPassword = async (req, res, next) => {
             }
         );
         const mail = await transporter.sendMail({
-            from: "waleyeldeen18@gmail.com",
+            from: secrets.sendgridMainSender,
             to: user.email,
             subject: "Reset password succesful",
             html: mailHtml,
