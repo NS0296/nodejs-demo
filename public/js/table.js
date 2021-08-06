@@ -30,11 +30,11 @@ let getAllSiblings = e => {
 };
 
 class UserData {
-    constructor(username, email, address, phone) {
+    constructor(username, email, phone, address) {
         this.username = username;
         this.email = email;
-        this.address = address;
         this.phone = phone;
+        this.address = address;
     }
 }
 
@@ -128,13 +128,22 @@ const setupTable = () => {
                 actionButtonUpdate.dataset.userId = elem.id;
 
                 actionButtonUpdate.addEventListener("click", () => {
-                    let allSiblings = getAllSiblings(row.firstChild);
+                    const rowCells = getAllSiblings(actionButtonUpdate.parentNode);
+                    rowCells.shift(); //remove id cell
+                    cellActions.replaceChild(actionButtonEdit, actionButtonUpdate);
                     const newData = new UserData(
-                        allSiblings[0].innerText,
-                        allSiblings[1].innerText,
-                        allSiblings[2].innerText,
-                        allSiblings[3].innerText
+                        rowCells[0].firstChild.value,
+                        rowCells[1].firstChild.value,
+                        rowCells[2].firstChild.value,
+                        rowCells[3].firstChild.value
                     );
+
+                    for (let i = 0; i < rowCells.length; i++) {
+                        const elem = rowCells[i];
+                        const textNode = document.createTextNode(elem.firstChild.value);
+                        elem.replaceChild(textNode, elem.firstChild);
+                    }
+                    console.log(newData);
 
                     const xhr = new XMLHttpRequest();
                     let reqUrl = `http://localhost:3000/admin/update/${actionButtonUpdate.dataset.userId}`;
