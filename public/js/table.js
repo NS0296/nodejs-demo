@@ -9,6 +9,26 @@ const getNthParentOf = (elem, i) => {
     return elem;
 };
 
+let getAllSiblings = e => {
+    // for collecting siblings
+    let siblings = [];
+    // if no parent, return no sibling
+    if (!e.parentNode) {
+        return siblings;
+    }
+    // first child of the parent node
+    let sibling = e.parentNode.firstChild;
+
+    // collecting siblings
+    while (sibling) {
+        if (sibling.nodeType === 1 && sibling !== e) {
+            siblings.push(sibling);
+        }
+        sibling = sibling.nextSibling;
+    }
+    return siblings;
+};
+
 const setupTable = () => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "http://localhost:3000/admin/users", true);
@@ -67,12 +87,11 @@ const setupTable = () => {
                 actionButtonEdit.dataset.userId = elem.id;
 
                 actionButtonEdit.addEventListener("click", () => {
-                    let newData = {
-                        username: elem.username,
-                        email: elem.email,
-                        phone: elem.phone,
-                        address: elem.address,
-                    };
+                    const newData = [];
+                    let allSiblings = getAllSiblings(row.firstChild);
+                    allSiblings.forEach(elem => {
+                        newData.push(elem.innerText);
+                    });
                     console.log(newData);
                     const xhr = new XMLHttpRequest();
                     let reqUrl = `http://localhost:3000/admin/edit/${actionButtonEdit.dataset.userId}`;
@@ -89,7 +108,7 @@ const setupTable = () => {
                         "application/json;charset=UTF-8"
                     );
                     xhr.setRequestHeader("Accept", "application/json");
-                    xhr.send(JSON.stringify(newData));
+                    xhr.send(JSON.stringify({ hi: newData }));
                 });
 
                 cellActions.appendChild(actionButtonDelete);
