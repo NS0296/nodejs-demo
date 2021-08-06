@@ -37,7 +37,8 @@ const auth = require(path.join(__dirname, "routes", "auth.js"));
 
 //the middleware
 app.use(express.static(path.join(__dirname, "public"))); //serve public
-app.use(express.urlencoded({ extended: false })); //body parser
+app.use(express.urlencoded({ extended: false })); //body parser for urlencoded
+app.use(express.json()); //body parser for json
 
 //  use routers
 app.use(auth);
