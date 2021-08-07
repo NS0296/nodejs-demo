@@ -1,7 +1,6 @@
 const Sequelize = require("sequelize");
-const secrets = require("../secrets.json");
 
-const sequelize = new Sequelize("node-demo", "root", secrets.mysqlPassword, {
+const sequelize = new Sequelize("node-demo", "root", process.env.MYSQLPASSWORD, {
     host: "localhost",
     dialect: "mysql",
     logging: false,
