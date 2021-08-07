@@ -4,17 +4,8 @@ const path = require("path");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const ejs = require("ejs");
-const nodemailer = require("nodemailer");
-const sendgridTransport = require("nodemailer-sendgrid-transport");
 const Sequelize = require("sequelize");
-
-const transporter = nodemailer.createTransport(
-    sendgridTransport({
-        auth: {
-            api_key: process.env.SENDGRID_API_KEY,
-        },
-    })
-);
+const transporter = require("../util/sendgrid.js");
 
 exports.getRegister = (req, res, next) => {
     res.render("auth/user-register.ejs", {
