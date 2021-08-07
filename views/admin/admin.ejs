@@ -6,19 +6,21 @@
             <%- include("../inc/nav.ejs") %>
         </header>
         <main>
-            <table id="table">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Usersname</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tBody id="tbody"></tBody>
-            </table>
+            <div class="users-table">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>USERNAME</th>
+                            <th>EMAIL</th>
+                            <th>PHONE</th>
+                            <th>ADDRESS</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tBody id="tbody"></tBody>
+                </table>
+            </div>
         </main>
         <script src="js/table.js" defer></script>
 <%- include("../inc/end.ejs") %>

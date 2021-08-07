@@ -1,3 +1,7 @@
+body {
+    justify-content: left;
+}
+
 dl {
     display: block;
     margin-top: 1em;

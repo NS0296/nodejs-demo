@@ -1,4 +1,3 @@
-let tbl = document.getElementById("table");
 let tblBody = document.getElementById("tbody");
 
 const getNthParentOf = (node, i) => {

@@ -1,14 +1,19 @@
 body {
-    margin: 50px;
-    padding-top: 20px;
+    padding-top: 50px;
     font-family: "Open Sans", sans-serif;
-    background: #f88126;
+    background: #d8d8d8;
     color: rgb(53, 53, 53);
+    display: flex;
+    justify-content: center;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 header {
     position: fixed;
-    background: rgb(5, 146, 5);
+    background: #009879;
     top: 0;
     left: 0;
     right: 0;
