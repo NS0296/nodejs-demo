@@ -23,12 +23,16 @@ exports.postRegister = async (req, res, next) => {
         if (isUserExist !== null) {
             throw new Error("User already exists");
         }
+        const mailHtml = await ejs.renderFile(
+            path.join(rootDir, "views", "email", "welcome.ejs"),
+            { email: email, username: username }
+        );
         const hashPassword = await bcrypt.hash(password, 4);
         await transporter.sendMail({
             to: email,
             from: process.env.SENDGRID_SENDER_MAIN,
-            subject: "Sign up succeed0",
-            html: "<h1>hey hey hey</h1>",
+            subject: "Thanks for Signing Up",
+            html: mailHtml,
         });
         User.create({
             username: username,
