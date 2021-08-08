@@ -19,12 +19,19 @@ body {
     font-weight: 540;
 }
 
+.box input[type="email"]::placeholder,
+.box input[type="password"]::placeholder,
+.box input[type="text"]::placeholder {
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.4);
+}
+
 .box input[type="email"],
 .box input[type="password"],
 .box input[type="text"] {
+    font-size: medium;
     border: 0;
     background: none;
-    /* display: block; */
     margin: 20px auto;
     text-align: center;
     border: 2.5px solid white;
@@ -40,6 +47,7 @@ body {
 }
 
 .box input[type="submit"] {
+    font-size: large;
     border: 0;
     background: none;
     display: block;
@@ -55,6 +63,20 @@ body {
 
 .box input[type="submit"]:hover {
     background: #009879;
+}
+
+.reset {
+    display: flex;
+    justify-content: center;
+}
+
+.reset ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.reset ul a {
+    text-decoration: none;
 }
 
 /* for toggle password visibility */
