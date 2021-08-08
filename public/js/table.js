@@ -39,7 +39,7 @@ class UserData {
 
 const setupTable = () => {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:3000/api/users", true);
+    xhr.open("GET", "http://localhost:3000/api/users/all", true);
 
     xhr.onload = () => {
         if (xhr.status === 200) {
@@ -87,7 +87,7 @@ const setupTable = () => {
 
                 actionButtonDelete.addEventListener("click", () => {
                     const xhr = new XMLHttpRequest();
-                    let reqUrl = `http://localhost:3000/api/delete/${actionButtonDelete.dataset.userId}`;
+                    let reqUrl = `http://localhost:3000/api/users/delete/${actionButtonDelete.dataset.userId}`;
                     xhr.open("DELETE", reqUrl, true);
 
                     xhr.onload = () => {
@@ -144,7 +144,7 @@ const setupTable = () => {
                     }
 
                     const xhr = new XMLHttpRequest();
-                    let reqUrl = `http://localhost:3000/api/update/${actionButtonUpdate.dataset.userId}`;
+                    let reqUrl = `http://localhost:3000/api/users/update/${actionButtonUpdate.dataset.userId}`;
                     xhr.open("POST", reqUrl, true);
 
                     xhr.onload = () => {

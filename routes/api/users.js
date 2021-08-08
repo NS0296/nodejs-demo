@@ -1,9 +1,11 @@
 const router = require("express").Router();
 
-router.get("/all", adminController.allUsers);
+const apiController = require("../../controllers/api/users.js");
 
-router.delete("/delete/:userId", adminController.deleteUser);
+router.get("/all", apiController.allUsers);
 
-router.post("/update/:userId", adminController.updateUser);
+router.delete("/delete/:userId", apiController.deleteUser);
+
+router.post("/update/:userId", apiController.updateUser);
 
 module.exports = router;
