@@ -7,3 +7,7 @@ const sequelize = new Sequelize("node-demo", "root", process.env.MYSQLPASSWORD, 
 });
 
 module.exports = sequelize;
+
+const User = require("../models/user");
+const Item = require("../models/item");
+const Order = require("../models/order");

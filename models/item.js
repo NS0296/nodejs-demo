@@ -1,7 +1,7 @@
-const { Sequelize, DATE } = require("sequelize"); //import sequlize for datatypes
+const { Sequelize } = require("sequelize"); //import sequlize for datatypes
 const sequelize = require("../util/database"); //import connection object
 
-sequelize.define("Item", {
+const Item = sequelize.define("Item", {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -14,7 +14,7 @@ sequelize.define("Item", {
         inNull: false,
     },
     categoryName: {
-        type: Sequlize.STRING(30),
+        type: Sequelize.STRING(30),
         isNull: false,
     },
     manufacture: {
@@ -34,3 +34,5 @@ sequelize.define("Item", {
         isNull: false,
     },
 });
+
+module.exports = Item;

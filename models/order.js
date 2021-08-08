@@ -1,7 +1,7 @@
-const { Sequelize, DATE } = require("sequelize"); //import sequlize for datatypes
+const { Sequelize } = require("sequelize"); //import sequlize for datatypes
 const sequelize = require("../util/database"); //import connection object
 
-sequelize.define("Order", {
+const Order = sequelize.define("Order", {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -10,3 +10,5 @@ sequelize.define("Order", {
         allowNull: false,
     },
 });
+
+module.exports = Order;
