@@ -9,6 +9,22 @@ const Order = sequelize.define("Order", {
         autoIncrement: true,
         allowNull: false,
     },
+    date: {
+        type: Sequelize.DATE,
+        allowNull: false,
+    },
+    paymentMethod: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
+    },
+    totalPrice: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
+    shippingAddress: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+    },
 });
 
 module.exports = Order;
