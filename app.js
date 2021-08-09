@@ -22,7 +22,7 @@ app.use(
 (async () => {
     try {
         await sequelize.authenticate();
-        await sequelize.sync({ alter: true });
+        await sequelize.sync();
         app.listen(3000, console.log("app is listening on http://localhost:3000/"));
     } catch (err) {
         console.log(err);
@@ -44,6 +44,6 @@ app.use(express.json()); //body parser for json
 //  use routers
 app.use(auth);
 app.use("/api/users", usersApi);
-app.use(admin);
+app.use("/admin", admin);
 app.use(homeController);
 app.use(errorController);

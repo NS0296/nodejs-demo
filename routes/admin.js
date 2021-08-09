@@ -3,8 +3,8 @@ const router = require("express").Router();
 
 const adminController = require("../controllers/admin.js");
 
-router.get("/admin", adminController.getAdmin);
+router.get("/", adminController.getAdmin);
 
-router.get("/admin/userstable", adminController.getUsersTable);
+router.get("/userstable", adminController.getUsersTable);
 
 module.exports = router;
