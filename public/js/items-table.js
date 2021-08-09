@@ -86,18 +86,13 @@ const addActionCells = () => {
         actionButtonEdit.innerText = "Edit";
         actionButtonEdit.dataset.itemId = item.dataset.itemId;
         actionButtonEdit.addEventListener("click", () => {
-            const allCells = getAllSiblings(actionButtonEdit.parentNode);
-            allCells.shift();
+            const allRowCells = getAllSiblings(actionButtonEdit.parentNode);
+            allRowCells.shift();
             cellActions.replaceChild(actionButtonUpdate, actionButtonEdit);
-            allCells.forEach(cell => {
+            allRowCells.forEach(cell => {
                 const input = document.createElement("input");
-                const newCell = document.createElement("td");
                 input.value = cell.innerText;
-                newCell.appendChild(input);
-                cell.parentNode.replaceChild(
-                    newCell,
-                    cell.parentNode.childNodes[allCells.indexOf(cell) + 1]
-                );
+                cell.replaceChild(input, cell.firstChild);
             });
         });
 
@@ -105,21 +100,24 @@ const addActionCells = () => {
         let actionButtonUpdate = document.createElement("button");
         actionButtonUpdate.className = "actionButton updateButton";
         actionButtonUpdate.innerText = "Update";
-        actionButtonUpdate.dataset.itemId = item.id;
+        actionButtonUpdate.dataset.itemId = item.dataset.itemId;
 
         actionButtonUpdate.addEventListener("click", () => {
-            const rowCells = getAllSiblings(actionButtonUpdate.parentNode);
-            rowCells.shift(); //remove id cell
+            const allRowCells = getAllSiblings(actionButtonUpdate.parentNode);
+            allRowCells.shift(); //remove id cell
             cellActions.replaceChild(actionButtonEdit, actionButtonUpdate);
             const newData = new ItemData(
-                rowCells[0].firstChild.value,
-                rowCells[1].firstChild.value,
-                rowCells[2].firstChild.value,
-                rowCells[3].firstChild.value
+                allRowCells[0].firstChild.value,
+                allRowCells[1].firstChild.value,
+                allRowCells[2].firstChild.value,
+                allRowCells[3].firstChild.value,
+                allRowCells[4].firstChild.value,
+                "2000-01-01 00:00:00"
+                /*allRowCells[5].firstChild.value*/
             );
 
-            for (let i = 0; i < rowCells.length; i++) {
-                const cell = rowCells[i];
+            for (let i = 0; i < allRowCells.length; i++) {
+                const cell = allRowCells[i];
                 const textNode = document.createTextNode(cell.firstChild.value); //firstchild -> input
                 cell.replaceChild(textNode, cell.firstChild);
             }

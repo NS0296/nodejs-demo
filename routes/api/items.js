@@ -6,6 +6,6 @@ router.get("/all", apiController.allItems);
 
 router.delete("/delete/:itemId", apiController.deleteItem);
 
-router.post("/update/:userId", apiController.updateItem);
+router.post("/update/:itemId", apiController.updateItem);
 
 module.exports = router;
