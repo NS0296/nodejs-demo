@@ -1,33 +1,36 @@
-<%- include('./inc/head.ejs') %>
-    <link rel="stylesheet" href="/css/items.css">
-</head>
-
-<body>
-    <%- include('./inc/nav.ejs') %>
-    <main>
-        <% if (items.length > 0) { %>
-            <div class="grid">
-                <% for (let item of items) { %>
-                    <article class="card item-item">
-                        <header class="card__header">
-                            <h1 class="item__title"><%= item.name %></h1>
-                        </header>
-                        <div class="card__image">
-                            <img src="https://dh9cuahs6ezpz.cloudfront.net/images/products/550x550/vmmm_31692.jpg"
-                                alt="<%= item.name %>">
-                        </div>
-                        <div class="card__content">
-                            <h2 class="item__price">$<%= item.price %></h2>
-                            <p class="item__description">this should be a description</p>
-                        </div>
-                        <div class="card__actions">
-                            <%- include('./inc/add-to-cart.ejs', {item: item}) %>
-                        </div>
-                    </article>
-                <% } %>
-            </div>
-        <% } else { %>
-            <h1>No items Found!</h1>
-        <% } %>
-    </main>
-<%- include('./inc/end.ejs') %>
+<%- include("../inc/head.ejs") %>
+<link rel="stylesheet" href="/css/tables.css">
+    </head>
+    <body>
+        <header>
+            <%- include("../inc/nav.ejs") %>
+        </header>
+        <main>
+            <table style="table-layout: fixed;"class="items-table table">
+                <thead id="thead">
+                    <tr>
+                        <th>NAME</th>
+                        <th>CATEGORY NAME</th>
+                        <th>MANUFACTURE</th>
+                        <th>PRICE</th>
+                        <th>STOCK AVALIABLE</th>
+                        <th>DATE FIRST AVALIABLE</th>
+                        <th id="actions-column">Actions</th>
+                    </tr>
+                </thead>
+                <tBody id="tbody">
+                    <% allItems.forEach(item => { %>
+                        <tr data-item-id="<%= item.id %>">
+                            <td><%= item.name %></td>
+                            <td><%= item.categoryName %></td>
+                            <td><%= item.manufacture %></td>
+                            <td><%= item.price %></td>
+                            <td><%= item.stockAvailable %></td>
+                            <td>a date</td>
+                        </tr>
+                    <% }); %>
+                </tBody>
+            </table>
+        </main>
+        <script src="/js/shop.js"></script>
+<%- include("../inc/end.ejs") %>
