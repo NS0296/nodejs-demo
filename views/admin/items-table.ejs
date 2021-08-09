@@ -6,7 +6,7 @@
             <%- include("../inc/nav.ejs") %>
         </header>
         <main>
-            <table class="items-table table">
+            <table style="table-layout: fixed;"class="items-table table">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -18,7 +18,19 @@
                         <th>DATE FIRST AVALIABLE</th>
                     </tr>
                 </thead>
-                <tBody id="tbody"></tBody>
+                <tBody id="tbody">
+                    <% allItems.forEach(item => { %>
+                        <tr>
+                            <td><%= item.id %> </td>
+                            <td><%= item.name %> </td>
+                            <td><%= item.categoryName %> </td>
+                            <td><%= item.manufacture %> </td>
+                            <td><%= item.price %> </td>
+                            <td><%= item.stockAvailable %> </td>
+                            <td><%= item.dateFirstAvailable %> </td>
+                        </tr>
+                    <% }); %>
+                </tBody>
             </table>
         </main>
 <%- include("../inc/end.ejs") %>

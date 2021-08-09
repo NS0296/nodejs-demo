@@ -17,12 +17,28 @@ exports.getUsersTable = (req, res) => {
     });
 };
 
-exports.getItemsTable = (req, res) => {
-    res.render("admin/items-table.ejs", {
-        pageTitle: "Items Table",
-        isAuth: req.session.isAuth,
-        path: "/admin",
-    });
+exports.getItemsTable = async (req, res) => {
+    try {
+        const allItems = await Item.findAll({
+            attributes: [
+                "id",
+                "name",
+                "categoryName",
+                "manufacture",
+                "price",
+                "stockAvailable",
+                "dateFirstAvailable",
+            ],
+        });
+        res.render("admin/items-table.ejs", {
+            allItems: allItems,
+            pageTitle: "Items Table",
+            isAuth: req.session.isAuth,
+            path: "/admin",
+        });
+    } catch (err) {
+        res.send(err);
+    }
 };
 
 // exports.postCreateItem = async (req, res, next) => {
