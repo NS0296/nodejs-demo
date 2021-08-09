@@ -29,11 +29,11 @@ app.use(
     }
 })();
 
-const homeController = require("./controllers/home.js");
 const errorController = require("./controllers/error.js");
 
 const admin = require(path.join(__dirname, "routes", "admin.js"));
 const auth = require(path.join(__dirname, "routes", "auth.js"));
+const shop = require(path.join(__dirname, "routes", "shop.js"));
 const { usersApi, itemsApi } = require(path.join(__dirname, "routes", "api", "index.js"));
 
 //the middleware
@@ -42,9 +42,9 @@ app.use(express.urlencoded({ extended: false })); //body parser for urlencoded
 app.use(express.json()); //body parser for json
 
 //  use routers
+app.use(shop);
 app.use(auth);
 app.use("/api/users", usersApi);
 app.use("/api/items", itemsApi);
 app.use("/admin", admin);
-app.use(homeController);
 app.use(errorController);
