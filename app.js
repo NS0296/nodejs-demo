@@ -34,7 +34,7 @@ const errorController = require("./controllers/error.js");
 
 const admin = require(path.join(__dirname, "routes", "admin.js"));
 const auth = require(path.join(__dirname, "routes", "auth.js"));
-const { usersApi } = require(path.join(__dirname, "routes", "api", "index.js"));
+const { usersApi, itemsApi } = require(path.join(__dirname, "routes", "api", "index.js"));
 
 //the middleware
 app.use(express.static(path.join(__dirname, "public"))); //serve public
@@ -44,6 +44,7 @@ app.use(express.json()); //body parser for json
 //  use routers
 app.use(auth);
 app.use("/api/users", usersApi);
+app.use("/api/items", itemsApi);
 app.use("/admin", admin);
 app.use(homeController);
 app.use(errorController);
