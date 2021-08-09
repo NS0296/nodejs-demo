@@ -7,7 +7,7 @@
         </header>
         <main>
             <table style="table-layout: fixed;"class="items-table table">
-                <thead>
+                <thead id="thead">
                     <tr>
                         <th>ID</th>
                         <th>NAME</th>
@@ -16,11 +16,12 @@
                         <th>PRICE</th>
                         <th>STOCK AVALIABLE</th>
                         <th>DATE FIRST AVALIABLE</th>
+                        <th id="actions-column">Actions</th>
                     </tr>
                 </thead>
                 <tBody id="tbody">
                     <% allItems.forEach(item => { %>
-                        <tr>
+                        <tr data-item-id="<%= item.id %>">
                             <td><%= item.id %> </td>
                             <td><%= item.name %> </td>
                             <td><%= item.categoryName %> </td>
@@ -33,4 +34,5 @@
                 </tBody>
             </table>
         </main>
+        <script src="/js/items-table.js"></script>
 <%- include("../inc/end.ejs") %>
