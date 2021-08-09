@@ -64,11 +64,11 @@ const addActionCells = () => {
         let actionButtonDelete = document.createElement("button");
         actionButtonDelete.className = "actionButtons deleteButtons";
         actionButtonDelete.innerText = "Delete";
-        actionButtonDelete.dataset.itemId = item.id;
+        actionButtonDelete.dataset.itemId = item.dataset.itemId;
 
         actionButtonDelete.addEventListener("click", () => {
             const xhr = new XMLHttpRequest();
-            let reqUrl = `http://localhost:3000/api/users/delete/${actionButtonDelete.dataset.userId}`;
+            let reqUrl = `http://localhost:3000/api/items/delete/${actionButtonDelete.dataset.itemId}`;
             xhr.open("DELETE", reqUrl, true);
 
             xhr.onload = () => {
@@ -84,7 +84,7 @@ const addActionCells = () => {
         let actionButtonEdit = document.createElement("button");
         actionButtonEdit.className = "actionButton editButton";
         actionButtonEdit.innerText = "Edit";
-        actionButtonEdit.dataset.itemId = item.id;
+        actionButtonEdit.dataset.itemId = item.dataset.itemId;
         actionButtonEdit.addEventListener("click", () => {
             const allCells = getAllSiblings(actionButtonEdit.parentNode);
             allCells.shift();
@@ -125,7 +125,7 @@ const addActionCells = () => {
             }
 
             const xhr = new XMLHttpRequest();
-            let reqUrl = `http://localhost:3000/api/users/update/${actionButtonUpdate.dataset.userId}`;
+            let reqUrl = `http://localhost:3000/api/items/update/${actionButtonUpdate.dataset.itemId}`;
             xhr.open("POST", reqUrl, true);
 
             xhr.onload = () => {
