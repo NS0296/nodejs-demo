@@ -2,7 +2,7 @@ body {
     justify-content: center;
 }
 
-.users-table {
+.table {
     justify-self: center;
     align-self: center;
     border-collapse: collapse;
@@ -14,31 +14,31 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-.users-table thead tr {
+.table thead tr {
     background-color: #009879;
     color: #ffffff;
     text-align: left;
     font-weight: bold;
 }
 
-.users-table th,
-.users-table td {
+.table th,
+.table td {
     padding: 12px 15px;
 }
 
-.users-table tbody tr {
+.table tbody tr {
     border-bottom: 1px solid #dddddd;
 }
 
-.users-table tbody tr:nth-of-type(even) {
+.table tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 }
 
-.users-table tbody tr:last-of-type {
+.table tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 }
 
-.users-table tbody tr.active-row {
+.table tbody tr.active-row {
     font-weight: bold;
     color: #009879;
 }
