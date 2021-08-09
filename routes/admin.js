@@ -5,4 +5,6 @@ const adminController = require("../controllers/admin.js");
 
 router.get("/admin", adminController.getAdmin);
 
+router.get("/admin/userstable", adminController.getUsersTable);
+
 module.exports = router;
