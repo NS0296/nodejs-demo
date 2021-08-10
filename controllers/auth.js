@@ -34,13 +34,17 @@ exports.postRegister = async (req, res, next) => {
             subject: "Thanks for Signing Up",
             html: mailHtml,
         });
-        User.create({
+        const user = await User.create({
             username: username,
             email: email,
             password: hashPassword,
             phone: phone || null,
             address: address || null,
         });
+        const isCartExist = await user.getCart();
+        if (isCartExist === null) {
+            user.createCart();
+        }
     } catch (err) {
         console.log(err);
     }
