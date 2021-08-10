@@ -1,5 +1,5 @@
 const User = require("../../models/user");
-const Cart = require("../../models/cart");
+const Item = require("../../models/item");
 
 exports.createCart = async (req, res, next) => {
     const userId = req.params.userId;
@@ -12,6 +12,45 @@ exports.createCart = async (req, res, next) => {
         } else {
             res.send({ message: "user has cart already" });
         }
+    } catch (err) {
+        res.send(err);
+    }
+};
+
+exports.getCart = async (req, res, next) => {
+    const userId = req.params.userId;
+    try {
+        const user = await User.findOne({ where: { id: userId } });
+        const userCart = await user.getCart();
+        const cartItems = await userCart.getItems();
+        res.send(cartItems);
+    } catch (err) {
+        res.send(err);
+    }
+};
+
+exports.postCartItem = async (req, res, next) => {
+    const userId = req.params.userId;
+    const itemId = req.params.itemId;
+    try {
+        const user = await User.findOne({ where: { id: userId } });
+        const userCart = await user.getCart();
+        userCart.createItem({ where: { id: itemId } });
+        res.send({ message: "Item added" });
+    } catch (err) {
+        res.send(err);
+    }
+};
+
+exports.deleteCartItem = async (req, res) => {
+    const userId = req.params.userId;
+    const itemId = req.params.itemId;
+    try {
+        const user = await User.findOne({ where: { id: userId } });
+        const userCart = await user.getCart();
+        const item = userCart.getItems({ where: { id: itemId } });
+        item.cartItem.destroy();
+        res.send({ message: "Item removed" });
     } catch (err) {
         res.send(err);
     }
