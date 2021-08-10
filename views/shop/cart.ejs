@@ -1,0 +1,33 @@
+<%- include("../inc/head.ejs") %>
+<link rel="stylesheet" href="/css/tables.css">
+    </head>
+    <body>
+        <header>
+            <%- include("../inc/nav.ejs") %>
+        </header>
+        <main>
+                <table style="table-layout: fixed;"class="items-table table">
+                    <thead id="thead">
+                        <tr>
+                            <th>NAME</th>
+                            <th>CATEGORY NAME</th>
+                            <th>MANUFACTURE</th>
+                            <th>PRICE</th>
+                            <th id="actions-column">Actions</th>
+                        </tr>
+                    </thead>
+                    <tBody id="tbody">
+                        <% cartItems.forEach(item => { %>
+                            <tr data-item-id="<%= item.id %>">
+                                <td><%= item.name %></td>
+                                <td><%= item.categoryName %></td>
+                                <td><%= item.manufacture %></td>
+                                <td><%= item.price %></td>
+                            </tr>
+                        <% }); %>
+                    </tBody>
+                </table>
+                <input id="user-id" type="hidden" name="userId" value="<%= userId %>">
+                <script src="/js/cart-items-table.js"></script>
+        </main>
+<%- include("../inc/end.ejs") %>

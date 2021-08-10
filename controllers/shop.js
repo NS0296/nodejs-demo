@@ -23,3 +23,22 @@ exports.getIndex = async (req, res, next) => {
         console.log(err);
     }
 };
+
+exports.getCart = async (req, res) => {
+    const userId = req.session.userId;
+    try {
+        const reqUrl = `http://localhost:3000/api/carts/allItems/${userId}`;
+        const fetchRes = await fetch(reqUrl);
+        const cartItems = await fetchRes.json();
+        console.log(cartItems);
+        res.render("shop/cart.ejs", {
+            isAuth: req.session.isAuth,
+            userId: req.session.userId, //gets id of logged in user
+            cartItems: cartItems,
+            pageTitle: "Cart",
+            path: "/cart",
+        });
+    } catch (err) {
+        console.log(err);
+    }
+};

@@ -3,6 +3,7 @@
         <li><a class=<%= path === "/" ? "active" : "not_active" %> href="/">Home</a></li>
         <% if (isAuth) { %>
             <li><a class=<%= path === "/dashboard" ? "active" : "not_active" %> href="/dashboard">Dashboard</a></li>
+            <li><a class=<%= path === "/cart" ? "active" : "not_active" %> href="/cart">Cart</a></li>
         <% } else if (!isAuth) { %>
             <li><a class=<%= path === "/login" ? "active" : "not_active" %> href="/login">Login</a></li>
             <li><a class=<%= path === "/register" ? "active" : "not_active" %> href="/register">Register</a></li>
