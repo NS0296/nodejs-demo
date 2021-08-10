@@ -10,6 +10,6 @@ router.get("/add/:userId/:itemId", apiController.postCartItem);
 
 router.get("/add/:userId/:itemId", apiController.deleteCartItem);
 
-router.get("/summary", apiController.getCartSummary);
+router.get("/summary/:userId", apiController.getCartSummary);
 
 module.exports = router;

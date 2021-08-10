@@ -59,7 +59,7 @@ exports.deleteCartItem = async (req, res) => {
 
 exports.getCartSummary = async (req, res) => {
     //gets total price and number of items in user cart
-    const userId = req.session.userId;
+    const userId = req.params.userId;
     try {
         const user = await User.findOne({ where: { id: userId } });
         const userCart = await user.getCart();
