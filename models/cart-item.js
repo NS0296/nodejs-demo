@@ -19,6 +19,11 @@ const CartItem = sequelize.define("CartItem", {
             key: "id",
         },
     },
+    quantity: {
+        type: Sequelize.INTEGER,
+        /*allowNull: false,*/
+        default: 1,
+    },
 });
 
 module.exports = CartItem;
