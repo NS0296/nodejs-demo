@@ -34,7 +34,12 @@ const errorController = require("./controllers/error.js");
 const admin = require(path.join(__dirname, "routes", "admin.js"));
 const auth = require(path.join(__dirname, "routes", "auth.js"));
 const shop = require(path.join(__dirname, "routes", "shop.js"));
-const { usersApi, itemsApi } = require(path.join(__dirname, "routes", "api", "index.js"));
+const { usersApi, itemsApi, cartsApi } = require(path.join(
+    __dirname,
+    "routes",
+    "api",
+    "index.js"
+));
 
 //the middleware
 app.use(express.static(path.join(__dirname, "public"))); //serve public
@@ -46,5 +51,6 @@ app.use(shop);
 app.use(auth);
 app.use("/api/users", usersApi);
 app.use("/api/items", itemsApi);
+app.use("/api/carts", cartsApi);
 app.use("/admin", admin);
 app.use(errorController);
