@@ -6,6 +6,10 @@
             <%- include("../inc/nav.ejs") %>
         </header>
         <main>
+            <div id="order-summary" class="box">
+                <p>Number of Items in Cart: <%= cartSummary.itemsCount %> </p>
+                <p>Total Price: <%= cartSummary.totalPrice %>  </p>
+            </div>
             <form class="box" action="/cart/checkout/place" method="POST">
                 <h1>Checkout</h1>
                 <label for="payment-method">Choose a payment method:</label>
