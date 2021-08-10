@@ -56,3 +56,24 @@ exports.deleteCartItem = async (req, res) => {
         res.send(err);
     }
 };
+
+exports.getCartSummary = async (req, res) => {
+    //gets total price and number of items in user cart
+    const userId = req.session.userId;
+    try {
+        const user = await User.findOne({ where: { id: userId } });
+        const userCart = await user.getCart();
+        const itemsCount = await userCart.countItems();
+        if (itemsCount === 0) {
+            throw new Error({ message: "No items in Cart" });
+        }
+        const itemsPrice = await userCart.getItems({ attributes: ["price"] });
+        let totalPrice = 0;
+        itemsPrice.forEach(item => {
+            totalPrice = totalPrice + item.price;
+        });
+        res.send({ itemsCount: itemsCount, totalPrice: totalPrice });
+    } catch (err) {
+        res.send(err);
+    }
+};
