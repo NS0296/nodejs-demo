@@ -42,3 +42,11 @@ exports.getCart = async (req, res) => {
         console.log(err);
     }
 };
+
+exports.getCheckout = (req, res) => {
+    res.render("shop/checkout.ejs", {
+        isAuth: req.session.isAuth,
+        pageTitle: "Checkout",
+        path: "/cart/checkout",
+    });
+};
