@@ -14,6 +14,7 @@ exports.getIndex = async (req, res, next) => {
         const allItems = await fetchRes.json();
         res.render("shop/index.ejs", {
             isAuth: req.session.isAuth,
+            userId: req.session.userId, //gets id of logged in user
             allItems: allItems,
             pageTitle: "Shop",
             path: "/",

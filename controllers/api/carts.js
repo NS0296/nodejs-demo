@@ -35,7 +35,8 @@ exports.postCartItem = async (req, res, next) => {
     try {
         const user = await User.findOne({ where: { id: userId } });
         const userCart = await user.getCart();
-        userCart.createItem({ where: { id: itemId } });
+        const addItem = await Item.findOne({ where: { id: itemId } });
+        userCart.addItem(addItem);
         res.send({ message: "Item added" });
     } catch (err) {
         res.send(err);

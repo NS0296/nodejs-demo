@@ -1,5 +1,6 @@
 let tblBody = document.getElementById("tbody");
 let tblHead = document.getElementById("thead");
+let userId = document.getElementById("user-id").value; //current logged in user id
 
 const getNthParentOf = (node, i) => {
     while (i > 0) {
@@ -45,10 +46,12 @@ const addActionCells = () => {
 
         actionButtonAddToCart.addEventListener("click", () => {
             const xhr = new XMLHttpRequest();
-            let reqUrl = `http://localhost:3000/api/shop/cart/add/${actionButtonAddToCart.dataset.itemId}`;
-            xhr.open("POST", reqUrl, true);
+            let reqUrl = `http://localhost:3000/api/carts/add/${userId}/${actionButtonAddToCart.dataset.itemId}`;
+            xhr.open("GET", reqUrl, true);
             xhr.onload = () => {
-                console.log("Add to Cart clicked");
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                }
             };
             xhr.send();
         });
