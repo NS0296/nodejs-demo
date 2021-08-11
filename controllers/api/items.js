@@ -29,6 +29,23 @@ exports.deleteItem = async (req, res, next) => {
     }
 };
 
+exports.createItem = async (req, res, next) => {
+    const { name, categoryName, manufacture, price, stockAvailable } = req.body;
+    try {
+        const createItem = await Item.create({
+            name: name,
+            categoryName: categoryName,
+            manufacture: manufacture,
+            price: price,
+            stockAvailable,
+            dateFirstAvailable: Date.now(),
+        });
+        res.send({ message: "Created Item" });
+    } catch (err) {
+        res.send(err);
+    }
+};
+
 exports.updateItem = async (req, res, next) => {
     const {
         id,
