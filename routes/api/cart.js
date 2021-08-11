@@ -8,7 +8,7 @@ router.get("/allItems/:userId", apiController.getCart);
 
 router.get("/add/:userId/:itemId", apiController.postCartItem);
 
-router.get("/add/:userId/:itemId", apiController.deleteCartItem);
+router.delete("/delete/:userId/:itemId", apiController.deleteCartItem);
 
 router.get("/summary/:userId", apiController.getCartSummary);
 
