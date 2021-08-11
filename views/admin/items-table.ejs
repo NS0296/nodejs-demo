@@ -1,11 +1,20 @@
 <%- include("../inc/head.ejs") %>
 <link rel="stylesheet" href="/css/tables.css">
+<link rel="stylesheet" href="/css/horizontal-form.css">
     </head>
     <body>
         <header>
             <%- include("../inc/nav.ejs") %>
         </header>
         <main>
+            <form class="box item-form" action="http://localhost:3000/api/items/create" method="POST">
+                <input type="text" name="name" id="name" placeholder="Name">
+                <input type="text" name="categoryName" id="category-name" placeholder="Category Name">
+                <input type="text" name="manufacture" id="manufacture" placeholder="Manufacture">
+                <input type="number" name="price" id="price" placeholder="Price">
+                <input type="text" name="stockAvailable" id="stock-available" placeholder="Stock Available">
+                <button id="insert-item-btn" type="submit">Insert Item</button>
+            </form>
             <table style="table-layout: fixed;"class="items-table table">
                 <thead id="thead">
                     <tr>
