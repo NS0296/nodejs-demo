@@ -1,5 +1,6 @@
 //this block is not commented out for now because express session uses sequelize
 const Sequelize = require("sequelize");
+const mysql = require("mysql2");
 
 const sequelize = new Sequelize("node-demo", "root", process.env.MYSQLPASSWORD, {
     host: "localhost",
@@ -7,6 +8,17 @@ const sequelize = new Sequelize("node-demo", "root", process.env.MYSQLPASSWORD, 
     logging: false,
 });
 
+const pool = mysql.createPool({
+    host: "localhost",
+    user: "root",
+    password: process.env.MYSQLPASSWORD,
+    database: "nodejs-demo-new",
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
+});
+
+exports.promisePool = pool.promise();
 module.exports = sequelize;
 
 // const User = require("../models/user");
