@@ -12,7 +12,7 @@ const pool = mysql.createPool({
     host: "localhost",
     user: "root",
     password: process.env.MYSQLPASSWORD,
-    database: "nodejs-demo-new",
+    database: process.env.MYSQLDEFAULTDATABASE,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
