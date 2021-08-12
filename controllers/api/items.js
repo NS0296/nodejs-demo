@@ -1,18 +1,18 @@
-const Item = require("../../models/item.js");
+// const Item = require("../../models/item.js");
 
 exports.allItems = async (req, res, next) => {
     try {
-        const allItems = await Item.findAll({
-            attributes: [
-                "id",
-                "name",
-                "categoryName",
-                "manufacture",
-                "price",
-                "stockAvailable",
-                "dateFirstAvailable",
-            ],
-        });
+        // const allItems = await Item.findAll({
+        //     attributes: [
+        //         "id",
+        //         "name",
+        //         "categoryName",
+        //         "manufacture",
+        //         "price",
+        //         "stockAvailable",
+        //         "dateFirstAvailable",
+        //     ],
+        // });
         res.send(allItems);
     } catch (err) {
         res.send(err);
@@ -21,8 +21,8 @@ exports.allItems = async (req, res, next) => {
 
 exports.deleteItem = async (req, res, next) => {
     try {
-        const itemId = parseInt(req.params.itemId);
-        const deleteRow = await Item.destroy({ where: { id: itemId } });
+        // const itemId = parseInt(req.params.itemId);
+        // const deleteRow = await Item.destroy({ where: { id: itemId } });
         res.send({ status: "done" });
     } catch (err) {
         res.send(err);
@@ -32,14 +32,14 @@ exports.deleteItem = async (req, res, next) => {
 exports.createItem = async (req, res, next) => {
     const { name, categoryName, manufacture, price, stockAvailable } = req.body;
     try {
-        const createItem = await Item.create({
-            name: name,
-            categoryName: categoryName,
-            manufacture: manufacture,
-            price: price,
-            stockAvailable,
-            dateFirstAvailable: Date.now(),
-        });
+        // const createItem = await Item.create({
+        //     name: name,
+        //     categoryName: categoryName,
+        //     manufacture: manufacture,
+        //     price: price,
+        //     stockAvailable,
+        //     dateFirstAvailable: Date.now(),
+        // });
         res.send({ message: "Created Item" });
     } catch (err) {
         res.send(err);
@@ -58,20 +58,20 @@ exports.updateItem = async (req, res, next) => {
     } = req.body;
     try {
         const itemId = parseInt(req.params.itemId);
-        const updateItem = await Item.update(
-            {
-                id: id,
-                name: name,
-                categoryName: categoryName,
-                manufacture: manufacture,
-                price: price,
-                stockAvailable: stockAvailable,
-                dateFirstAvailable: dateFirstAvailable,
-            },
-            {
-                where: { id: itemId },
-            }
-        );
+        // const updateItem = await Item.update(
+        //     {
+        //         id: id,
+        //         name: name,
+        //         categoryName: categoryName,
+        //         manufacture: manufacture,
+        //         price: price,
+        //         stockAvailable: stockAvailable,
+        //         dateFirstAvailable: dateFirstAvailable,
+        //     },
+        //     {
+        //         where: { id: itemId },
+        //     }
+        // );
         if (updateItem[0] === 0) {
             throw new Error("Item does not exit");
         }

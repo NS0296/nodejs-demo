@@ -2,7 +2,7 @@ const path = require("path");
 const dotenv = require("dotenv").config();
 const express = require("express");
 const app = express();
-const sequelize = require("./util/database");
+//const sequelize = require("./util/database");
 const session = require("express-session");
 const store = require("./util/session");
 
@@ -21,8 +21,8 @@ app.use(
 
 (async () => {
     try {
-        await sequelize.authenticate();
-        await sequelize.sync();
+        // await sequelize.authenticate();
+        // await sequelize.sync();
         app.listen(3000, console.log("app is listening on http://localhost:3000/"));
     } catch (err) {
         console.log(err);
