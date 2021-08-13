@@ -1,5 +1,25 @@
 // //this file is responsible for the connection to the database
 // //and inserting values into each table
+
+const pool = require("../util/database").promisePool;
+
+class User {
+    constructor(username, email, password, phone, homeAddress) {
+        this.username = username;
+        this.email = email;
+        this.password = password; //to restrict password access
+        this.phone = phone;
+        this.homeAddress = homeAddress;
+    }
+
+    static pool = pool; //connection pool
+    static getAllUsers() {
+        return this.pool.execute("call `nodejs-demo-new`.get_all_users()");
+    }
+}
+
+module.exports = User;
+
 // const { Sequelize } = require("sequelize"); //import sequlize for datatypes
 // const sequelize = require("../util/database"); //import connection object
 
