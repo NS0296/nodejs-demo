@@ -2,7 +2,7 @@ const User = require("../../models/user.js");
 const pool = require("../../util/database").promisePool;
 
 exports.allUsers = (req, res, next) => {
-    const users = User.getAllUsers()
+    const users = User.getAll()
         .then(([rows, fields]) => {
             res.send(rows);
         })
