@@ -1,14 +1,12 @@
 const User = require("../../models/user.js");
+const pool = require("../../util/database").promisePool;
 
-exports.allUsers = async (req, res, next) => {
-    try {
-        // const users = await User.findAll({
-        //     attributes: ["id", "username", "email", "phone", "address"],
-        // });
-        res.send(users);
-    } catch (err) {
-        res.send(err);
-    }
+exports.allUsers = (req, res, next) => {
+    const users = User.getAllUsers()
+        .then(([rows, fields]) => {
+            res.send(rows);
+        })
+        .catch(err => res.send(err));
 };
 
 exports.deleteUser = async (req, res, next) => {
