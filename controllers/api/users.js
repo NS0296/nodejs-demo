@@ -9,14 +9,11 @@ exports.allUsers = (req, res, next) => {
         .catch(err => res.send(err));
 };
 
-exports.deleteUser = async (req, res, next) => {
+exports.deleteUser = (req, res, next) => {
     const userId = parseInt(req.params.userId);
-    try {
-        // const deleteRow = await User.destroy({ where: { id: userId } });
-        res.send({ status: "done" });
-    } catch (err) {
-        res.send(err);
-    }
+    const deleteUser = User.deleteByPK(userId)
+        .then(response => res.send(response))
+        .catch(err => res.send(err));
 };
 
 exports.updateUser = async (req, res, next) => {

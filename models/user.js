@@ -13,8 +13,13 @@ class User {
     }
 
     static pool = pool; //connection pool
+
     static getAllUsers() {
         return this.pool.execute("call `nodejs-demo-new`.get_all_users()");
+    }
+
+    static deleteByPK(id) {
+        return this.pool.execute(`call delete_user_by_id(${id})`);
     }
 }
 
