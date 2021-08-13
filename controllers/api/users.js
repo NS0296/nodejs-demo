@@ -27,8 +27,7 @@ exports.insert = (req, res) => {
 
 exports.updateUser = async (req, res, next) => {
     const userId = parseInt(req.params.userId);
-    const { username, email, phone, home_address } = req.body;
-    console.log(req.body);
-    const updateUser = User.updateByPK(18, req.body);
-    res.send({ status: "done" });
+    const updateUser = User.updateByPK(userId, req.body)
+        .then(response => res.send(response))
+        .catch(err => res.send(err));
 };

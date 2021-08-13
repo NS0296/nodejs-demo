@@ -27,14 +27,15 @@ class User {
     }
 
     static updateByPK(id, newDataObj) {
-        return this.pool
-            .execute(`call insert_or_update_user(${id}, '${newDataObj.username}',
-            '${newDataObj.email}', '${newDataObj.password}', '${newDataObj.phone}', '${newDataObj.home_address}')`);
+        return this.pool.execute("call insert_or_update_user(?, ?, ?, ?, ?, ?);", [
+            id,
+            newDataObj.username || null,
+            newDataObj.email || null,
+            newDataObj.password || null,
+            newDataObj.phone || null,
+            newDataObj.home_address || null,
+        ]);
     }
-    // static updateByPK(id) {
-    //     return this.pool.execute(`call insert_or_update_user(${id}, '${this.username}',
-    //         '${this.email}', '${this.password}', '${this.phone}', '${this.homeAddress}')`);
-    // }
 
     insert() {
         return this.pool.execute(`call insert_or_update_user(0, '${this.username}',
