@@ -16,26 +16,19 @@ exports.deleteUser = (req, res, next) => {
         .catch(err => res.send(err));
 };
 
+exports.insert = (req, res) => {
+    const { username, email, password, phone, home_address } = req.body;
+    const user = new User(username, email, password, phone, home_address);
+    const insertUser = user
+        .insert()
+        .then(response => res.send(response))
+        .catch(err => res.send(err));
+};
+
 exports.updateUser = async (req, res, next) => {
     const userId = parseInt(req.params.userId);
-    const { username, email, phone, address } = req.body;
-    try {
-        // const updateUser = await User.update(
-        //     {
-        //         username: username,
-        //         email: email,
-        //         phone: phone,
-        //         address: address,
-        //     },
-        //     {
-        //         where: { id: userId },
-        //     }
-        // );
-        if (updateUser[0] === 0) {
-            throw new Error("User does not exit");
-        }
-        res.send({ status: "done" });
-    } catch (err) {
-        res.send(err);
-    }
+    const { username, email, phone, home_address } = req.body;
+    console.log(req.body);
+    const updateUser = User.updateByPK(18, req.body);
+    res.send({ status: "done" });
 };

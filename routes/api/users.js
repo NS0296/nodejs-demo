@@ -8,4 +8,6 @@ router.delete("/delete/:userId", apiController.deleteUser);
 
 router.post("/update/:userId", apiController.updateUser);
 
+router.post("/insert", apiController.insert);
+
 module.exports = router;

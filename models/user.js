@@ -14,12 +14,31 @@ class User {
 
     static pool = pool; //connection pool
 
+    get pool() {
+        return User.pool;
+    }
+
     static getAll() {
         return this.pool.execute("call get_all_users()");
     }
 
     static deleteByPK(id) {
         return this.pool.execute(`call delete_user_by_id(${id})`);
+    }
+
+    static updateByPK(id, newDataObj) {
+        return this.pool
+            .execute(`call insert_or_update_user(${id}, '${newDataObj.username}',
+            '${newDataObj.email}', '${newDataObj.password}', '${newDataObj.phone}', '${newDataObj.home_address}')`);
+    }
+    // static updateByPK(id) {
+    //     return this.pool.execute(`call insert_or_update_user(${id}, '${this.username}',
+    //         '${this.email}', '${this.password}', '${this.phone}', '${this.homeAddress}')`);
+    // }
+
+    insert() {
+        return this.pool.execute(`call insert_or_update_user(0, '${this.username}',
+            '${this.email}', '${this.password}', '${this.phone}', '${this.homeAddress}')`);
     }
 }
 
