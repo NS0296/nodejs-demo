@@ -19,7 +19,7 @@ const pool = mysql.createPool({
 });
 
 exports.promisePool = pool.promise();
-module.exports = sequelize;
+exports.sequelize = sequelize;
 
 // const User = require("../models/user");
 // const Item = require("../models/item");
