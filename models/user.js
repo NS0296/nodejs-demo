@@ -18,7 +18,7 @@ class User {
         return User.pool;
     }
 
-    static getAll() {
+    static findAll() {
         return this.pool.execute("call get_all_users()");
     }
 
@@ -37,7 +37,7 @@ class User {
         ]);
     }
 
-    insert() {
+    save() {
         return this.pool.execute(`call insert_or_update_user(0, '${this.username}',
             '${this.email}', '${this.password}', '${this.phone}', '${this.homeAddress}')`);
     }
