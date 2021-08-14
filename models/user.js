@@ -7,7 +7,7 @@ class User {
     constructor(username, email, password, phone, homeAddress) {
         this.username = username;
         this.email = email;
-        this.password = password; //to restrict password access
+        this.password = password; //Remember: restrict password access
         this.phone = phone;
         this.homeAddress = homeAddress;
     }
@@ -18,8 +18,15 @@ class User {
         return User.pool;
     }
 
-    static findAll() {
-        return this.pool.execute("call get_all_users()");
+    static findAll(filters) {
+        if (filters === undefined) filters = {}; //prevent error incase no arg. is passed
+        return this.pool.execute("CALL get_all_users(?, ?, ?, ?, ?);", [
+            filters.id || null,
+            filters.username || null,
+            filters.email || null,
+            filters.phone || null,
+            filters.homeAdress || null,
+        ]);
     }
 
     static deleteByPK(id) {
