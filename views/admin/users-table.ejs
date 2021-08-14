@@ -14,10 +14,20 @@
                         <th>EMAIL</th>
                         <th>PHONE</th>
                         <th>ADDRESS</th>
-                        <th>ACTIONS</th>
+                        <th id="actions-column">ACTIONS</th>
                     </tr>
                 </thead>
-                <tBody id="tbody"></tBody>
+                <tBody id="tbody">
+                    <% allUsers.forEach(user => { %>
+                        <tr data-item-id="<%= user.id %>">
+                            <td><%= user.id %></td>
+                            <td><%= user.username %></td>
+                            <td><%= user.email %></td>
+                            <td><%= user.phone %></td>
+                            <td><%= user.home_address %></td>
+                        </tr>
+                    <% }); %>
+                </tBody>
             </table>
         </main>
         <script src="/js/admin-users-table.js" defer></script>

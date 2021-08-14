@@ -1,3 +1,4 @@
+const fetch = require("node-fetch");
 const User = require("../models/user.js");
 const Item = require("../models/item.js");
 
@@ -9,12 +10,20 @@ exports.getAdmin = (req, res) => {
     });
 };
 
-exports.getUsersTable = (req, res) => {
-    res.render("admin/users-table.ejs", {
-        pageTitle: "Users Table",
-        isAuth: req.session.isAuth,
-        path: "/admin",
-    });
+exports.getUsersTable = async (req, res) => {
+    try {
+        const fetchRes = await fetch("http://localhost:3000/api/users/findall");
+        let allUsers = await fetchRes.json();
+        allUsers = allUsers[0];
+        res.render("admin/users-table.ejs", {
+            pageTitle: "Users Table",
+            isAuth: req.session.isAuth,
+            path: "/admin",
+            allUsers: allUsers,
+        });
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 exports.getItemsTable = async (req, res) => {
