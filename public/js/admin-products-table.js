@@ -113,7 +113,7 @@ const addActionCells = () => {
 
         cellActions.appendChild(actionButtonDelete);
         cellActions.appendChild(actionButtonEdit);
-        item.appendChild(cellActions);
+        product.appendChild(cellActions);
     }
 };
 

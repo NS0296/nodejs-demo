@@ -26,27 +26,19 @@ exports.getUsersTable = async (req, res) => {
     }
 };
 
-exports.getItemsTable = async (req, res) => {
+exports.getProductsTable = async (req, res) => {
     try {
-        const allItems = await Item.findAll({
-            attributes: [
-                "id",
-                "name",
-                "categoryName",
-                "manufacture",
-                "price",
-                "stockAvailable",
-                "dateFirstAvailable",
-            ],
-        });
-        res.render("admin/items-table.ejs", {
-            allItems: allItems,
-            pageTitle: "Items Table",
+        const fetchRes = await fetch("http://localhost:3000/api/products/findall");
+        let allProducts = await fetchRes.json();
+        allProducts = allProducts[0];
+        res.render("admin/products-table.ejs", {
+            pageTitle: "Products Table",
             isAuth: req.session.isAuth,
             path: "/admin",
+            allProducts: allProducts,
         });
     } catch (err) {
-        res.send(err);
+        console.log(err);
     }
 };
 

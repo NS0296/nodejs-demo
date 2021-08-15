@@ -7,6 +7,6 @@ router.get("/", adminController.getAdmin);
 
 router.get("/userstable", adminController.getUsersTable);
 
-router.get("/itemstable", adminController.getItemsTable);
+router.get("/itemstable", adminController.getProductsTable);
 
 module.exports = router;

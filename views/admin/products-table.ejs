@@ -27,16 +27,17 @@
                     </tr>
                 </thead>
                 <tBody id="tbody">
-                    <% allItems.forEach(item => { %>
-                        <tr data-product-id="<%= item.id %>">
-                            <td><%= item.id %></td>
-                            <td><%= item.title %></td>
-                            <td><%= item.categoryName %></td>
-                            <td><%= item.price %></td>
+                    <% allProducts.forEach(product => { %>
+                        <tr data-product-id="<%= product.id %>">
+                            <td><%= product.id %></td>
+                            <td><%= product.title %></td>
+                            <td><%= product.category_name %></td>
+                            <td><%= product.price %></td>
+                            <td><%= product.stock %></td>
                         </tr>
                     <% }); %>
                 </tBody>
             </table>
         </main>
-        <script src="/js/admin-items-table.js"></script>
+        <script src="/js/admin-products-table.js"></script>
 <%- include("../inc/end.ejs") %>
