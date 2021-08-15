@@ -1,10 +1,4 @@
 let tblBody = document.getElementById("tbody");
-let tblHead = document.getElementById("thead");
-
-//add actions column
-// let columnActions = document.createElement("th");
-// columnActions.innerText = "ACTIONS";
-// tblHead.appendChild(columnActions);
 
 const getNthParentOf = (node, i) => {
     while (i > 0) {
@@ -34,57 +28,38 @@ let getAllSiblings = e => {
     return siblings;
 };
 
-class ItemData {
-    constructor(
-        name,
-        categoryName,
-        manufacture,
-        price,
-        stockAvailable,
-        dateFirstAvailable
-    ) {
-        this.name = name;
-        this.categoryName = categoryName;
-        this.manufacture = manufacture;
-        this.price = price;
-        this.stockAvailable = stockAvailable;
-        this.dateFirstAvailable = dateFirstAvailable;
-    }
-}
-
 const addActionCells = () => {
     for (let i = 0; i < tblBody.children.length; i++) {
-        const item = tblBody.children[i];
+        const product = tblBody.children[i];
 
         //add actions cell
         let cellActions = document.createElement("td");
         cellActions.className = "actions";
 
-        //delete action button
+        //create delete action button
         let actionButtonDelete = document.createElement("button");
         actionButtonDelete.className = "actionButtons deleteButtons";
         actionButtonDelete.innerText = "Delete";
-        actionButtonDelete.dataset.itemId = item.dataset.itemId;
 
         actionButtonDelete.addEventListener("click", () => {
             const xhr = new XMLHttpRequest();
-            let reqUrl = `http://localhost:3000/api/items/delete/${actionButtonDelete.dataset.itemId}`;
+            let reqUrl = `http://localhost:3000/api/products/destroy/${product.dataset.productId}`;
             xhr.open("DELETE", reqUrl, true);
 
             xhr.onload = () => {
                 if (xhr.status === 200) {
-                    let deletedRow = getNthParentOf(actionButtonDelete, 2);
-                    deletedRow.remove();
+                    getNthParentOf(actionButtonDelete, 2).remove();
                 }
             };
+
             xhr.send();
         });
 
-        //edit action button
+        //create edit action button
         let actionButtonEdit = document.createElement("button");
         actionButtonEdit.className = "actionButton editButton";
         actionButtonEdit.innerText = "Edit";
-        actionButtonEdit.dataset.itemId = item.dataset.itemId;
+
         actionButtonEdit.addEventListener("click", () => {
             const allRowCells = getAllSiblings(actionButtonEdit.parentNode);
             allRowCells.shift();
@@ -96,45 +71,44 @@ const addActionCells = () => {
             });
         });
 
-        //update action button
+        //create update action button
         let actionButtonUpdate = document.createElement("button");
         actionButtonUpdate.className = "actionButton updateButton";
         actionButtonUpdate.innerText = "Update";
-        actionButtonUpdate.dataset.itemId = item.dataset.itemId;
 
         actionButtonUpdate.addEventListener("click", () => {
             const allRowCells = getAllSiblings(actionButtonUpdate.parentNode);
             allRowCells.shift(); //remove id cell
             cellActions.replaceChild(actionButtonEdit, actionButtonUpdate);
-            const newData = new ItemData(
-                allRowCells[0].firstChild.value,
-                allRowCells[1].firstChild.value,
-                allRowCells[2].firstChild.value,
-                allRowCells[3].firstChild.value,
-                allRowCells[4].firstChild.value,
-                "2000-01-01 00:00:00"
-                /*allRowCells[5].firstChild.value*/
-            );
+            const newProductData = {
+                title: allRowCells[0].value.firstChild,
+                categoryName: allRowCells[1].value.firstChild,
+                price: allRowCells[2].value.firstChild,
+                stock: allRowCells[3].value.firstChild,
+            };
 
-            for (let i = 0; i < allRowCells.length; i++) {
-                const cell = allRowCells[i];
-                const textNode = document.createTextNode(cell.firstChild.value); //firstchild -> input
-                cell.replaceChild(textNode, cell.firstChild);
-            }
-
+            //send new data in ajax call
             const xhr = new XMLHttpRequest();
-            let reqUrl = `http://localhost:3000/api/items/update/${actionButtonUpdate.dataset.itemId}`;
-            xhr.open("POST", reqUrl, true);
+            let reqUrl = `http://localhost:3000/api/products/update/${product.dataset.productId}`;
+            xhr.open("PUT", reqUrl, true);
 
             xhr.onload = () => {
                 if (xhr.status === 200) {
-                    console.log(xhr.response);
+                    if (JSON.parse(xhr.response)[0].affectedRows >= 1) {
+                        for (let i = 0; i < allRowCells.length; i++) {
+                            const cell = allRowCells[i];
+                            const textNode = document.createTextNode(
+                                cell.firstChild.value
+                            ); //firstchild -> input
+                            cell.replaceChild(textNode, cell.firstChild);
+                        }
+                    }
                 }
             };
 
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.setRequestHeader("Accept", "application/json");
-            xhr.send(JSON.stringify(newData));
+            xhr.send(JSON.stringify(newProductData));
         });
 
         cellActions.appendChild(actionButtonDelete);
