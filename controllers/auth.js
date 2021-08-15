@@ -19,32 +19,27 @@ exports.postRegister = async (req, res, next) => {
     const { username, email, password, phone, address } = req.body;
     res.redirect("/login");
     try {
-        const isUserExist = await User.findOne({ where: { email: email } });
-        if (isUserExist !== null) {
+        const [isEmailExist] = await User.findAll({ email: email });
+        if (isEmailExist[0].length) {
             throw new Error("User already exists");
         }
         const mailHtml = await ejs.renderFile(
             path.join(rootDir, "views", "email", "welcome.ejs"),
             { email: email, username: username }
         );
-        const hashPassword = await bcrypt.hash(password, 4);
         await transporter.sendMail({
             to: email,
             from: process.env.SENDGRID_SENDER_MAIN,
             subject: "Thanks for Signing Up",
             html: mailHtml,
         });
-        const user = await User.create({
-            username: username,
-            email: email,
-            password: hashPassword,
-            phone: phone || null,
-            address: address || null,
-        });
-        const isCartExist = await user.getCart();
-        if (isCartExist === null) {
-            user.createCart();
-        }
+        const hashPassword = await bcrypt.hash(req.body.password, 4);
+        const user = new User(username, email, hashPassword, phone, address);
+        await user.save();
+        // const isCartExist = await user.getCart();
+        // if (isCartExist === null) {
+        //     user.createCart();
+        // }
     } catch (err) {
         console.log(err);
     }
