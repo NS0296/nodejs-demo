@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 const User = require("../models/user.js");
-const Item = require("../models/item.js");
+const Item = require("../models/product.js");
 
 exports.getAdmin = (req, res) => {
     res.render("admin/admin.ejs", {

@@ -1,13 +1,13 @@
 const router = require("express").Router();
 
-const apiController = require("../../controllers/api/items.js");
+const productsApiController = require("../../controllers/api/products.js");
 
-router.get("/all", apiController.allItems);
+router.get("/findall", productsApiController.findAll);
 
-router.post("/create", apiController.createItem);
+router.post("/create", productsApiController.createItem);
 
-router.delete("/delete/:itemId", apiController.deleteItem);
+router.delete("/delete/:itemId", productsApiController.deleteItem);
 
-router.post("/update/:itemId", apiController.updateItem);
+router.post("/update/:itemId", productsApiController.updateItem);
 
 module.exports = router;

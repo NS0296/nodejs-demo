@@ -1,22 +1,11 @@
-// const Item = require("../../models/item.js");
+const Product = require("../../models/product");
 
-exports.allItems = async (req, res, next) => {
-    try {
-        // const allItems = await Item.findAll({
-        //     attributes: [
-        //         "id",
-        //         "name",
-        //         "categoryName",
-        //         "manufacture",
-        //         "price",
-        //         "stockAvailable",
-        //         "dateFirstAvailable",
-        //     ],
-        // });
-        res.send(allItems);
-    } catch (err) {
-        res.send(err);
-    }
+exports.findAll = (req, res, next) => {
+    Product.findAll()
+        .then(([rows]) => {
+            res.send(rows);
+        })
+        .catch(err => res.send(err));
 };
 
 exports.deleteItem = async (req, res, next) => {
