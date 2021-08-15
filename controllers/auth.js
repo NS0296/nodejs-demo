@@ -56,16 +56,16 @@ exports.getLogin = (req, res, next) => {
 exports.postLogin = async (req, res, next) => {
     const { email, password } = req.body;
     try {
-        const user = await User.findOne({ where: { email: email } });
-        if (user === null) {
+        const [user] = await User.findAll({ email: email });
+        if (!user[0].length) {
             throw new Error("User does not exist");
         }
-        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        const isPasswordMatch = await bcrypt.compare(password, user[0][0].password);
         if (!isPasswordMatch) {
             throw new Error("Wrong Password");
         }
         req.session.isAuth = true;
-        req.session.userId = user.get("id"); //used to view data in user dashboard
+        req.session.userId = user[0][0].id; //used to view data in user dashboard
     } catch (err) {
         console.log(err);
     }
