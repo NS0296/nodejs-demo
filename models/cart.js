@@ -1,14 +1,23 @@
-// const { Sequelize } = require("sequelize"); //import sequlize for datatypes
-// const sequelize = require("../util/database"); //import connection object
+const pool = require("../util/database").promisePool;
 
-// const Cart = sequelize.define("Cart", {
-//     id: {
-//         type: Sequelize.INTEGER,
-//         primaryKey: true,
-//         unique: true,
-//         autoIncrement: true,
-//         allowNull: false,
-//     },
-// });
+class Cart {
+    constructor(id, user_id) {
+        this.user_id = user_id;
+    }
 
-// module.exports = Cart;
+    static pool = pool;
+
+    get pool() {
+        return Cart.pool;
+    }
+
+    save() {
+        return this.pool.execute("call insert_cart(?)", [this.user_id]);
+    }
+
+    static deleteByPK(id = 0) {
+        return this.pool.execute("call delete_cart_by_id(?)", [id]);
+    }
+}
+
+module.exports = Cart;
