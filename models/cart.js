@@ -11,6 +11,13 @@ class Cart {
         return Cart.pool;
     }
 
+    static findOne(filters = {}) {
+        return this.pool.execute("call get_one_cart(?, ?)", [
+            filters.id || NULL,
+            filters.userId || NULL,
+        ]);
+    }
+
     save() {
         return this.pool.execute("call insert_cart(?)", [this.user_id]);
     }
