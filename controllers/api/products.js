@@ -1,4 +1,4 @@
-const { response } = require("express");
+// const { response } = require("express");
 const Product = require("../../models/product");
 
 exports.findAll = (req, res, next) => {
@@ -26,7 +26,7 @@ exports.create = (req, res, next) => {
 };
 
 exports.update = (req, res, next) => {
-    const productId = req.params.itemId;
+    const productId = req.params.productId;
     Product.updateByPK(productId, req.body)
         .then(response => res.send(response))
         .catch(err => res.send(err));

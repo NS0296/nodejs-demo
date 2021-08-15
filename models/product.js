@@ -11,7 +11,7 @@ class Product {
     static pool = pool;
 
     get pool() {
-        return User.pool;
+        return Product.pool;
     }
 
     static findAll(filters) {
@@ -26,11 +26,11 @@ class Product {
     }
 
     static deleteByPK(id = 0) {
-        return this.pool.execute("call delete_user_by_id(?)", [id]);
+        return this.pool.execute("call delete_product_by_id(?)", [id]);
     }
 
     static updateByPK(id, newDataObj) {
-        return this.pool.execute("call insert_or_update_product(?, ?, ?, ?, ?, ?);", [
+        return this.pool.execute("call insert_or_update_product(?, ?, ?, ?, ?);", [
             id,
             newDataObj.title || null,
             newDataObj.categoryName || null,
@@ -40,7 +40,7 @@ class Product {
     }
 
     save() {
-        return this.pool.execute("call insert_or_update_prodcut(0, ?, ?, ?, ?)", [
+        return this.pool.execute("call insert_or_update_product(0, ?, ?, ?, ?)", [
             this.title,
             this.categoryName,
             this.price,
