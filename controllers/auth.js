@@ -181,14 +181,15 @@ exports.postNewPassword = async (req, res, next) => {
 
 exports.getUserDashboard = async (req, res, next) => {
     try {
-        const { username, email, phone, address } = await User.findByPk(
-            req.session.userId
-        );
+        const [user] = await User.findAll({ id: req.session.userId });
+        const { username, email, phone, home_address } = user[0][0];
+        console.log(username);
+        console.log(user);
         res.render("auth/dashboard.ejs", {
             username: username,
             email: email,
             phone: phone,
-            address: address,
+            address: home_address,
             pageTitle: "Dashboard",
             isAuth: req.session.isAuth,
             path: "/dashboard",
