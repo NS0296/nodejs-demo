@@ -10,6 +10,7 @@ BEGIN
 	IF _id <= 0 THEN
 		INSERT INTO user (username, email, `password`, phone, home_address)
         VALUES (_username, _email, _password, _phone, _home_address);
+        CALL insert_cart(last_insert_id());
 	ELSE
 		UPDATE user
         SET
