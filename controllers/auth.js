@@ -16,7 +16,7 @@ exports.getRegister = (req, res, next) => {
 };
 
 exports.postRegister = async (req, res, next) => {
-    const { username, email, password, phone, address } = req.body;
+    const { username, email, password, phone, home_address } = req.body;
     res.redirect("/login");
     try {
         const [isEmailExist] = await User.findAll({ email: email });
@@ -34,7 +34,7 @@ exports.postRegister = async (req, res, next) => {
             html: mailHtml,
         });
         const hashPassword = await bcrypt.hash(req.body.password, 4);
-        const user = new User(username, email, hashPassword, phone, address);
+        const user = new User(username, email, hashPassword, phone, home_address);
         await user.save();
         // const isCartExist = await user.getCart();
         // if (isCartExist === null) {
