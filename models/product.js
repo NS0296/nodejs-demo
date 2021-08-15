@@ -24,45 +24,29 @@ class Product {
             filters.stock || null,
         ]);
     }
+
+    static deleteByPK(id = 0) {
+        return this.pool.execute("call delete_user_by_id(?)", [id]);
+    }
+
+    static updateByPK(id, newDataObj) {
+        return this.pool.execute("call insert_or_update_product(?, ?, ?, ?, ?, ?);", [
+            id,
+            newDataObj.title || null,
+            newDataObj.categoryName || null,
+            newDataObj.price || null,
+            newDataObj.stock || null,
+        ]);
+    }
+
+    save() {
+        return this.pool.execute("call insert_or_update_prodcut(0, ?, ?, ?, ?)", [
+            this.title,
+            this.categoryName,
+            this.price,
+            this.stock,
+        ]);
+    }
 }
 
 module.exports = Product;
-
-// const { Sequelize } = require("sequelize"); //import sequlize for datatypes
-// const sequelize = require("../util/database"); //import connection object
-
-// const Item = sequelize.define("Item", {
-//     id: {
-//         type: Sequelize.INTEGER,
-//         primaryKey: true,
-//         unique: true,
-//         autoIncrement: true,
-//         allowNull: false,
-//     },
-//     name: {
-//         type: Sequelize.STRING(50),
-//         inNull: false,
-//     },
-//     categoryName: {
-//         type: Sequelize.STRING(30),
-//         isNull: false,
-//     },
-//     manufacture: {
-//         type: Sequelize.STRING(40),
-//         isNull: false,
-//     },
-//     price: {
-//         type: Sequelize.INTEGER,
-//         allowNull: false,
-//     },
-//     stockAvailable: {
-//         type: Sequelize.INTEGER,
-//         allowNull: false,
-//     },
-//     dateFirstAvailable: {
-//         type: Sequelize.DATE,
-//         isNull: false,
-//     },
-// });
-
-// module.exports = Item;
