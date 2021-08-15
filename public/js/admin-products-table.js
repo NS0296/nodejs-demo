@@ -81,10 +81,10 @@ const addActionCells = () => {
             allRowCells.shift(); //remove id cell
             cellActions.replaceChild(actionButtonEdit, actionButtonUpdate);
             const newProductData = {
-                title: allRowCells[0].value.firstChild,
-                categoryName: allRowCells[1].value.firstChild,
-                price: allRowCells[2].value.firstChild,
-                stock: allRowCells[3].value.firstChild,
+                title: allRowCells[0].firstChild.value,
+                categoryName: allRowCells[1].firstChild.value,
+                price: allRowCells[2].firstChild.value,
+                stock: allRowCells[3].firstChild.value,
             };
 
             //send new data in ajax call
