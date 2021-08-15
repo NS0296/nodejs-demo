@@ -1,28 +1,28 @@
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_or_update_user`(
-	id INT,
-    username varchar(64),
-    email varchar(64),
-    `password` char(60),
-    phone varchar(11),
-    home_address varchar(64)
+	_id INT,
+    _username varchar(64),
+    _email varchar(64),
+    _password char(60),
+    _phone varchar(11),
+    _home_address varchar(64)
 )
 BEGIN
-	IF id <= 0 THEN
+	IF _id <= 0 THEN
 		INSERT INTO user (username, email, `password`, phone, home_address)
-        VALUES (username, email, `password`, phone, home_address);
+        VALUES (_username, _email, _password, _phone, _home_address);
 	ELSE
-		UPDATE user u
+		UPDATE user
         SET
-			u.username = IFNULL(username, u.username),
-			u.email = IFNULL(email, u.email),
-			u.`password` = IFNULL(`password`, u.`password`),
-			u.phone = IFNULL(phone, u.phone),
-			u.home_address = IFNULL(home_address, u.home_address)
+			username = IFNULL(_username, username),
+			email = IFNULL(_email, email),
+			`password` = IFNULL(_password, `password`),
+			phone = IFNULL(_phone, phone),
+			home_address = IFNULL(_home_address, home_address)
 		WHERE
-			u.id = id AND (username IS NOT NULL OR
-				email IS NOT NULL OR
-                `password` IS NOT NULL OR
-                phone IS NOT NULL OR
-                home_address IS NOT NULL);
+			id = _id AND (_username IS NOT NULL OR
+				_email IS NOT NULL OR
+                _password IS NOT NULL OR
+                _phone IS NOT NULL OR
+                _home_address IS NOT NULL);
 	END IF;
 END
