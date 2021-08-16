@@ -18,6 +18,10 @@ class Cart {
         ]);
     }
 
+    static findCartItems(filter = {}) {
+        return this.pool.execute("call get_cart_items(?)", [filters.userId || NULL]);
+    }
+
     save() {
         return this.pool.execute("call insert_cart(?)", [this.user_id]);
     }
