@@ -24,8 +24,8 @@ class Cart {
 
     static insertCartItem(filters = {}) {
         return this.pool.execute("call insert_cart_item(?, ?, ?)", [
-            filters.user_id,
-            filters.product_id,
+            filters.userId,
+            filters.productId,
             filters.quantity,
         ]);
     }
