@@ -22,6 +22,14 @@ class Cart {
         return this.pool.execute("call get_cart_items(?)", [filters.userId || NULL]);
     }
 
+    static insertCartItem(filters = {}) {
+        return this.pool.execute("call insert_cart_item(?, ?, ?)", [
+            filters.user_id,
+            filters.product_id,
+            filters.quantity,
+        ]);
+    }
+
     save() {
         return this.pool.execute("call insert_cart(?)", [this.user_id]);
     }
