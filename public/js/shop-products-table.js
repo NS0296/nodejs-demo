@@ -32,7 +32,7 @@ let getAllSiblings = e => {
 
 const addActionCells = () => {
     for (let i = 0; i < tblBody.children.length; i++) {
-        const item = tblBody.children[i];
+        const product = tblBody.children[i];
 
         //add actions cell
         let cellActions = document.createElement("td");
@@ -42,11 +42,11 @@ const addActionCells = () => {
         let actionButtonAddToCart = document.createElement("button");
         actionButtonAddToCart.className = "actionButtons addToCartButton";
         actionButtonAddToCart.innerText = "Add to Cart";
-        actionButtonAddToCart.dataset.itemId = item.dataset.itemId;
+        actionButtonAddToCart.dataset.productId = product.dataset.productId;
 
         actionButtonAddToCart.addEventListener("click", () => {
             const xhr = new XMLHttpRequest();
-            let reqUrl = `http://localhost:3000/api/carts/add/${userId}/${actionButtonAddToCart.dataset.itemId}`;
+            let reqUrl = `http://localhost:3000/api/carts/add/${actionButtonAddToCart.dataset.productId}`;
             xhr.open("GET", reqUrl, true);
             xhr.onload = () => {
                 if (xhr.status === 200) {
@@ -57,7 +57,7 @@ const addActionCells = () => {
         });
 
         cellActions.appendChild(actionButtonAddToCart);
-        item.appendChild(cellActions);
+        product.appendChild(cellActions);
     }
 };
 

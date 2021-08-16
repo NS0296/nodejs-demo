@@ -10,12 +10,12 @@ exports.getWelcome = (req, res) => {
 
 exports.getIndex = async (req, res, next) => {
     try {
-        const fetchRes = await fetch("http://localhost:3000/api/items/all");
-        const allItems = await fetchRes.json();
+        const fetchRes = await fetch("http://localhost:3000/api/products/findall");
+        const [allProducts] = await fetchRes.json();
         res.render("shop/index.ejs", {
             isAuth: req.session.isAuth,
             userId: req.session.userId, //gets id of logged in user
-            allItems: allItems,
+            allProducts: allProducts,
             pageTitle: "Shop",
             path: "/",
         });
