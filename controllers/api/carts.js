@@ -1,5 +1,7 @@
-// const User = require("../../models/user");
-// const Item = require("../../models/item");
+const User = require("../../models/user");
+const Product = require("../../models/product");
+const { insertCartItem } = require("../../models/cart");
+const Cart = require("../../models/cart");
 
 exports.createCart = async (req, res, next) => {
     const userId = req.params.userId;
@@ -17,12 +19,10 @@ exports.createCart = async (req, res, next) => {
     }
 };
 
-exports.getCart = async (req, res, next) => {
-    const userId = req.params.userId;
+exports.getCartItems = async (req, res, next) => {
+    const userId = req.session.userId;
     try {
-        // const user = await User.findOne({ where: { id: userId } });
-        // const userCart = await user.getCart();
-        // const cartItems = await userCart.getItems();
+        const [cartItems] = await Cart.getCartItems({ userId: userId });
         res.send(cartItems);
     } catch (err) {
         res.send(err);
@@ -30,13 +30,10 @@ exports.getCart = async (req, res, next) => {
 };
 
 exports.postCartItem = async (req, res, next) => {
-    const userId = req.params.userId;
-    const itemId = req.params.itemId;
+    const userId = req.session.userId;
+    const productId = req.params.productId;
     try {
-        // const user = await User.findOne({ where: { id: userId } });
-        // const userCart = await user.getCart();
-        // const addItem = await Item.findOne({ where: { id: itemId } });
-        // userCart.addItem(addItem);
+        await Cart.insertCartItem({ userId: userId, productId: productId, quantity: 1 });
         res.send({ message: "Item added" });
     } catch (err) {
         res.send(err);
