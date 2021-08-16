@@ -30,6 +30,13 @@ class Cart {
         ]);
     }
 
+    static deleteCartItem(filters = {}) {
+        return this.pool.execute("call delete_cart_item(?, ?)", [
+            filters.userId,
+            filters.itemId,
+        ]);
+    }
+
     save() {
         return this.pool.execute("call insert_cart(?)", [this.user_id]);
     }
