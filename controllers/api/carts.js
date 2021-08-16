@@ -45,13 +45,7 @@ exports.deleteCartItem = async (req, res) => {
     const userId = req.params.userId;
     const itemId = req.params.itemId;
     try {
-        // const user = await User.findOne({ where: { id: userId } });
-        // const userCart = await user.getCart();
-        // const removedItem = await userCart.getItems({ where: { id: itemId } });
-        // await userCart.removeItem(removedItem[0]);
-        // const item = items[0];
-        // console.log("single", item);
-        // await item.cartItem.set();
+        await Cart.deleteCartItem({ userId: userId, itemId: itemId });
         res.send({ message: "Item removed" });
     } catch (err) {
         res.send({ message: "error" });
