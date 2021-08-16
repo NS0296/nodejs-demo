@@ -1,15 +1,15 @@
 const router = require("express").Router();
 
-const apiController = require("../../controllers/api/carts");
+const cartApiController = require("../../controllers/api/carts");
 
-router.get("/create/:userId", apiController.createCart);
+router.get("/create/:userId", cartApiController.createCart);
 
-router.get("/allItems/:userId", apiController.getCart);
+router.get("/findallitems", cartApiController.getCartItems);
 
-router.get("/add/:userId/:itemId", apiController.postCartItem);
+router.get("/add/:productId", cartApiController.postCartItem);
 
-router.delete("/delete/:userId/:itemId", apiController.deleteCartItem);
+router.delete("/delete/:userId/:itemId", cartApiController.deleteCartItem);
 
-router.get("/summary/:userId", apiController.getCartSummary);
+router.get("/summary/:userId", cartApiController.getCartSummary);
 
 module.exports = router;
