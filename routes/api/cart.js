@@ -4,7 +4,7 @@ const cartApiController = require("../../controllers/api/carts");
 
 router.get("/create/:userId", cartApiController.createCart);
 
-router.get("/findallitems", cartApiController.getCartItems);
+router.get("/:userId/findallitems", cartApiController.getCartItems);
 
 router.get("/add/:productId", cartApiController.postCartItem);
 

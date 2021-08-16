@@ -18,7 +18,7 @@ class Cart {
         ]);
     }
 
-    static findCartItems(filter = {}) {
+    static findCartItems(filters = {}) {
         return this.pool.execute("call get_cart_items(?)", [filters.userId || NULL]);
     }
 
