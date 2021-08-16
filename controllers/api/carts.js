@@ -20,9 +20,9 @@ exports.createCart = async (req, res, next) => {
 };
 
 exports.getCartItems = async (req, res, next) => {
-    const userId = req.session.userId;
+    const userId = req.params.userId;
     try {
-        const [cartItems] = await Cart.getCartItems({ userId: userId });
+        const [cartItems] = await Cart.findCartItems({ userId: userId });
         res.send(cartItems);
     } catch (err) {
         res.send(err);
@@ -31,6 +31,7 @@ exports.getCartItems = async (req, res, next) => {
 
 exports.postCartItem = async (req, res, next) => {
     const userId = req.session.userId;
+    console.log(userId);
     const productId = req.params.productId;
     try {
         await Cart.insertCartItem({ userId: userId, productId: productId, quantity: 1 });

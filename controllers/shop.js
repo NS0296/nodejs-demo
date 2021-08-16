@@ -27,14 +27,13 @@ exports.getIndex = async (req, res, next) => {
 exports.getCart = async (req, res) => {
     const userId = req.session.userId;
     try {
-        const reqUrl = `http://localhost:3000/api/carts/allItems/${userId}`;
+        const reqUrl = `http://localhost:3000/api/carts/${userId}/findallitems`;
         const fetchRes = await fetch(reqUrl);
-        const cartItems = await fetchRes.json();
-        console.log(cartItems);
+        const [cartItems] = await fetchRes.json();
         res.render("shop/cart.ejs", {
             isAuth: req.session.isAuth,
             userId: req.session.userId, //gets id of logged in user
-            cartItems: cartItems,
+            cartProducts: cartItems,
             pageTitle: "Cart",
             path: "/cart",
         });
