@@ -42,11 +42,10 @@ const addActionCells = () => {
         let actionButtonDelete = document.createElement("button");
         actionButtonDelete.className = "actionButtons deleteButtons";
         actionButtonDelete.innerText = "Delete";
-        actionButtonDelete.dataset.itemId = item.dataset.itemId;
 
         actionButtonDelete.addEventListener("click", () => {
             const xhr = new XMLHttpRequest();
-            let reqUrl = `http://localhost:3000/api/carts/delete/${userId}/${actionButtonDelete.dataset.itemId}`;
+            let reqUrl = `http://localhost:3000/api/carts/delete/${userId}/${item.dataset.productId}`;
             xhr.open("DELETE", reqUrl, true);
 
             xhr.onload = () => {
