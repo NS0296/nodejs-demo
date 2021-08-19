@@ -6,7 +6,6 @@ exports.postOrder = async (req, res) => {
     try {
         const { paymentMethod, shippingAddress } = req.body;
         const userId = req.params.userId;
-        console.log(userId);
         const fetchRes = await fetch(`http://localhost:3000/api/carts/summary/${userId}`);
         const cartSummary = await fetchRes.json();
         // const user = await User.findOne({ where: { id: userId } });

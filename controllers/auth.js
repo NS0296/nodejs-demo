@@ -183,8 +183,6 @@ exports.getUserDashboard = async (req, res, next) => {
     try {
         const [user] = await User.findAll({ id: req.session.userId });
         const { username, email, phone, home_address } = user[0][0];
-        console.log(username);
-        console.log(user);
         res.render("auth/dashboard.ejs", {
             username: username,
             email: email,
