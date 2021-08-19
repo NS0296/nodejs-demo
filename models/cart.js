@@ -44,6 +44,11 @@ class Cart {
     static deleteByPK(id = 0) {
         return this.pool.execute("call delete_cart_by_id(?)", [id]);
     }
+
+    static getCartSummary(filters = {}) {
+        //get cart summary(total_price, items_count) by user id
+        return this.pool.execute("CALL get_cart_summary(?)", [filters.id || 0]);
+    }
 }
 
 module.exports = Cart;
