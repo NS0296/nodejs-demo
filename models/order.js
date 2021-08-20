@@ -1,30 +1,20 @@
-// const { Sequelize } = require("sequelize"); //import sequlize for datatypes
-// const sequelize = require("../util/database"); //import connection object
+const pool = require("../util/database").promisePool;
 
-// const Order = sequelize.define("Order", {
-//     id: {
-//         type: Sequelize.INTEGER,
-//         primaryKey: true,
-//         unique: true,
-//         autoIncrement: true,
-//         allowNull: false,
-//     },
-//     date: {
-//         type: Sequelize.DATE,
-//         allowNull: false,
-//     },
-//     paymentMethod: {
-//         type: Sequelize.STRING(20),
-//         allowNull: false,
-//     },
-//     totalPrice: {
-//         type: Sequelize.INTEGER,
-//         allowNull: false,
-//     },
-//     shippingAddress: {
-//         type: Sequelize.STRING(50),
-//         allowNull: false,
-//     },
-// });
+class Order {
+    static pool = pool;
 
-// module.exports = Order;
+    get pool() {
+        return User.pool;
+    }
+
+    static createOrder(data = {}) {
+        // data => { userId, paymentMethod, shippingAddress}
+        return this.pool.execute("call create_order(?, ?, ?)", [
+            userId,
+            paymentMethod,
+            shippingAddress,
+        ]);
+    }
+}
+
+module.exports = Order;
