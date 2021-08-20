@@ -33,13 +33,9 @@ exports.postRegister = async (req, res, next) => {
             subject: "Thanks for Signing Up",
             html: mailHtml,
         });
-        const hashPassword = await bcrypt.hash(req.body.password, 4);
+        const hashPassword = await bcrypt.hash(password, 4);
         const user = new User(username, email, hashPassword, phone, home_address);
         await user.save();
-        // const isCartExist = await user.getCart();
-        // if (isCartExist === null) {
-        //     user.createCart();
-        // }
     } catch (err) {
         console.log(err);
     }
@@ -56,16 +52,16 @@ exports.getLogin = (req, res, next) => {
 exports.postLogin = async (req, res, next) => {
     const { email, password } = req.body;
     try {
-        const [user] = await User.findAll({ email: email });
-        if (!user[0].length) {
+        const [[user]] = await User.findAll({ email: email });
+        if (!user.length) {
             throw new Error("User does not exist");
         }
-        const isPasswordMatch = await bcrypt.compare(password, user[0][0].password);
+        const isPasswordMatch = await bcrypt.compare(password, user[0].password);
         if (!isPasswordMatch) {
             throw new Error("Wrong Password");
         }
         req.session.isAuth = true;
-        req.session.userId = user[0][0].id; //used to view data in user dashboard
+        req.session.userId = user[0].id; //used to view data in user dashboard
     } catch (err) {
         console.log(err);
     }
@@ -79,6 +75,7 @@ exports.getReset = (req, res, next) => {
         isAuth: req.session.isAuth,
     });
 };
+
 exports.postReset = async (req, res, next) => {
     const { email } = req.body;
     res.redirect("/login");
@@ -181,13 +178,9 @@ exports.postNewPassword = async (req, res, next) => {
 
 exports.getUserDashboard = async (req, res, next) => {
     try {
-        const [user] = await User.findAll({ id: req.session.userId });
-        const { username, email, phone, home_address } = user[0][0];
+        const [[[user]]] = await User.findAll({ id: req.session.userId });
         res.render("auth/dashboard.ejs", {
-            username: username,
-            email: email,
-            phone: phone,
-            address: home_address,
+            user: user,
             pageTitle: "Dashboard",
             isAuth: req.session.isAuth,
             path: "/dashboard",
