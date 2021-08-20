@@ -1,24 +1,13 @@
-// const Order = require("../../models/order");
-// const User = require("../../models/user");
-const fetch = require("node-fetch");
+const Order = require("../../models/order");
 
-exports.postOrder = async (req, res) => {
+exports.postCreateOrder = async (req, res) => {
+    const { payment_method, shipping_address } = req.body;
     try {
-        const { paymentMethod, shippingAddress } = req.body;
-        const userId = req.params.userId;
-        const fetchRes = await fetch(`http://localhost:3000/api/carts/summary/${userId}`);
-        const cartSummary = await fetchRes.json();
-        // const user = await User.findOne({ where: { id: userId } });
-        // const userCart = await user.getCart();
-        // const userCartItems = await userCart.getItems();
-        // const newOrder = await user.createOrder({
-        //     date: Date.now(),
-        //     paymentMethod: paymentMethod,
-        //     totalPrice: cartSummary.totalPrice,
-        //     shippingAddress: shippingAddress,
-        // });
-        // newOrder.setItems(userCartItems);
-        // userCart.setItems(null);
+        Order.createOrder({
+            userId: req.session.id,
+            paymentMethod: 1,
+            shippingAddress: shipping_address,
+        });
         res.send(newOrder);
     } catch (err) {
         res.send(err);
