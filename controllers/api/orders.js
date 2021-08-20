@@ -4,7 +4,7 @@ exports.postCreateOrder = async (req, res) => {
     const { payment_method, shipping_address } = req.body;
     try {
         await Order.createOrder({
-            userId: req.session.id,
+            userId: req.params.userId,
             paymentMethod: 1,
             shippingAddress: shipping_address,
         });
