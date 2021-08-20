@@ -1,6 +1,5 @@
-const fetch = require("node-fetch");
 const User = require("../models/user.js");
-const Item = require("../models/product.js");
+const Product = require("../models/product.js");
 
 exports.getAdmin = (req, res) => {
     res.render("admin/admin.ejs", {
@@ -12,9 +11,7 @@ exports.getAdmin = (req, res) => {
 
 exports.getUsersTable = async (req, res) => {
     try {
-        const fetchRes = await fetch("http://localhost:3000/api/users/findall");
-        let allUsers = await fetchRes.json();
-        allUsers = allUsers[0];
+        [[allUsers]] = await User.findAll();
         res.render("admin/users-table.ejs", {
             pageTitle: "Users Table",
             isAuth: req.session.isAuth,
@@ -28,9 +25,7 @@ exports.getUsersTable = async (req, res) => {
 
 exports.getProductsTable = async (req, res) => {
     try {
-        const fetchRes = await fetch("http://localhost:3000/api/products/findall");
-        let allProducts = await fetchRes.json();
-        allProducts = allProducts[0];
+        [[allProducts]] = await Product.findAll();
         res.render("admin/products-table.ejs", {
             pageTitle: "Products Table",
             isAuth: req.session.isAuth,
@@ -41,27 +36,3 @@ exports.getProductsTable = async (req, res) => {
         console.log(err);
     }
 };
-
-// exports.postCreateItem = async (req, res, next) => {
-//     const dummyItem = {
-//         name: "Monitor",
-//         categoryName: "Electronics",
-//         manufacture: "MSI",
-//         price: 50,
-//         stockAvailable: 10,
-//         dateFirstAvailable: Date.now(),
-//     };
-//     //creates new Item model instance and stores it in database
-//     try {
-//         const createItem = await Item.create({
-//             name: dummyItem.name,
-//             categoryName: dummyItem.categoryName,
-//             manufacture: dummyItem.manufacture,
-//             price: dummyItem.price,
-//             stockAvailable: dummyItem.stockAvailable,
-//             dateFirstAvailable: dummyItem.dateFirstAvailable,
-//         });
-//     } catch (err) {
-//         console.log(err);
-//     }
-// };
