@@ -43,7 +43,7 @@ exports.getCart = async (req, res) => {
 exports.getCheckout = async (req, res) => {
     const userId = req.session.userId;
     try {
-        const [[[cartSummary]]] = await Cart.getCartSummary({ id: userId });
+        const [[[cartSummary]]] = await Cart.getCartSummary({ userId: userId });
         res.render("shop/checkout.ejs", {
             isAuth: req.session.isAuth,
             cartSummary: cartSummary,

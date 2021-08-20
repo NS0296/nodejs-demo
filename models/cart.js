@@ -47,7 +47,7 @@ class Cart {
 
     static getCartSummary(filters = {}) {
         //get cart summary(total_price, items_count) by user id
-        return this.pool.execute("CALL get_cart_summary(?)", [filters.id || 0]);
+        return this.pool.execute("CALL get_cart_summary(?)", [filters.userId || 0]);
     }
 }
 
