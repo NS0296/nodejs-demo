@@ -47,6 +47,7 @@ exports.getCheckout = async (req, res) => {
         res.render("shop/checkout.ejs", {
             isAuth: req.session.isAuth,
             cartSummary: cartSummary,
+            userId: req.session.userId,
             pageTitle: "Checkout",
             path: "/cart/checkout",
         });
