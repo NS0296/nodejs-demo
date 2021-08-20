@@ -7,8 +7,8 @@
         </header>
         <main>
             <div id="order-summary" class="box">
-                <p>Number of Items in Cart: <%= cartSummary.itemsCount %> </p>
-                <p>Total Price: <%= cartSummary.totalPrice %>  </p>
+                <p>Number of Items in Cart: <%= cartSummary.items_count %> </p>
+                <p>Total Price: <%= cartSummary.total_price %>  </p>
             </div>
             <form class="box" action="/cart/checkout/place" method="POST">
                 <h1>Checkout</h1>

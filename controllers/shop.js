@@ -46,7 +46,7 @@ exports.getCheckout = async (req, res) => {
     try {
         const reqUrl = `http://localhost:3000/api/carts/summary/${req.session.userId}`;
         const fetchRes = await fetch(reqUrl);
-        const cartSummary = await fetchRes.json();
+        const [[[cartSummary]]] = await fetchRes.json();
         res.render("shop/checkout.ejs", {
             isAuth: req.session.isAuth,
             cartSummary: cartSummary,
