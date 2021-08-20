@@ -1,4 +1,5 @@
-const fetch = require("node-fetch");
+const Product = require("../models/product");
+const Cart = require("../models/cart");
 
 exports.getWelcome = (req, res) => {
     res.render("welcome.ejs", {
@@ -10,8 +11,7 @@ exports.getWelcome = (req, res) => {
 
 exports.getIndex = async (req, res, next) => {
     try {
-        const fetchRes = await fetch("http://localhost:3000/api/products/findall");
-        const [allProducts] = await fetchRes.json();
+        [[allProducts]] = await Product.findAll();
         res.render("shop/index.ejs", {
             isAuth: req.session.isAuth,
             userId: req.session.userId, //gets id of logged in user
@@ -27,9 +27,7 @@ exports.getIndex = async (req, res, next) => {
 exports.getCart = async (req, res) => {
     const userId = req.session.userId;
     try {
-        const reqUrl = `http://localhost:3000/api/carts/${userId}/findallitems`;
-        const fetchRes = await fetch(reqUrl);
-        const [cartItems] = await fetchRes.json();
+        [[cartItems]] = await Cart.findCartItems({ userId: userId });
         res.render("shop/cart.ejs", {
             isAuth: req.session.isAuth,
             userId: req.session.userId, //gets id of logged in user
@@ -43,10 +41,9 @@ exports.getCart = async (req, res) => {
 };
 
 exports.getCheckout = async (req, res) => {
+    const userId = req.session.userId;
     try {
-        const reqUrl = `http://localhost:3000/api/carts/summary/${req.session.userId}`;
-        const fetchRes = await fetch(reqUrl);
-        const [[[cartSummary]]] = await fetchRes.json();
+        const [[[cartSummary]]] = await Cart.getCartSummary({ id: userId });
         res.render("shop/checkout.ejs", {
             isAuth: req.session.isAuth,
             cartSummary: cartSummary,
