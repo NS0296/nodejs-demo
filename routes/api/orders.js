@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
-const apiController = require("../../controllers/api/orders");
+const orderApiController = require("../../controllers/api/orders");
 
-router.get("/create/:userId", apiController.postOrder); //change this to post
+router.post("/create/:userId", orderApiController.postCreateOrder);
 
 module.exports = router;
