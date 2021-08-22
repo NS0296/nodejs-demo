@@ -4,8 +4,6 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `is_user_exist`(
 ) RETURNS int
     DETERMINISTIC
 BEGIN
-	DECLARE result INT;
-    SET result = (SELECT count(*) FROM `user` u
+    RETURN (SELECT count(*) FROM `user` u
 	WHERE u.id = ifnull(_id, u.id) AND u.email = ifnull(_email, u.email));
-	RETURN result;
 END
