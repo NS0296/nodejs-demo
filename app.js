@@ -3,6 +3,7 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const session = require("express-session");
+const sequelize = require("./util/database").sequelize;
 const store = require("./util/session"); //session store
 
 const shop = require("./routes/shop");
@@ -20,8 +21,10 @@ app.set("views", "views");
 app.set("template engine", "ejs");
 
 //run server
-(() => {
+(async () => {
     try {
+        await sequelize.authenticate();
+        await sequelize.sync();
         app.listen(3000);
         console.log("app is listening on http://localhost:3000/");
     } catch (err) {
