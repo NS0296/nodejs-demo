@@ -5,16 +5,15 @@ const app = express();
 const session = require("express-session");
 const store = require("./util/session"); //session store
 
-const shop = require(path.join(__dirname, "routes", "shop.js"));
-const auth = require(path.join(__dirname, "routes", "auth.js"));
-const admin = require(path.join(__dirname, "routes", "admin.js"));
-const errorController = require("./controllers/error.js");
-const { userApi, productApi, cartApi, orderApi } = require(path.join(
-    __dirname,
-    "routes",
-    "api",
-    "index.js"
-));
+const shop = require("./routes/shop");
+const auth = require("./routes/auth");
+const admin = require("./routes/admin");
+const errorController = require("./controllers/error");
+
+const userApi = require("./routes/api/user");
+const productApi = require("./routes/api/product");
+const cartApi = require("./routes/api/cart");
+const orderApi = require("./routes/api/order");
 
 //config express
 app.set("views", "views");
@@ -45,9 +44,9 @@ app.use(express.json()); //parser for json
 
 app.use(shop);
 app.use(auth);
-app.use("/api/user", usersApi);
-app.use("/api/product", productsApi);
-app.use("/api/cart", cartsApi);
-app.use("/api/order", ordersApi);
 app.use("/admin", admin);
+app.use("/api/user", userApi);
+app.use("/api/product", productApi);
+app.use("/api/cart", cartApi);
+app.use("/api/order", orderApi);
 app.use(errorController);
