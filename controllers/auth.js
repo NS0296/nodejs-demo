@@ -52,17 +52,17 @@ exports.getLogin = (req, res) => {
 exports.postLogin = async (req, res) => {
     const { email, password } = req.body;
     try {
-        //task: create a sql function to check for existing user
-        const [[user]] = await User.findAll({ email: email });
-        if (!user.length) {
+        const [[checkExistance]] = await User.isUserExist({ email: email });
+        if (!checkExistance.result) {
             throw new Error("User does not exist");
         }
-        const isPasswordMatch = await bcrypt.compare(password, user[0].password);
+        const [[[user]]] = await User.findAll({ email: email });
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (!isPasswordMatch) {
             throw new Error("Wrong Password");
         }
         req.session.isAuth = true;
-        req.session.userId = user[0].id; //used to view data in user dashboard
+        req.session.userId = user.id; //used to view data in user dashboard
     } catch (err) {
         console.log(err);
     }
