@@ -45,7 +45,7 @@ class User {
     }
 
     static isUserExist(filters = {}) {
-        return this.pool.execute("SELECT is_user_exist(?, ?)", [
+        return this.pool.execute("SELECT is_user_exist(?, ?) result", [
             filters.userId || null,
             filters.email || null,
         ]);
