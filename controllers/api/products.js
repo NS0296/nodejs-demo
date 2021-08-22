@@ -1,7 +1,6 @@
-// const { response } = require("express");
 const Product = require("../../models/product");
 
-exports.findAll = (req, res, next) => {
+exports.findAll = (req, res) => {
     Product.findAll()
         .then(([rows]) => {
             res.send(rows);
@@ -9,14 +8,14 @@ exports.findAll = (req, res, next) => {
         .catch(err => res.send(err));
 };
 
-exports.destroy = (req, res, next) => {
+exports.destroy = (req, res) => {
     const productId = req.params.productId;
     Product.deleteByPK(productId)
         .then(response => res.send(response))
         .catch(err => res.send(err));
 };
 
-exports.create = (req, res, next) => {
+exports.create = (req, res) => {
     const { title, categoryName, price, stock } = req.body;
     const product = new Product(title, categoryName, price, stock);
     product
@@ -25,7 +24,7 @@ exports.create = (req, res, next) => {
         .catch(err => res.send(err));
 };
 
-exports.update = (req, res, next) => {
+exports.update = (req, res) => {
     const productId = req.params.productId;
     Product.updateByPK(productId, req.body)
         .then(response => res.send(response))
