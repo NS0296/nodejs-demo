@@ -44,6 +44,13 @@ class User {
         ]);
     }
 
+    static isUserExist(filters = {}) {
+        return this.pool.execute("SELECT is_user_exit(?, ?)", [
+            filters.userId,
+            filters.email,
+        ]);
+    }
+
     save() {
         return this.pool.execute(`call insert_or_update_user(0, '${this.username}',
             '${this.email}', '${this.password}', '${this.phone}', '${this.homeAddress}')`);
