@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const usersApiController = require("../../controllers/api/users.js");
+const usersApiController = require("../../controllers/api/user");
 
 router.get("/findAll", usersApiController.findAll);
 
