@@ -2,8 +2,6 @@ const router = require("express").Router();
 
 const cartApiController = require("../../controllers/api/cart");
 
-router.get("/create/:userId", cartApiController.createCart);
-
 router.get("/:userId/findallitems", cartApiController.getCartItems);
 
 router.get("/add/:productId", cartApiController.postCartItem);

@@ -11,13 +11,13 @@ router.get("/login", middleware.isNotAuth, authController.getLogin);
 
 router.post("/login", middleware.isNotAuth, authController.postLogin);
 
-router.get("/reset", middleware.isNotAuth, authController.getReset);
+// router.get("/reset", middleware.isNotAuth, authController.getReset);
 
-router.post("/reset", middleware.isNotAuth, authController.postReset);
+// router.post("/reset", middleware.isNotAuth, authController.postReset);
 
-router.get("/reset/:resetToken", middleware.isNotAuth, authController.getNewPassword);
+// router.get("/reset/:resetToken", middleware.isNotAuth, authController.getNewPassword);
 
-router.post("/reset/confirm", middleware.isNotAuth, authController.postNewPassword);
+// router.post("/reset/confirm", middleware.isNotAuth, authController.postNewPassword);
 
 router.get("/logout", middleware.isAuth, authController.getLogout); //NB:authentication means beign logged in
 
