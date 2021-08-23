@@ -18,8 +18,7 @@ class User {
         return User.pool;
     }
 
-    static findAll(filters) {
-        if (filters === undefined) filters = {}; //prevent error incase no arg. is passed
+    static findAll(filters = {}) {
         return this.pool.execute("CALL get_all_users(?, ?, ?, ?, ?);", [
             filters.id || null,
             filters.username || null,
@@ -58,50 +57,3 @@ class User {
 }
 
 module.exports = User;
-
-// const { Sequelize } = require("sequelize"); //import sequlize for datatypes
-// const sequelize = require("../util/database"); //import connection object
-
-// const User = sequelize.define("User", {
-//     id: {
-//         type: Sequelize.INTEGER,
-//         primaryKey: true,
-//         unique: true,
-//         autoIncrement: true,
-//         allowNull: false,
-//     },
-//     username: {
-//         type: Sequelize.STRING(50),
-//         isNull: false,
-//     },
-//     email: {
-//         type: Sequelize.STRING(100),
-//         isNull: false,
-//     },
-//     password: {
-//         type: Sequelize.STRING,
-//         isNull: false,
-//     },
-//     phone: {
-//         type: Sequelize.STRING(11),
-//         isNull: true,
-//         defaultValue: null,
-//     },
-//     address: {
-//         type: Sequelize.STRING(50),
-//         isNull: true,
-//         defaultValue: null,
-//     },
-//     resetToken: {
-//         type: Sequelize.STRING(30),
-//         isNull: true,
-//         default: null,
-//     },
-//     resetTokenExpiration: {
-//         type: Sequelize.DATE,
-//         isNull: true,
-//         default: null,
-//     },
-// });
-
-// module.exports = User;
