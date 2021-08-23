@@ -35,7 +35,7 @@ app.set("template engine", "ejs");
 //the middleware
 app.use(
     session({
-        secret: "shhhh",
+        secret: process.env.SESSIONSECRET,
         resave: false,
         saveUninitialized: false,
         store: store,
