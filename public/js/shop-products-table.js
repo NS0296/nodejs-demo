@@ -1,6 +1,5 @@
 let tblBody = document.getElementById("tbody");
 let tblHead = document.getElementById("thead");
-let userId = document.getElementById("user-id").value; //current logged in user id
 
 const addActionCells = () => {
     for (let i = 0; i < tblBody.children.length; i++) {
@@ -14,11 +13,10 @@ const addActionCells = () => {
         let actionButtonAddToCart = document.createElement("button");
         actionButtonAddToCart.className = "actionButtons addToCartButton";
         actionButtonAddToCart.innerText = "Add to Cart";
-        actionButtonAddToCart.dataset.productId = product.dataset.productId;
 
         actionButtonAddToCart.addEventListener("click", () => {
             const xhr = new XMLHttpRequest();
-            let reqUrl = `http://localhost:3000/api/carts/add/${actionButtonAddToCart.dataset.productId}`;
+            let reqUrl = `http://localhost:3000/api/cart/add/${product.dataset.productId}`;
             xhr.open("GET", reqUrl, true);
             xhr.onload = () => {
                 if (xhr.status === 200) {
