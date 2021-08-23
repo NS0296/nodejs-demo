@@ -14,8 +14,7 @@ class Product {
         return Product.pool;
     }
 
-    static findAll(filters) {
-        if (filters === undefined) filters = {}; //prevent error incase no arg. is passed
+    static findAll(filters = {}) {
         return this.pool.execute("CALL get_all_products(?, ?, ?, ?, ?);", [
             filters.id || null,
             filters.title || null,
