@@ -3,18 +3,18 @@ const mysql = require("mysql2");
 
 const sequelize = new Sequelize(
     process.env.MYSQLDEFAULTDATABASE,
-    "root",
+    process.env.MYSQLUSER,
     process.env.MYSQLPASSWORD,
     {
-        host: "localhost",
+        host: process.env.MYSQLHOST,
         dialect: "mysql",
         logging: false,
     }
 );
 
 const pool = mysql.createPool({
-    host: "localhost",
-    user: "root",
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
     password: process.env.MYSQLPASSWORD,
     database: process.env.MYSQLDEFAULTDATABASE,
     waitForConnections: true,
