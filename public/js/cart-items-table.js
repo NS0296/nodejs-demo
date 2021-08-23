@@ -12,7 +12,7 @@ const getNthParentOf = (node, i) => {
 const addActionCells = () => {
     //first row is for create
     for (let i = 0; i < tblBody.children.length; i++) {
-        const item = tblBody.children[i];
+        const product = tblBody.children[i];
 
         //add actions cell
         let cellActions = document.createElement("td");
@@ -25,20 +25,19 @@ const addActionCells = () => {
 
         actionButtonDelete.addEventListener("click", () => {
             const xhr = new XMLHttpRequest();
-            let reqUrl = `http://localhost:3000/api/carts/delete/${userId}/${item.dataset.productId}`;
+            let reqUrl = `http://localhost:3000/api/cart/delete/${userId}/${product.dataset.productId}`;
             xhr.open("DELETE", reqUrl, true);
 
             xhr.onload = () => {
                 if (xhr.status === 200) {
-                    let deletedRow = getNthParentOf(actionButtonDelete, 2);
-                    deletedRow.remove();
+                    getNthParentOf(actionButtonDelete, 2).remove();
                 }
             };
             xhr.send();
         });
 
         cellActions.appendChild(actionButtonDelete);
-        item.appendChild(cellActions);
+        product.appendChild(cellActions);
     }
 };
 
