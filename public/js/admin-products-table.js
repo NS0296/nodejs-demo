@@ -43,7 +43,7 @@ const addActionCells = () => {
 
         actionButtonDelete.addEventListener("click", () => {
             const xhr = new XMLHttpRequest();
-            let reqUrl = `http://localhost:3000/api/products/destroy/${product.dataset.productId}`;
+            let reqUrl = `http://localhost:3000/api/product/destroy/${product.dataset.productId}`;
             xhr.open("DELETE", reqUrl, true);
 
             xhr.onload = () => {
@@ -89,7 +89,7 @@ const addActionCells = () => {
 
             //send new data in ajax call
             const xhr = new XMLHttpRequest();
-            let reqUrl = `http://localhost:3000/api/products/update/${product.dataset.productId}`;
+            let reqUrl = `http://localhost:3000/api/product/update/${product.dataset.productId}`;
             xhr.open("PUT", reqUrl, true);
 
             xhr.onload = () => {

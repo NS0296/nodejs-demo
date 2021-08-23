@@ -43,7 +43,7 @@ const addActionCells = () => {
 
         actionButtonDelete.addEventListener("click", () => {
             const xhr = new XMLHttpRequest();
-            let reqUrl = `http://localhost:3000/api/users/destroy/${user.dataset.userId}`;
+            let reqUrl = `http://localhost:3000/api/user/destroy/${user.dataset.userId}`;
             xhr.open("DELETE", reqUrl, true);
 
             xhr.onload = () => {
@@ -89,7 +89,7 @@ const addActionCells = () => {
 
             //send new data in ajax call
             const xhr = new XMLHttpRequest();
-            let reqUrl = `http://localhost:3000/api/users/update/${user.dataset.userId}`;
+            let reqUrl = `http://localhost:3000/api/user/update/${user.dataset.userId}`;
             xhr.open("PUT", reqUrl, true);
             xhr.onload = () => {
                 if (xhr.status === 200) {
