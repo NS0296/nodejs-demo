@@ -10,9 +10,9 @@ class Order {
     static createOrder(data = {}) {
         // data => { userId, paymentMethod, shippingAddress}
         return this.pool.execute("call create_order(?, ?, ?)", [
-            userId,
-            paymentMethod,
-            shippingAddress,
+            data.userId,
+            data.paymentMethod,
+            data.shippingAddress,
         ]);
     }
 }
