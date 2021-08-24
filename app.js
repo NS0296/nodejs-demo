@@ -15,6 +15,7 @@ const userApi = require("./routes/api/user");
 const productApi = require("./routes/api/product");
 const cartApi = require("./routes/api/cart");
 const orderApi = require("./routes/api/order");
+const lookupApi = require("./routes/api/lookup");
 
 //config express
 app.set("views", "views");
@@ -52,4 +53,5 @@ app.use("/api/user", userApi);
 app.use("/api/product", productApi);
 app.use("/api/cart", cartApi);
 app.use("/api/order", orderApi);
+app.use("/api/lookup", lookupApi);
 app.use(errorController);

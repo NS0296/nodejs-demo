@@ -2,10 +2,10 @@
 
 const pool = require("../util/database").promisePool;
 
-const lookup = {
+const Lookup = {
     findPaymentMethods: () => {
-        return pool.execute("SELECT 'title' FROM payment_method");
+        return pool.execute("SELECT title FROM payment_method");
     },
 };
 
-module.exports = lookup;
+module.exports = Lookup;
